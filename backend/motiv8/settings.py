@@ -96,7 +96,7 @@ WSGI_APPLICATION = 'motiv8.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE':'django.db.backends.postgresql',
-        'NAME':'',
+        'NAME':'motivation',
         'USER':'cyan',
         'PASSWORD':'ms254',
     }
