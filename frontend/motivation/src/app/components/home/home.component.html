@@ -10,28 +10,49 @@
     </nav>
   </section>
   <section id='post-cat'>
-    <div class="row">
+    <div class="row post-image">
 
       <!-- post looping -->
       <div class="col-md-7">
         <div class="post">
           <div class="post-image">
-            <img src="" alt="" class="image">
+            <img src="https://cdn.educba.com/academy/wp-content/uploads/2018/10/Top-Uses-Of-Django.jpg" alt="" class="image">
           </div>
           <div class="post-content">
             <div class="post-datils">
-              <i class="fas fa-thumbs-up"></i>
-              <i class="fas fa-comment-dots"></i>
-              <i class="fas fa-save"></i>
-              <i class="fas fa-share-alt"></i>
+              <a href="/"><i class="fas fa-thumbs-up"></i></a> 
+              <a href="" data-bs-toggle="modal" data-bs-target="#addcomment">
+                <i class="fas fa-comment-dots"></i>
+              </a>
+               <!-- Modal -->
+               <div class="modal fade" id="addcomment" data-bs-backdrop="static" data-bs-keyboard="false"
+               tabindex="-1" aria-labelledby="addcommentLabel" aria-hidden="true">
+               <div class="modal-dialog">
+                 <div class="modal-content">
+                   <div class="modal-header">
+                     <h5 class="modal-title" id="staticBackdropLabel">Add your comment</h5>
+                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                   </div>
+                   <div class="modal-body">
+                     ...
+                   </div>
+                   <div class="modal-footer">
+                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                   </div>
+                 </div>
+               </div>
+             </div>
+            
+              <a href=""><i class="fas fa-save"></i></a>
+              <a href=""><i class="fas fa-share-alt"></i></a>
             </div>
             <div class="comments">
-              <a href="" data-bs-toggle="modal" data-bs-target="#comment">
+              <a class = "view-comment" href="" data-bs-toggle="modal" data-bs-target="#comment">
                 View Comments
               </a>
               <!-- Modal -->
               <div class="modal fade" id="comment" data-bs-backdrop="static" data-bs-keyboard="false"
-                tabindex="-1" aria-labelledby="commentpLabel" aria-hidden="true">
+                tabindex="-1" aria-labelledby="commentLabel" aria-hidden="true">
                 <div class="modal-dialog">
                   <div class="modal-content">
                     <div class="modal-header">
@@ -50,11 +71,33 @@
             </div>
           </div>
         </div>
+        <hr>
       </div>
 
 
       <!-- category looping -->
-      <div class="col-md-5"></div>
+      <div class="col-md-5">
+        <div class="categories">
+          <div class="butts">
+            <div class="cat-header">
+              <h3 class="text-center text-white">Choose category</h3>
+              <div class="buttons">
+                <div> 
+                  <a href=""><button class ='custom btn btn-lg btn-outline-info'>Angular</button></a>
+                </div>
+                <div>
+                  <a href=""><button class ='custom btn btn-lg btn-outline-info'>Fullstack</button></a>
+                </div>
+                <div>
+                  <a href=""><button class ='custom btn btn-lg btn-outline-info'>Devops</button></a>
+                </div>
+                
+              </div>
+            </div>
+          </div>
+       
+        </div>
+      </div>
     </div>
 
   </section>
