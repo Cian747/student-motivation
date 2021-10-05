@@ -11,6 +11,9 @@
   color: white !important;
  
 }
+#exampleModalLabel{
+  color: black;
+}
 i{
   padding: 0.5rem;
   color: #fff;
