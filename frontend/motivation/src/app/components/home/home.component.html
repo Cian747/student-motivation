@@ -1,1 +1,62 @@
-<p>home works!</p>
+<main id="main">
+  <section id="nav">
+    <nav class="navbar navbar-light bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand"><i class="fas fa-graduation-cap"></i>
+          ProperLearn</a>
+        <button class="btn d-flex btn-outline-success" type="submit">Add Post</button>
+
+      </div>
+    </nav>
+  </section>
+  <section id='post-cat'>
+    <div class="row">
+
+      <!-- post looping -->
+      <div class="col-md-7">
+        <div class="post">
+          <div class="post-image">
+            <img src="" alt="" class="image">
+          </div>
+          <div class="post-content">
+            <div class="post-datils">
+              <i class="fas fa-thumbs-up"></i>
+              <i class="fas fa-comment-dots"></i>
+              <i class="fas fa-save"></i>
+              <i class="fas fa-share-alt"></i>
+            </div>
+            <div class="comments">
+              <a href="" data-bs-toggle="modal" data-bs-target="#comment">
+                View Comments
+              </a>
+              <!-- Modal -->
+              <div class="modal fade" id="comment" data-bs-backdrop="static" data-bs-keyboard="false"
+                tabindex="-1" aria-labelledby="commentpLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="staticBackdropLabel">Comments</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                      ...
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <!-- category looping -->
+      <div class="col-md-5"></div>
+    </div>
+
+  </section>
+
+</main>
