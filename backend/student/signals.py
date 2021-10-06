@@ -9,6 +9,3 @@ from rest_framework.authtoken.models import Token
 def post_save_create_profile(sender,instance,created,**kwargs):
     if created:
         Profile.objects.create(user=instance)
-
-    # for user in StudentUser.objects.all():
-    #     Token.objects.get_or_create(user=user)

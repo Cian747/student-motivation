@@ -68,7 +68,6 @@ class Category(models.Model):
 class Profile(models.Model):
     user = models.OneToOneField(StudentUser, on_delete=models.CASCADE)
     profile_photo = CloudinaryField('image',blank=True,null=True)
-    # role = models.ForeignKey(Role, on_delete=models.DO_NOTHING,null=True)
     category = models.ForeignKey(Category, on_delete=models.CASCADE,null=True,blank=True)
     profile_email = models.EmailField(blank=True,null=True)
     phone_number = models.CharField(max_length=20,null=True,blank=True)
@@ -78,10 +77,10 @@ class Profile(models.Model):
        return self.user.username
 
 class Motivation(models.Model):
-    image = CloudinaryField('images')
+    image = CloudinaryField('images', blank=True,null=True)
     video = models.FileField(blank=True,null=True)
     title = models.CharField(max_length=255)
-    category = models.ForeignKey(Category, on_delete=models.DO_NOTHING)
+    category = models.ForeignKey(Category, null=True, on_delete=models.DO_NOTHING)
     description = models.TextField()
     profile = models.ForeignKey(Profile,on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
@@ -89,7 +88,7 @@ class Motivation(models.Model):
     likes = models.ManyToManyField(StudentUser, related_name='motivation_posts')
 
     def __str__(self) -> str:
-       return self.user.username
+       return self.title
 
 class Review(models.Model):
     review = models.TextField()
@@ -108,8 +107,8 @@ class Subscription(models.Model):
        return self.name
 
 class WishList(models.Model):
-   motivatation = models.ForeignKey(Motivation,on_delete=models.CASCADE)
-   profile = models.ForeignKey(Profile,on_delete=models.CASCADE)
+   motivatation = models.ForeignKey(Motivation, null=True, on_delete=models.CASCADE)
+   profile = models.ForeignKey(Profile,on_delete=models.CASCADE, null=True)
 
 # Classes
 # Role class
