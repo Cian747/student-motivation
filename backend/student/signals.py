@@ -10,5 +10,5 @@ def post_save_create_profile(sender,instance,created,**kwargs):
     if created:
         Profile.objects.create(user=instance)
 
-    for user in User.objects.all():
-        Token.objects.get_or_create(user=user)
+    # for user in User.objects.all():
+    #     Token.objects.get_or_create(user=user)

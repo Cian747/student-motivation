@@ -27,7 +27,7 @@ class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     profile_photo = CloudinaryField('image',blank=True,null=True)
     role = models.ForeignKey(Role, on_delete=models.DO_NOTHING,null=True)
-    category = models.ForeignKey(Category, on_delete=models.CASCADE)
+    category = models.ForeignKey(Category, null=True, on_delete=models.CASCADE)
     profile_email = models.EmailField(blank=True,null=True)
     phone_number = models.CharField(max_length=20,null=True,blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
@@ -36,22 +36,22 @@ class Profile(models.Model):
        return self.user.username
 
 class Motivation(models.Model):
-    image = CloudinaryField('images')
+    image = CloudinaryField('images', blank=True,null=True)
     video = models.FileField(blank=True,null=True)
     title = models.CharField(max_length=255)
-    category = models.ForeignKey(Category, on_delete=models.DO_NOTHING)
+    category = models.ForeignKey(Category, null=True, on_delete=models.DO_NOTHING)
     description = models.TextField()
     profile = models.ForeignKey(Profile,on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
-    likes = models.ManyToManyField(User, related_name='motivation_posts')
+    likes = models.ManyToManyField(User, null=True, blank=True, related_name='motivation_posts')
 
     def __str__(self) -> str:
-       return self.user.username
+       return self.title
 
 class Review(models.Model):
     review = models.TextField()
-    user_id = models.ForeignKey(User,on_delete=models.CASCADE)
+    user_id = models.ForeignKey(User, null=True, on_delete=models.CASCADE)
     motivation = models.ForeignKey(Motivation,on_delete=models.CASCADE)
 
     def __str__(self) -> str:
@@ -66,8 +66,8 @@ class Subscription(models.Model):
        return self.name
 
 class WishList(models.Model):
-   motivatation = models.ForeignKey(Motivation,on_delete=models.CASCADE)
-   profile = models.ForeignKey(Profile,on_delete=models.CASCADE)
+   motivatation = models.ForeignKey(Motivation, null=True, on_delete=models.CASCADE)
+   profile = models.ForeignKey(Profile,on_delete=models.CASCADE, null=True)
 
 # Classes
 # Role class
