@@ -8,11 +8,8 @@
 }
 .navbar{
   background-color: transparent !important;
-  color: white !important;
+  /* color: white !important; */
  
-}
-#exampleModalLabel{
-  color: black;
 }
 i{
   padding: 0.5rem;
