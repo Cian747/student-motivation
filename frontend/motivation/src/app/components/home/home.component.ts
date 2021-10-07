@@ -1,4 +1,8 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { Motivation } from 'src/app/models/motivation';
+import { AuthenticationService } from 'src/app/services/authentication.service';
+import { MotivationService } from 'src/app/services/motivation.service';
 
 @Component({
   selector: 'app-home',
@@ -7,9 +11,37 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  constructor() { }
+  motivations!:Motivation[]
 
-  ngOnInit(): void {
+
+  constructor(
+    private http: HttpClient,
+    private motivationService: MotivationService,
+    private authService: AuthenticationService
+
+  )
+
+  { }
+
+  ngOnInit(){
+    let promise = new Promise <void> ((resolve,reject)=>{
+      this.motivationService.getAllMotivations().toPromise().then(
+        (response:any) => {
+          console.log(response)
+        this.motivations = response;
+        resolve()
+      },
+      (error:string) => {
+
+      })
+    })
+    return promise
+
+
+  }
+
+  onLogout(){
+    this.authService.logout();
   }
 
 }
