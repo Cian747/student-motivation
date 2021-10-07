@@ -26,7 +26,7 @@ urlpatterns = [
     url(r'^category/$', views.CategoryList.as_view()),
     url(r'^category/cat_idd/(?P<cat_pk>[0-9]+)$', views.category_id),
     
-    
+    path('profile/',views.profile, name='profile'),
     path('token/obtain/', jwt_views.TokenObtainPairView.as_view(), name='token_create'),
     path('token/refresh/', jwt_views.TokenRefreshView.as_view(), name='token_refresh'),
     path('register', AuthUserRegistrationView.as_view(), name='register'),
