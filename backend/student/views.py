@@ -75,35 +75,6 @@ class GetProfileView(APIView):
         return Response(serializers.data)
     
 
-@api_view(['GET', 'PUT', 'DELETE'])
-@permission_classes((IsAuthenticated,))
-# @authentication_classes((JWTAuthentication))
-def profile(request):
-    user = request.user
-    # print(user)
-    profile = Profile.objects.get(user=user)
-    # print(profile)
-    if request.method == 'GET':
-        serializer = ProfileSerializer(profile, many=False)
-        return Response(serializer.data, status=status.HTTP_200_OK)
-
-    elif request.method == 'PUT':
-        # serializer = UserProfileSerializer(user, many=False)
-        profile_serializer = ProfileSerializer(instance=profile, data=request.data['profile'])
-        
-        if profile_serializer.is_valid():
-            profile_serializer.save()
-            return Response(profile_serializer.data, status=status.HTTP_200_OK)
-        else:
-            return Response(profile_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-    elif request.method == 'DELETE':
-        user.delete()
-        return Response("User deleted!...")
-
-# Check if the user has admin privileges 
-# Create a secondary function to handle deactivation of the user
-
 class ReviewList(APIView):
     def get(self, request, format=None):
         all_merch = Review.objects.all()
@@ -238,3 +209,32 @@ class UserProfileView(RetrieveAPIView):
                 'error': str(e)
                 }
         return Response(response, status=status_code)
+
+@api_view(['GET', 'PUT', 'DELETE'])
+@permission_classes((IsAuthenticated,))
+# @authentication_classes((JWTAuthentication))
+def profile(request):
+    user = request.user
+    # print(user)
+    profile = Profile.objects.get(user=user)
+    # print(profile)
+    if request.method == 'GET':
+        serializer = ProfileSerializer(profile, many=False)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+    elif request.method == 'PUT':
+        # serializer = UserProfileSerializer(user, many=False)
+        profile_serializer = ProfileSerializer(instance=profile, data=request.data['profile'])
+        
+        if profile_serializer.is_valid():
+            profile_serializer.save()
+            return Response(profile_serializer.data, status=status.HTTP_200_OK)
+        else:
+            return Response(profile_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    elif request.method == 'DELETE':
+        user.delete()
+        return Response("User deleted!...")
+
+# Check if the user has admin privileges 
+# Create a secondary function to handle deactivation of the user
