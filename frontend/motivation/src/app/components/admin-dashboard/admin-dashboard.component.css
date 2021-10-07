@@ -22,6 +22,7 @@ width: 350px;
 background: white;
 margin: 2rem 0;
 border-radius: 20px;
+cursor: pointer;
 
 }
 .content h3{
@@ -47,8 +48,9 @@ span{
   margin: 0 .5rem;
   
 }
-.students a{
+.students h3{
   color: #074436;
+  cursor: pointer;
 }
 .students{
   margin: 2.5rem 0;
@@ -64,4 +66,10 @@ span{
   color: black;
   font-weight: 900;
   font-size: 1.5rem;
+}
+h6{
+  cursor: pointer;
+}
+#dashbord-student,#dashbord-categories,#dashbord-posts,#dashbord-admins{
+  display: none;
 }

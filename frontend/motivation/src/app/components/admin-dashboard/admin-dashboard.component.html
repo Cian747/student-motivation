@@ -14,22 +14,19 @@
           <div class="dashbord">
             <div class="students">
             </div>
-            <h6 pt=4 class='text-center '><i class="fas fa-home"></i> Dashbord</h6>
+            <h6 (click) = 'get_admin()' pt=4 class='text-center '><i class="fas fa-home"></i> Dashbord</h6>
+          </div>
+          <div class="students">            
+             <h3 id = 'students' (click) = 'get_users()'> <i class="fas fa-user-friends"></i> Students</h3>
           </div>
           <div class="students">
-            <span>
-               <i class="fas fa-user-friends"></i>
-            </span>
-             <a href="">Students</a>
+            <h3 (click) ='get_posts()'> <i class="fas fa-plus"></i> Posts</h3>
           </div>
           <div class="students">
-            <span> <i class="fas fa-plus"></i> </span> <a href="">Posts</a>
-          </div>
-          <div class="students">
-            <span>
-              <i class="fas fa-tag"></i>
-            </span>
-            <a href="">Categories</a>
+            
+              
+          
+            <h3 (click)='get_categories()'> <i class="fas fa-tag"></i> Categories</h3>
           </div>
         </div>
 
@@ -43,45 +40,34 @@
             <a href=""><i class="fas fa-user-circle"></i></a>John Doe
           </div>
         </div>
-        <div class="dash-body">
+        <div class="dash-body " id = 'dashbord-body'>
           <div class="cats">
-            <div class="posts text-center pt-3">
-              <a href="">
+            <div (click) = 'get_posts()'class="posts text-center pt-3">
                 <div class="content">
                   <h3><i class="fas fa-images"></i> Posts</h3>
                   <h3 class = 'text-center'>0</h3>
-                </div>
-              </a>
-              
+                </div>              
             </div>
-            <div class="users">
-              <a href="">
+
+            <div (click)='get_users()'class="users">
                 <div class="content text-center pt-3">
                 
                   <h3><i class="fas fa-users"></i>Users</h3>
                   <h3 class = 'text-center'>0</h3>
-                </div>
-              </a>
-              
-            </div>
+                </div>              
+              </div>
             
-            <div class="categories text-center pt-3">
-              <a href="">
+            <div (click) = 'get_categories()'class="categories text-center pt-3">
                 <div class="content">
                   <h3><i class="fas fa-user-tag"></i>Categories</h3>
                   <h3 class = 'text-center'>0</h3>
-                </div>
-              </a>
-             
+                </div>             
             </div>
             <div class="admins text-center pt-3">
-              <a href="">
                 <div class="content">
-                  <h3><i class="fas fa-user-shield"></i> Admins</h3>
+                  <h3 (click)='get_adm()'><i class="fas fa-user-shield"></i> Admins</h3>
                   <h3 class = 'text-center'>0</h3>
-                </div>
-              </a>
-              
+                </div>              
             </div>
           </div>
           <div class="chart">
@@ -91,6 +77,18 @@
               </path>
             </svg>
           </div>
+        </div>
+        <div id="dashbord-student">
+          <h1>Awadh</h1>
+        </div>
+        <div id="dashbord-categories">
+          <h1>Categories</h1>
+        </div>
+        <div id="dashbord-posts">
+          <h1>Posts</h1>
+        </div>
+        <div id="dashbord-admins">
+          <h1>Admin</h1>
         </div>
       </div>
     </div>
