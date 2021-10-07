@@ -3,7 +3,7 @@
   font-family: Poppins;
   font-style: normal;
   font-weight: bold;
-  font-size: 55px;
+  font-size: 40px;
   line-height: 100px;
   text-align: center;
   color: #074436;
@@ -47,8 +47,8 @@ form .button{
 
 form .signin-btn {
   margin-top: 10%;
-  width: 240px;
-  height: 80px;
+  width: 200px;
+  height: 70px;
   background: #074436;
   border-radius: 50px;
   font-family: Poppins;
@@ -103,7 +103,7 @@ label {
   font-family: Poppins;
   font-style: normal;
   font-weight: bold;
-  font-size: 35px;
+  font-size: 25px;
   line-height: 72px;
   text-align: center;
 
@@ -114,8 +114,8 @@ label {
 
 .login-image .signup-btn {
 
-  width: 220px;
-  height: 70px;
+  width: 180px;
+  height: 65px;
   background: #FFFFFF;
   border: 4px solid #074436;
   box-sizing: border-box;

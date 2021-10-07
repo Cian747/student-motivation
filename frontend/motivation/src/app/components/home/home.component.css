@@ -6,11 +6,8 @@
 #post-cat{
   margin-top: 3rem;
 }
-.navbar{
-  background-color: transparent !important;
-  /* color: white !important; */
- 
-}
+
+
 i{
   padding: 0.5rem;
   color: #fff;
@@ -41,9 +38,7 @@ margin-top: 3.5rem;
   color: #fff !important;
   border: 1px solid #fff !important;
 }
-.navbar-brand{
-  color: #fff !important;
-}
+
 .view-comment{
   text-decoration: none;
   font-weight: 800;
