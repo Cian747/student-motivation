@@ -1,0 +1,67 @@
+#admin{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+
+.dash-body{
+  background-color:rgb(235, 233, 233);
+  margin-top: 3rem;
+  padding-top: 2rem;
+  
+}
+.cats{
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+}
+.users,.categories,.admins,.posts{
+height: 100px;
+width: 350px;
+background: white;
+margin: 2rem 0;
+border-radius: 20px;
+
+}
+.content h3{
+color: #074436 !important;
+
+}
+.content h3 i{
+  margin-right: .5rem;
+  color: #91beb4;
+}
+a{
+  text-decoration:none;
+}
+.first-row,.icons {
+  margin-top: 1rem;
+}
+.first-row{
+  color: #074436;
+  font-weight: 900;
+  font-size: 1.5rem;
+}
+span{
+  margin: 0 .5rem;
+  
+}
+.students a{
+  color: #074436;
+}
+.students{
+  margin: 2.5rem 0;
+  color: #074436;
+}
+.icons{
+  margin: 1rem 2rem;
+}
+.custom{
+  margin: 0 1.5rem;
+}
+.icons i{
+  color: black;
+  font-weight: 900;
+  font-size: 1.5rem;
+}
