@@ -1,8 +1,8 @@
-from .models import StudentUser
+from .models import StudentUser,Motivation,Review,Profile
 from rest_framework import serializers
 from rest_framework_simplejwt.tokens import RefreshToken
 from django.contrib.auth import authenticate
-from .models import Motivation, Review
+from .models import Motivation, Review, Profile, Category
 
 
 
@@ -71,7 +71,31 @@ class UserListSerializer(serializers.ModelSerializer):
             'role'
         )
 
-    
+class ProfileSerializer(serializers.ModelSerializer):
+    user = serializers.PrimaryKeyRelatedField(read_only=True, default=serializers.CurrentUserDefault())
+    class Meta:
+        model = Profile
+        fields = ('id', 'user','profile_photo','category','profile_email','phone_number')
+
+# class UserSerializer(serializers.ModelSerializer):
+#     # account = ProfileSerializer(source="profilemodel", many=False)
+
+#     class Meta:
+#         model = User
+#         fields = ["username", "email", "first_name", "last_name", "account"]
+#         read_only_fields = ["id"]
+
+#     def update(self, instance, validated_data):
+#         profile_data = validated_data.get("profilemodel")
+
+#         instance.username = validated_data.get('username', instance.username)
+#         instance.first_name = validated_data.get('first_name', instance.first_name)
+#         instance.last_name = validated_data.get('last_name', instance.last_name)
+#         instance.email = validated_data.get('email', instance.email)
+        
+#         instance.save()
+#         return instance
+
 class MotivationSerializer(serializers.ModelSerializer):
     class Meta:
         model = Motivation
@@ -81,3 +105,8 @@ class ReviewSerializer(serializers.ModelSerializer):
     class Meta:
         model = Review
         fields = ('id', 'review', 'motivation')
+
+class CategorySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Category
+        fields = ('id', 'category_name')
