@@ -1,10 +1,11 @@
 from django.shortcuts import render
 from django.http.response import Http404, HttpResponseRedirect
+from rest_framework import permissions
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework import status
 from .models import  Motivation,Review
-from .serializer import MotivationSerializer, ReviewSerializer
+from .serializers import MotivationSerializer, ReviewSerializer
 from rest_framework import viewsets
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.authtoken.views import ObtainAuthToken
@@ -23,6 +24,7 @@ from .models import StudentUser
 
 # Create your views here.
 class MotivationList(APIView):
+    permissions_classes=(AllowAny,)
     def get(self, request, format=None):
         all_merch = Motivation.objects.all()
         serializers = MotivationSerializer(all_merch, many=True)
@@ -143,4 +145,5 @@ class UserListView(APIView):
 
             }
             return Response(response, status=status.HTTP_200_OK)
+
 

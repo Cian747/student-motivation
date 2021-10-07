@@ -18,6 +18,10 @@ export class MotivationService {
     return this.http.get<any[]>(this.APIUrl + 'api/motivation/')
   }
 
+  postMotivation(motivationData:any):Observable<any[]>{
+    return this.http.post<any[]>(this.APIUrl + 'api/motivation/', motivationData)
+  }
+
   searchMotivation(service:string):Observable<any[]>{
     return this.http.get<any[]>(this.APIUrl + 'api/search/?search='+ service )
   }

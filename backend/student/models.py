@@ -63,7 +63,7 @@ class Category(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self) -> str:
-       return self.category_name
+        return self.category_name
 
 class Profile(models.Model):
     user = models.OneToOneField(StudentUser, on_delete=models.CASCADE)
