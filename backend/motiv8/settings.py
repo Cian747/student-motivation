@@ -158,13 +158,9 @@ CSRF_TRUSTED_ORIGINS = [
 
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': (
-<<<<<<< HEAD
-        'rest_framework.permissions.IsAuthenticated',
-=======
         # 'rest_framework.permissions.IsAuthenticated',
         # 'rest_framework.permissions.IsAdminUser',
         'rest_framework.permissions.AllowAny'
->>>>>>> 0f57dfe7569585dfe6157ba428a3f9a3313da2dd
     ),
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_simplejwt.authentication.JWTAuthentication',
@@ -251,7 +247,6 @@ cloudinary.config(
 django_on_heroku.settings(locals())
 
 
-# Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'

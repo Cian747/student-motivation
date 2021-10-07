@@ -13,7 +13,6 @@ import { Router } from '@angular/router';
 export class HomeComponent implements OnInit {
 
   motivations!:Motivation[]
-  motivationPost:any
   error: any;
 
 
@@ -43,45 +42,12 @@ export class HomeComponent implements OnInit {
 
 
 
-    this.motivationPost = {
-      image: '',
-      video: '',
-      title: '',
-      category: '',
-      description: '',
-      created: '',
 
-
-    };
-
-    // public image: string,
-    // public video: string,
-    // public title: string,
-    // public category: string,
-    // public description: string,
-    // public profile:string,
-    // public created:Date,
-    // public update:Date,
-    // public likes:string,
 
 
   }
 
-  publishMotivation(){
-    this.motivationService.postMotivation(this.motivationPost).subscribe( response => {
-      console.log(response)
-      alert('Motivation ' + this.motivationPost.username + ' has been created'),
-      // this.loggedIn.next(true);
-      this.router.navigate(['home'])
 
-    },
-
-    error => {
-      this.error = error
-      console.log('error',error)
-    }
-    );
-  }
 
 
 
