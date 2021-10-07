@@ -4,20 +4,20 @@
     <div class="col-md-5 login-form">
       <form action="" class="form">
         <div class="form-item">
-          <label for="username">email</label>
-          <input name="username" type="text" class="input" placeholder="Username" required="required">
+          <label for="username">username</label>
+          <input [(ngModel)]="login.username" name="username" type="text" class="input" placeholder="Username" required="required">
         </div>
 
         <div class="form-item">
 
           <label for="password">password</label>
-          <input name="password" type="password" class="input" placeholder="Password" required="required">
+          <input [(ngModel)]="login.password" name="password" type="password" class="input" placeholder="Password" required="required">
 
         </div>
 
 
         <div class="button">
-          <button type="submit" class="btn btn-success  signin-btn">
+          <button (click)="LoginUser()" type="submit" class="btn btn-success  signin-btn">
             Sign in
           </button>
         </div>
