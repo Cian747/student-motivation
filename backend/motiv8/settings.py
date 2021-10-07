@@ -103,7 +103,7 @@ DATABASES = {
         'ENGINE':'django.db.backends.postgresql',
         'NAME':'motivation',
         'USER':'moringa',
-        'PASSWORD':'1234',
+        'PASSWORD':'Access',
     }
 }
 
@@ -151,12 +151,12 @@ CSRF_TRUSTED_ORIGINS = [
 
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': (
-        'rest_framework.permissions.IsAuthenticated'
+        'rest_framework.permissions.IsAuthenticated',
     ),
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_simplejwt.authentication.JWTAuthentication',
         'rest_framework.authentication.SessionAuthentication',
-        'rest_framework.authentication.BasicAuthentication'
+        'rest_framework.authentication.BasicAuthentication',
     ),
 }
 

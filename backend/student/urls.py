@@ -20,7 +20,7 @@ urlpatterns = [
     path('token/refresh/', jwt_views.TokenRefreshView.as_view(), name='token_refresh'),
     path('register', AuthUserRegistrationView.as_view(), name='register'),
     path('login', AuthUserLoginView.as_view(), name='login'),
-    path('users', UserListView.as_view(), name='users')
+    path('users', UserListView.as_view(), name='users'),
     url(r'^api/motivation/$', views.MotivationList.as_view()),
     url(r'^api/review/$', views.ReviewList.as_view()),
     url(r'api/motivation/mot-id/(?P<pk>[0-9]+)/$', views.MotivationalDescription.as_view()),

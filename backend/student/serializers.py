@@ -1,4 +1,4 @@
-from .models import StudentUser
+from .models import StudentUser, Motivation, Review
 from rest_framework import serializers
 from rest_framework_simplejwt.tokens import RefreshToken
 from django.contrib.auth import authenticate
@@ -64,3 +64,12 @@ class UserListSerializer(serializers.ModelSerializer):
             'email',
             'role'
         )
+class MotivationSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Motivation
+        fields = ('id', 'image', 'video', 'title', 'category', 'description', 'profile', )
+
+class ReviewSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Review
+        fields = ('id', 'review', 'motivation')

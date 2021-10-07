@@ -4,7 +4,7 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework import status
 from .models import  Motivation,Review
-from .serializer import MotivationSerializer, ReviewSerializer
+from .serializers import MotivationSerializer, ReviewSerializer
 from rest_framework import viewsets
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.authtoken.views import ObtainAuthToken
