@@ -81,15 +81,6 @@ class CategoryList(APIView):
             serializers.save()
             return Response(serializers.data, status=status.HTTP_201_CREATED)
         return Response(serializers.errors, status=status.HTTP_400_BAD_REQUEST)
-
-@api_view(['GET', 'POST', 'DELETE'])
-@permission_classes((AllowAny, ))
-def category_list(request):
-    if request.method == 'GET':
-        category = Category.objects.all()
-        
-        category_serializer = CategorySerializer(category, many=True)
-        return JsonResponse(category_serializer.data, safe=False)
     
 
 @api_view(['GET', 'POST', 'DELETE'])
@@ -220,4 +211,71 @@ class UserListView(APIView):
 
             }
             return Response(response, status=status.HTTP_200_OK)
+          
+class UserProfileView(RetrieveAPIView):
+
+    # permission_classes = (IsAuthenticated,)
+    # authentication_class = JSONWebTokenAuthentication
+
+    def get_profile(self, pk):
+        try:
+            return Profile.objects.get(pk=pk)
+        except Profile.DoesNotExist:
+            return Http404
+
+    def get(self,request, pk):
+        try:
+            user_profile = self.get_profile(pk)
+            status_code = status.HTTP_200_OK
+            response = {
+                'success': 'true',
+                'status code': status_code,
+                'message': 'User profile fetched successfully',
+                'data': [{
+                    'profile_name': user_profile.profile_name,
+                    'profile_photo': user_profile.profile_photo,
+                    'profile_email': user_profile.profile_email,
+                    'phone_number': user_profile.phone_number,
+                    'created_at': user_profile.created_at,
+                    }]
+                }
+
+        except Exception as e:
+            status_code = status.HTTP_400_BAD_REQUEST
+            response = {
+                'success': 'false',
+                'status code': status.HTTP_400_BAD_REQUEST,
+                'message': 'User does not exists',
+                'error': str(e)
+                }
+        return Response(response, status=status_code)
+
+@api_view(['GET', 'PUT', 'DELETE'])
+@permission_classes((IsAuthenticated,))
+# @authentication_classes((JWTAuthentication))
+def profile(request):
+    user = request.user
+    # print(user)
+    profile = Profile.objects.get(user=user)
+    # print(profile)
+    if request.method == 'GET':
+        serializer = ProfileSerializer(profile, many=False)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+    elif request.method == 'PUT':
+        # serializer = UserProfileSerializer(user, many=False)
+        profile_serializer = ProfileSerializer(instance=profile, data=request.data['profile'])
+        
+        if profile_serializer.is_valid():
+            profile_serializer.save()
+            return Response(profile_serializer.data, status=status.HTTP_200_OK)
+        else:
+            return Response(profile_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    elif request.method == 'DELETE':
+        user.delete()
+        return Response("User deleted!...")
+
+# Check if the user has admin privileges 
+# Create a secondary function to handle deactivation of the user
 
