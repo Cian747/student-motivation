@@ -35,3 +35,33 @@ color: #074436 !important;
 a{
   text-decoration:none;
 }
+.first-row,.icons {
+  margin-top: 1rem;
+}
+.first-row{
+  color: #074436;
+  font-weight: 900;
+  font-size: 1.5rem;
+}
+span{
+  margin: 0 .5rem;
+  
+}
+.students a{
+  color: #074436;
+}
+.students{
+  margin: 2.5rem 0;
+  color: #074436;
+}
+.icons{
+  margin: 1rem 2rem;
+}
+.custom{
+  margin: 0 1.5rem;
+}
+.icons i{
+  color: black;
+  font-weight: 900;
+  font-size: 1.5rem;
+}
