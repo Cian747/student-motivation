@@ -1,4 +1,4 @@
-from .models import StudentUser,Motivation,Review,Profile
+from .models import StudentUser,Motivation,Review,Profile, Category
 from rest_framework import serializers
 from rest_framework_simplejwt.tokens import RefreshToken
 from django.contrib.auth import authenticate
@@ -99,3 +99,8 @@ class ReviewSerializer(serializers.ModelSerializer):
     class Meta:
         model = Review
         fields = ('id', 'review', 'motivation')
+
+class CategorySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Category
+        fields = ('id', 'category_name')

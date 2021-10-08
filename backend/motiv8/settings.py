@@ -86,7 +86,6 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'django.template.context_processors.media',
-                'django.core.context_processors.request',
 
             ],
         },
@@ -104,8 +103,8 @@ DATABASES = {
     'default': {
         'ENGINE':'django.db.backends.postgresql',
         'NAME':'motivation',
-        'USER':'cyan',
-        'PASSWORD':'ms254',
+        'USER':'moringa',
+        'PASSWORD':'1234',
     }
 }
 
