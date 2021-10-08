@@ -85,7 +85,9 @@
           <h1>Categories</h1>
         </div>
         <div id="dashbord-posts">
-          <h1>Posts</h1>
+          <div class="motivations" *ngFor = 'let motivation of motivations'>
+            <h1>{{motivation.description}}</h1>
+          </div>
         </div>
         <div id="dashbord-admins">
           <h1>Admin</h1>

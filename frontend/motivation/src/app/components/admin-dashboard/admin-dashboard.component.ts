@@ -1,5 +1,10 @@
+import { HttpClient } from '@angular/common/http';
+import { analyzeAndValidateNgModules } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import * as $ from 'jquery'
+import { MotivationService } from 'src/app/services/motivation.service';
+import { Motivation } from 'src/app/models/motivation';
+
 
 @Component({
   selector: 'app-admin-dashboard',
@@ -8,9 +13,23 @@ import * as $ from 'jquery'
 })
 export class AdminDashboardComponent implements OnInit {
 
-  constructor() { }
+  constructor(private http:HttpClient, private motivationService:MotivationService) { }
+  motivations!:Motivation[]
 
-  ngOnInit(): void {
+  ngOnInit() {
+    let promise = new Promise <void> ((resolve,reject)=>{
+      this.motivationService.getAllMotivations().toPromise().then(
+        (response:any) => {
+          console.log(response)
+        this.motivations = response;
+        resolve()
+      },
+      (error:string) => {
+
+      })
+    })
+    return promise
+    
   }
 
   get_users(){
