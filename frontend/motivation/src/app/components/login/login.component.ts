@@ -35,7 +35,7 @@ export class LoginComponent implements OnInit {
 
   LoginUser(){
     this.LoginService.loginUser(this.login).subscribe( response => {
-      console.log(response)
+      // console.log(response)
       // alert('User ' + this.login.username + ' has logged in'),
       this.loggedIn.next(true);
       this.router.navigate(['home'])

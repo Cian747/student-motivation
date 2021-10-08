@@ -1,0 +1,79 @@
+<div class="container-fluid" id="main">
+  <section id="nav">
+    <app-navbar></app-navbar>
+  </section>
+  <!-- category looping -->
+  <div class="container">
+    <h5 class="text-center text-white">Choose category</h5>
+      <div class="buttons">
+        <div>
+          <a href="/home" ><button class='custom btn btn-lg btn-outline-info' id="all">All</button></a>
+        </div>
+        <div class="" *ngFor="let category of categories">
+          <div>
+            <button (click)='goToCategory(category.id)'  class='custom btn btn-lg btn-outline-info'>{{category.category_name}}</button>
+          </div>
+        </div>
+
+
+
+      </div>
+  </div>
+
+
+  <div class="container-fluid motivations" id="motivation">
+
+    <!-- post looping -->
+    <div class="d-flex">
+
+      <div class="row" >
+        <div class="col-md-3" *ngFor="let motivation of motivations">
+           <div class="card mb-3">
+          <img src="https://cdn.educba.com/academy/wp-content/uploads/2018/10/Top-Uses-Of-Django.jpg" class="card-img-top" alt="...">
+          <div class="card-body ">
+            <h5 class="card-title">{{motivation.title}}</h5>
+            <p class="card-text">Category:{{motivation.category}}</p>
+            <p class="card-text small">{{motivation.description}}</p>
+
+            <p class="card-text"><small class="text-muted">{{motivation.profile}}</small></p>
+            <!-- {{motivation.created_at}} -->
+          </div>
+          <div class="card-footer">
+            <div class="icons">
+               <a href=""><i class="fas fa-save"></i></a>
+                <a href=""><i class="fas fa-share-alt"></i></a>
+            </div>
+            <div class="details">
+                <button (click)='goToUrl(motivation.id)' class="btn btn-secondary">View Details</button>
+
+            </div>
+
+          </div>
+        </div>
+        </div>
+
+
+    </div>
+
+
+    </div>
+
+
+
+  </div>
+
+
+  <div class="container-fluid motivations" id="devops">
+
+    <!-- post looping -->
+    <h2>Hello</h2>
+
+
+
+
+  </div>
+
+
+
+
+</div>

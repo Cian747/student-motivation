@@ -99,7 +99,7 @@ class ProfileSerializer(serializers.ModelSerializer):
 class MotivationSerializer(serializers.ModelSerializer):
     class Meta:
         model = Motivation
-        fields = ('id', 'image', 'video', 'title', 'category', 'description', 'profile', )
+        fields = ('id', 'image', 'video', 'title', 'category', 'description', 'profile', 'created_at')
 
 class ReviewSerializer(serializers.ModelSerializer):
     class Meta:

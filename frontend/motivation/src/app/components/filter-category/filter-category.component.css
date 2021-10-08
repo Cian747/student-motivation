@@ -1,0 +1,53 @@
+#main{
+    background-color: #074436 !important;
+    height: 100vh;
+    padding-left: 3%;
+  }
+
+  .motivations{
+    margin-top: 5px;
+    /* background-color: rgba(245, 252, 245, 0.5) !important; */
+
+  }
+
+
+
+  i{
+    padding: 0.5rem;
+    color: #fff;
+  }
+
+
+  .categories{
+    /* position: fixed;  */
+    margin: 0 auto
+  }
+  .buttons{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .btn{
+    background: #fff !important;
+    color: #074436 !important;
+    margin: 5px;
+    height: 40px;
+    font-size: 17px;
+  }
+  .btn:hover{
+    background-color: #074436 !important;
+    color: #fff !important;
+    border: 1px solid #fff !important;
+  }
+
+  .view-comment{
+    text-decoration: none;
+    font-weight: 800;
+    color: #fff;
+  }
+
+  #devops{
+
+    display: none;
+
+  }

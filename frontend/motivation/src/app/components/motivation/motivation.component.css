@@ -1,0 +1,26 @@
+.card{
+  margin-top: 5%;
+}
+
+.card-body{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.card-footer{
+  display: flex;
+  justify-content: space-between;
+}
+
+
+i{
+  padding: 0.5rem;
+  color: rgb(15, 221, 25);
+}
+
+.motivation-loop{
+  display: flex;
+}
+
+

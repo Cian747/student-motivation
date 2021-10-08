@@ -1,0 +1,13 @@
+#main{
+  background-color: #074436 !important;
+  height: 100vh;
+}
+
+.motivation{
+  display: flex;
+  justify-content: center;
+}
+
+video{
+  height: 10rem !important;
+}

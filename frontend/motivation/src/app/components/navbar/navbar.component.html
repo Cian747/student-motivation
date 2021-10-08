@@ -8,17 +8,17 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">Home</a>
+          <a class="nav-link active" aria-current="page" href="/home">Home</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Link</a>
-        </li>
+        <!-- <li class="nav-item">
+          <a class="nav-link" href="">Link</a>
+        </li> -->
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             Profile
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li><a class="dropdown-item" href="#">Profile</a></li>
+            <li><a class="dropdown-item" href="/profile">Profile</a></li>
             <li><a class="dropdown-item" href="#">Another action</a></li>
             <li><hr class="dropdown-divider"></li>
             <li><a class="dropdown-item"  (click)="onLogout()">Logout</a></li>
@@ -38,7 +38,7 @@
           </div>
           <div class="modal-body">
             <div class="post-form">
-              <form #postForm="ngForm" novalidate>
+              <form action="" class="form"  enctype="multipart/form-data">
                 <div class="form-group">
                   <label for="title">Title</label>
                   <input [(ngModel)]="motivationPost.title" type="text" id="title" name="title" class="form-control">
@@ -48,20 +48,37 @@
                   <textarea  [(ngModel)]="motivationPost.description" name="description" class="form-control" id="des" rows="3"></textarea>
                 </div>
                 <div class="mb-3">
-                  <label for="formFile" class="form-label">Media</label>
-                  <input  [(ngModel)]="motivationPost.media" name="media" class="form-control" type="file" id="formFile">
+                  <label for="formFile" class="form-label">Image</label>
+                  <input  [(ngModel)]="motivationPost.image" name="media" class="form-control" type="file" id="formFile">
                 </div>
 
-                <button type="submit" class='custom btn btn-lg btn-outline-info'>Publish</button>
+                <div class="mb-3">
+                  <label for="formFile" class="form-label">Video</label>
+                  <input  [(ngModel)]="motivationPost.video" name="media" class="form-control" type="file" id="formFile">
+                </div>
+                <div class="mb-3">
+                  <label for="formFile" class="form-label">Category</label>
+                  <select [(ngModel)]="motivationPost.category" multiple class="form-control"  name="category" required>
+
+                    <option *ngFor="let category of categories" [value]="category.id">{{ category.category_name }}</option>
+
+                  </select>
+                </div>
+
+
+
+
+                <button (click)="publishMotivation()" type="submit" class='custom btn btn-lg btn-outline-info'>Publish</button>
               </form>
             </div>
           </div>
           <div class="modal-footer">
-            <button (click)="publishMotivation()" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
           </div>
         </div>
       </div>
     </div>
+
 
     </div>
   </div>

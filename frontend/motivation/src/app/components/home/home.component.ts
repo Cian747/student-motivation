@@ -4,6 +4,8 @@ import { Motivation } from 'src/app/models/motivation';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { MotivationService } from 'src/app/services/motivation.service';
 import { Router } from '@angular/router';
+import * as $ from 'jquery';
+
 
 @Component({
   selector: 'app-home',
@@ -13,6 +15,7 @@ import { Router } from '@angular/router';
 export class HomeComponent implements OnInit {
 
   motivations!:Motivation[]
+  categories:any
   error: any;
 
 
@@ -28,23 +31,66 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(){
     let promise = new Promise <void> ((resolve,reject)=>{
+      // motivations
       this.motivationService.getAllMotivations().toPromise().then(
         (response:any) => {
-          console.log(response)
+        console.log(response)
         this.motivations = response;
         resolve()
       },
       (error:string) => {
 
       })
+        // categories
+      this.motivationService.getAllCategories().toPromise().then(
+        (response:any) => {
+          // console.log(response)
+        this.categories = response;
+        resolve()
+      },
+      (error:string) => {
+
+      })
     })
-    return promise
+    // return promise
+
+
+
+
+    $('#all').on('click', function () {
+      $("#devops").fadeIn(1000);
+      $("#motivation").hide();
+
+
+    });
+
+    $('li .followers-link').on('click', function () {
+      $(".followers-list").fadeIn(2000);
+      $(".repo-list").hide();
+      $(".following-list").hide();
+      $(".followers-list").css("display", "flex");
+
+
+    });
+
+    $('li .following-link').on('click', function () {
+      $(".following-list").fadeIn(1000);
+      $(".followers-list").hide();
+      $(".repo-list").hide();
+      $(".following-list").css("display", "flex");
+
+
+    });
 
 
 
 
 
 
+  }
+
+  goToCategory(id: any){
+    this.router.navigate(['/category',id])
   }
 
 

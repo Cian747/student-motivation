@@ -1,0 +1,34 @@
+<div class="row" >
+    <div class="col-md-3" *ngFor="let motivation of motivations">
+       <div class="card mb-3">
+      <img src="https://cdn.educba.com/academy/wp-content/uploads/2018/10/Top-Uses-Of-Django.jpg" class="card-img-top" alt="...">
+      <!-- <img src=" http://127.0.0.1:8000/api/motivation{{motivation.image}}" class="card-img-top" alt="..."> -->
+
+
+      <div class="card-body ">
+        <h5 class="card-title">{{motivation.title}}</h5>
+        <p class="card-text">Category:{{motivation.category}}</p>
+        <p class="card-text small">{{motivation.description}}</p>
+
+        <p class="card-text"><small class="text-muted">{{motivation.profile}}</small></p>
+        <!-- {{motivation.created_at}} -->
+      </div>
+      <div class="card-footer">
+        <div class="icons">
+           <a href=""><i class="fas fa-save"></i></a>
+            <a href=""><i class="fas fa-share-alt"></i></a>
+        </div>
+        <div class="details">
+            <button (click)='goToUrl(motivation.id)' class="btn btn-secondary">View Details</button>
+
+        </div>
+
+      </div>
+    </div>
+    </div>
+
+
+</div>
+
+
+

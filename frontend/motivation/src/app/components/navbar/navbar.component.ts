@@ -11,6 +11,7 @@ import { ProfileService } from 'src/app/services/profile.service';
 })
 export class NavbarComponent implements OnInit {
   motivationPost:any
+  categories:any
   error: any;
 
   constructor(
@@ -29,11 +30,23 @@ export class NavbarComponent implements OnInit {
       title: '',
       category: '',
       description: '',
-
-
-
+      profile:'',
+      created_at:'',
 
     };
+
+    let promise = new Promise <void> ((resolve,reject)=>{
+      this.motivationService.getAllCategories().toPromise().then(
+        (response:any) => {
+          // console.log(response)
+        this.categories = response;
+        resolve()
+      },
+      (error:string) => {
+
+      })
+    })
+
 
   }
 

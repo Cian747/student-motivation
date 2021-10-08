@@ -1,0 +1,39 @@
+<div class="container-fluid" id="main">
+  <section id="nav">
+    <app-navbar></app-navbar>
+  </section>
+
+
+
+  <div class="container-fluid motivation" >
+
+    <!-- post -->
+    <div class="col-md-8">
+      <div class="card mb-3">
+        <div *ngIf="motivation?.image">
+          <img src="http://127.0.0.1:8000/{{motivation.image}}" class="card-img-top" alt="...">
+        </div>
+        <div *ngIf="motivation?.video">
+          <div class="video">
+            <video controls #videoPlayer width="auto"  height="auto">
+                <source src="{{motivation.video}}" type="video/mp4" />
+                Browser not supported
+            </video>
+          </div>
+        </div>
+        <div class="card-body">
+          <h5 class="card-title">{{motivation?.title}}</h5>
+          <p class="card-text"> {{motivation?.description}}</p>
+          <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+        </div>
+      </div>
+
+
+    </div>
+
+
+
+  </div>
+
+
+</div>

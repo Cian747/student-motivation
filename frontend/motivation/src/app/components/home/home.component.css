@@ -3,35 +3,36 @@
   height: 100vh;
   padding-left: 3%;
 }
-#post-cat{
-  margin-top: 3rem;
+
+.motivations{
+  margin-top: 5px;
+  /* background-color: rgba(245, 252, 245, 0.5) !important; */
+
 }
+
 
 
 i{
   padding: 0.5rem;
   color: #fff;
 }
-.image{
-  width: 600px;
-  height: auto;
-}
-/* .post-image,.post-content,.na{
-  padding-left: 3%;
-} */
+
+
 .categories{
   /* position: fixed;  */
   margin: 0 auto
 }
 .buttons{
   display: flex;
-justify-content: space-around;
-flex-wrap: wrap;
-margin-top: 3.5rem;
+  justify-content: center;
+  flex-wrap: wrap;
 }
 .btn{
   background: #fff !important;
   color: #074436 !important;
+  margin: 5px;
+  height: 40px;
+  font-size: 17px;
 }
 .btn:hover{
   background-color: #074436 !important;
@@ -43,4 +44,10 @@ margin-top: 3.5rem;
   text-decoration: none;
   font-weight: 800;
   color: #fff;
+}
+
+#devops{
+
+  display: none;
+
 }
