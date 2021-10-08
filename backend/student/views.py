@@ -18,10 +18,11 @@ from rest_framework.permissions import AllowAny, IsAuthenticated,IsAdminUser
 from .serializers import (
     UserRegistrationSerializer,
     UserLoginSerializer,
-    UserListSerializer
+    UserListSerializer,
+    ProfileSerializer
 )
 
-from .models import StudentUser
+from .models import StudentUser,Profile
 
 # Create your views here.
 
