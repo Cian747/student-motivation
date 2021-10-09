@@ -35,10 +35,7 @@ export class FilterCategoryComponent implements OnInit {
       // motivations
       this.motivationService.filterByCategory(id).toPromise().then(
         (response:any) => {
-        console.log(response)
         this.motivations = response;
-
-        //this.motivations = Array.from(Object.values(response.data.body.data));
         resolve()
       },
       (error:string) => {
@@ -47,7 +44,6 @@ export class FilterCategoryComponent implements OnInit {
         // categories
       this.motivationService.getAllCategories().toPromise().then(
         (response:any) => {
-          // console.log(response)
         this.categories = response;
         resolve()
       },
@@ -63,6 +59,9 @@ export class FilterCategoryComponent implements OnInit {
     this.router.navigate(['/category',id])
   }
 
+  refresh(): void {
+    window.location.reload();
+}
   goToUrl(id: any){
     this.router.navigate(['/motivation',id])
   }

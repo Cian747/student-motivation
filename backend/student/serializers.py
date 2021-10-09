@@ -104,7 +104,7 @@ class MotivationSerializer(serializers.ModelSerializer):
 class ReviewSerializer(serializers.ModelSerializer):
     class Meta:
         model = Review
-        fields = ('id', 'review', 'motivation')
+        fields = ('id', 'review', 'user_id', 'motivation')
 
 class CategorySerializer(serializers.ModelSerializer):
     class Meta:

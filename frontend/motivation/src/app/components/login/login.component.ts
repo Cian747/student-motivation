@@ -29,6 +29,7 @@ export class LoginComponent implements OnInit {
       username: '',
       password: '',
       email: '',
+      role:'',
 
     };
   }
@@ -38,6 +39,7 @@ export class LoginComponent implements OnInit {
       // console.log(response)
       // alert('User ' + this.login.username + ' has logged in'),
       this.loggedIn.next(true);
+      // if this.login.role ==
       this.router.navigate(['home'])
     },
     error => {

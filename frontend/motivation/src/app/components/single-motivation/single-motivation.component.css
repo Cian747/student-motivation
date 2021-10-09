@@ -1,13 +1,75 @@
 #main{
   background-color: #074436 !important;
-  height: 100vh;
+  /* height: 100vh; */
 }
 
 .motivation{
   display: flex;
   justify-content: center;
+
+}
+.video{
+  display: flex;
+  justify-content: center;
+}
+video{
+  height: 100% !important;
 }
 
-video{
-  height: 10rem !important;
+.card-body{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(192, 224, 166, 0.5) !important;
+
+}
+
+#review-form, #hide-form{
+  display: none;
+}
+
+
+.comment {
+  border: 1px solid rgba(16, 46, 46, 1);
+  background-color: rgba(16, 46, 46, 0.973);
+  float: left;
+  border-radius: 5px;
+  padding-left: 40px;
+  padding-right: 30px;
+  padding-top: 10px
+}
+
+.comment h4,
+.comment span,
+.darker h4,
+.darker span {
+  display: inline
+}
+
+.comment p,
+.comment span,
+.darker p,
+.darker span {
+  color: rgb(184, 183, 183)
+}
+
+h1,
+h5 {
+    color: white;
+    font-weight: bold
+}
+
+
+
+.review-loop{
+  display: flex;
+  flex-direction: column;
+}
+.reviewed-by{
+  display: flex;
+}
+
+.review-by span{
+  float: right;
 }

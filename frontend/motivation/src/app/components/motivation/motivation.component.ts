@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { Motivation } from 'src/app/models/motivation';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { MotivationService } from 'src/app/services/motivation.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-motivation',
@@ -29,17 +30,40 @@ export class MotivationComponent implements OnInit {
 
   ngOnInit(){
     let promise = new Promise <void> ((resolve,reject)=>{
+      // motivations
       this.motivationService.getAllMotivations().toPromise().then(
         (response:any) => {
-          // console.log(response)
         this.motivations = response;
         resolve()
       },
       (error:string) => {
 
       })
+
     })
-    return this.motivations
+
+    // let baseUrl = environment.mediaURL;
+
+    // let promise = new Promise <void> ((resolve,reject)=>{
+    //   this.motivationService.getAllMotivations().toPromise().then(
+    //     (response) => {
+    //     let new_response = response.map(item => {
+    //       let new_image = `${baseUrl}${item["image"]}`
+    //       item["image"] = new_image
+    //       return item
+
+    //     })
+    //     console.log(new_response)
+    //     this.motivations = response;
+
+    //     resolve()
+    //   },
+    //   (error:string) => {
+
+    //   })
+    // })
+    // return this.motivations
+
 
   }
 
@@ -54,3 +78,5 @@ export class MotivationComponent implements OnInit {
 
 
 }
+
+

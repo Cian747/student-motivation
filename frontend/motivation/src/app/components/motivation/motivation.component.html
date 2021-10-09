@@ -1,16 +1,26 @@
 <div class="row" >
     <div class="col-md-3" *ngFor="let motivation of motivations">
        <div class="card mb-3">
-      <img src="https://cdn.educba.com/academy/wp-content/uploads/2018/10/Top-Uses-Of-Django.jpg" class="card-img-top" alt="...">
-      <!-- <img src=" http://127.0.0.1:8000/api/motivation{{motivation.image}}" class="card-img-top" alt="..."> -->
+        <div *ngIf="motivation.image == null && motivation.video == null ">
+          <img src="assets/Motivation.jpg" class="card-img-top" alt="" height="300">
+        </div>
+        <div *ngIf="motivation.image">
+          <!-- <img [src]="motivation.image" class="card-img-top" alt="image " height="300"> -->
+          <img src="https://res.cloudinary.com/kenya12254/{{motivation.image}}" class="card-img-top vid-link" alt="..." height="300">
 
+        </div>
+        <div *ngIf="motivation?.video" class="video-icon">
+          <div class="col-md-8">
+            <img src="assets/vid-icon.png" class="card-img-top" alt="Video" (click)='goToUrl(motivation.id)' height="300">
 
+          </div>
+        </div>
       <div class="card-body ">
         <h5 class="card-title">{{motivation.title}}</h5>
         <p class="card-text">Category:{{motivation.category}}</p>
         <p class="card-text small">{{motivation.description}}</p>
 
-        <p class="card-text"><small class="text-muted">{{motivation.profile}}</small></p>
+        <p class="card-text"><small class="">{{motivation.profile}}</small></p>
         <!-- {{motivation.created_at}} -->
       </div>
       <div class="card-footer">
@@ -19,7 +29,7 @@
             <a href=""><i class="fas fa-share-alt"></i></a>
         </div>
         <div class="details">
-            <button (click)='goToUrl(motivation.id)' class="btn btn-secondary">View Details</button>
+            <button (click)='goToUrl(motivation.id)' class=" custom btn btn-info">View Details</button>
 
         </div>
 

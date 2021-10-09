@@ -51,6 +51,7 @@ export class NavbarComponent implements OnInit {
   }
 
   publishMotivation(){
+    console.log(this.motivationPost)
     this.motivationService.postMotivation(this.motivationPost).subscribe( response => {
       console.log(response)
       alert('Motivation ' + this.motivationPost.username + ' has been created'),

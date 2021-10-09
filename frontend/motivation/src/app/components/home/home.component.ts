@@ -57,30 +57,6 @@ export class HomeComponent implements OnInit {
 
 
 
-    $('#all').on('click', function () {
-      $("#devops").fadeIn(1000);
-      $("#motivation").hide();
-
-
-    });
-
-    $('li .followers-link').on('click', function () {
-      $(".followers-list").fadeIn(2000);
-      $(".repo-list").hide();
-      $(".following-list").hide();
-      $(".followers-list").css("display", "flex");
-
-
-    });
-
-    $('li .following-link').on('click', function () {
-      $(".following-list").fadeIn(1000);
-      $(".followers-list").hide();
-      $(".repo-list").hide();
-      $(".following-list").css("display", "flex");
-
-
-    });
 
 
 
