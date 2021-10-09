@@ -2,10 +2,11 @@ from django.shortcuts import render
 from django.http.response import JsonResponse, Http404, HttpResponseRedirect
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from rest_framework import generics
 from rest_framework.parsers import JSONParser 
 from rest_framework import status
-from .models import  Category, Motivation,Review
-from .serializers import MotivationSerializer, ReviewSerializer,CategorySerializer
+from .models import  Category, Motivation,Review, Profile
+from .serializers import MotivationSerializer, ReviewSerializer,CategorySerializer, ProfileSerializer
 from rest_framework import viewsets
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.authtoken.views import ObtainAuthToken
@@ -14,6 +15,7 @@ from rest_framework.generics import RetrieveAPIView
 from django.contrib.auth.models import User
 from rest_framework.decorators import api_view, permission_classes
 from django.http import Http404
+from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.permissions import AllowAny, IsAuthenticated,IsAdminUser
 from .serializers import (
     UserRegistrationSerializer,
@@ -29,6 +31,9 @@ from .models import StudentUser
 @api_view(['GET', 'POST', 'DELETE'])
 @permission_classes((AllowAny, ))
 def motivation(request):
+    # user = request.user
+    # profile = Profile.objects.get(user=user)
+    # serializer = ProfileSerializer(profile, many=False)
     if request.method == 'GET':
         motivation = Motivation.objects.all()
        
@@ -36,9 +41,12 @@ def motivation(request):
         return JsonResponse(motivation_serializer.data, safe=False)
     
     elif request.method == 'POST':
+        
         motivational_data = JSONParser().parse(request)
+        
         motivational_serializer = MotivationSerializer(data=motivational_data)
         if motivational_serializer.is_valid():
+            # motivational_serializer.profile=user
             motivational_serializer.save()
             return JsonResponse(motivational_serializer.data, status=status.HTTP_201_CREATED) 
         return JsonResponse(motivational_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
@@ -67,12 +75,24 @@ def motivation_id(request, mot_pk):
         motivation.delete() 
         return JsonResponse({'message': 'Motivation was deleted successfully!'}, status=status.HTTP_204_NO_CONTENT)
     
-        
+
+class MotList(generics.ListAPIView):
+    permission_classes = (AllowAny, )
+    queryset = Motivation.objects.all()
+    serializer_class = MotivationSerializer
+    filter_backends = [DjangoFilterBackend]
+    filterset_fields = ['category',]
+
+
 class MotivationalByCategory(APIView):
     permission_classes = (AllowAny, )
+    filter_backends = [DjangoFilterBackend]
     def get_mot(self, cat_pk):
         try:
-            return Motivation.objects.get(category=cat_pk)
+            motivations=Motivation.objects.filter(category__id=cat_pk)
+            # Model.objects.filter(field_name=some_param)
+            print(motivations)
+            return motivations
         except Motivation.DoesNotExist:
             return Http404
 
@@ -138,6 +158,13 @@ class ReviewList(APIView):
             serializers.save()
             return Response(serializers.data, status=status.HTTP_201_CREATED)
         return Response(serializers.errors, status=status.HTTP_400_BAD_REQUEST)
+
+class RevList(generics.ListAPIView):
+    permission_classes = (AllowAny, )
+    queryset = Review.objects.all()
+    serializer_class = ReviewSerializer
+    filter_backends = [DjangoFilterBackend]
+    filterset_fields = ['motivation',]
 
 class ReviewDescription(APIView):
     permission_classes = (AllowAny, )

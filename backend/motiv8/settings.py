@@ -55,6 +55,7 @@ INSTALLED_APPS = [
     'corsheaders',
     'cloudinary',
     'rest_framework',
+    'django_filters',
 ]
 
 MIDDLEWARE = [
@@ -102,7 +103,7 @@ WSGI_APPLICATION = 'motiv8.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE':'django.db.backends.postgresql',
-        'NAME':'motivation',
+        'NAME':'newmotive',
         'USER':'moringa',
         'PASSWORD':'1234',
     }
@@ -161,6 +162,7 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.SessionAuthentication',
         'rest_framework.authentication.BasicAuthentication',
     ),
+    'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend']
 }
 
 SIMPLE_JWT = {
