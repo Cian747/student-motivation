@@ -78,6 +78,20 @@ h6{
 #bar{
   margin-top:2rem !important;
 }
-.side-bar{
+/* .side-bar{
   position: fixed;
+} */
+.navbar{
+  background-color: white !important;
+}
+.delete{
+  color: red;
+  cursor: pointer
+}
+.roles i{
+  padding: 0.5rem;
+  cursor:pointer
+}
+.role i,.fa-trash{
+  color: red;
 }

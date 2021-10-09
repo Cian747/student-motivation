@@ -83,7 +83,10 @@
           <h1>Awadh</h1>
         </div>
         <div id="dashbord-categories">
-          <h1>Categories</h1>
+          <div class="cats" *ngFor = 'let category of categories'>
+            <h1>{{category.category_name}}</h1>
+          </div>
+         
         </div>
         <div id="dashbord-posts">
           <div class="motivations" *ngFor = 'let motivation of motivations'>
@@ -94,6 +97,40 @@
              <div class="image-description">
                 <h6>{{motivation.title}}</h6>
                 <small>{{motivation.description}}</small>
+                <div class="comments">
+                  <a class="view-comment" href="" data-bs-toggle="modal" data-bs-target="#viewComment">
+                    View Comments
+                  </a>
+                  <!-- Modal -->
+                  <div class="modal fade" id="viewComment" tabindex="-1" aria-labelledby="viewCommentLabel"
+                    aria-hidden="true">
+                    <div class="modal-dialog">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title" id="exampleModalLabel">Comments</h5>
+                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                          <!-- loop all comments -->
+
+                          <p>Don't be stupid dude</p>
+                          <div class="roles">
+                            <i class="fas fa-flag"></i>
+                            <i class="fas fa-trash"></i>
+                          </div>
+  
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="delete">
+                  <i class="fas fa-trash"></i>
+                </div>
+                
 
              </div>
              <hr>

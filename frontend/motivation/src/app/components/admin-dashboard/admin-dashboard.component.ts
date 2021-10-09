@@ -3,7 +3,9 @@ import { analyzeAndValidateNgModules } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import * as $ from 'jquery'
 import { MotivationService } from 'src/app/services/motivation.service';
+import { CategoriesService } from 'src/app/services/categories.service';
 import { Motivation } from 'src/app/models/motivation';
+import { Category } from 'src/app/models/category';
 
 
 @Component({
@@ -13,8 +15,10 @@ import { Motivation } from 'src/app/models/motivation';
 })
 export class AdminDashboardComponent implements OnInit {
 
-  constructor(private http:HttpClient, private motivationService:MotivationService) { }
+  constructor(private http:HttpClient, private motivationService:MotivationService,
+              private categoryService: CategoriesService) { }
   motivations!:Motivation[]
+  categories!:Category[]
 
   ngOnInit() {
     let promise = new Promise <void> ((resolve,reject)=>{
@@ -29,7 +33,7 @@ export class AdminDashboardComponent implements OnInit {
       })
     })
     return promise
-    
+  
   }
   
   get_users(){
@@ -54,7 +58,11 @@ export class AdminDashboardComponent implements OnInit {
     $('#dashbord-posts').hide()
     $('#dashbord-admins').hide()
     $('#dashbord-categories').show()
-    
+    this.categoryService.getAllCategories().subscribe((response:any)=>{
+        this.categories = response
+        console.log(response)
+      })
+     
    
   }
   get_admin(){
