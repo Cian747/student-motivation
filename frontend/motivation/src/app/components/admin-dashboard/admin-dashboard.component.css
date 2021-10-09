@@ -36,9 +36,7 @@ color: #074436 !important;
 a{
   text-decoration:none;
 }
-.first-row,.icons {
-  margin-top: 1rem;
-}
+
 .first-row{
   color: #074436;
   font-weight: 900;
@@ -72,4 +70,14 @@ h6{
 }
 #dashbord-student,#dashbord-categories,#dashbord-posts,#dashbord-admins{
   display: none;
+  margin-top: 3rem;
+}
+.motivation{
+  margin-left: 2.5rem;
+}
+#bar{
+  margin-top:2rem !important;
+}
+.side-bar{
+  position: fixed;
 }

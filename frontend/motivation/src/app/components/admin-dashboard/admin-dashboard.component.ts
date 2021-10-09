@@ -31,7 +31,7 @@ export class AdminDashboardComponent implements OnInit {
     return promise
     
   }
-
+  
   get_users(){
     $('#dashbord-body').hide()
     $('#dashbord-categories').hide()

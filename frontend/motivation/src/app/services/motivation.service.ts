@@ -21,4 +21,5 @@ export class MotivationService {
   searchMotivation(service:string):Observable<any[]>{
     return this.http.get<any[]>(this.APIUrl + 'api/search/?search='+ service )
   }
+
 }

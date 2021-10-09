@@ -1,16 +1,23 @@
 <main id='admin'>
   <section id="top-row">
 
+    <nav class="navbar navbar-light fixed-top">
+      <div class="container-fluid">
+        <a class="navbar-brand"> <i class="fas fa-graduation-cap"></i> ProperLearn</a>
+        <div class="d-flex">
+          <a href=""><i class="fas fa-bell"></i></a>
+        <a href=""><i class="fas custom fa-comment-alt"></i></a>
+        <a href=""><i class="fas fa-user-circle"></i></a>John Doe
+        </div>
+      </div>
+    </nav>
+
   </section>
 
   <section id="bar">
     <div class="row">
       <div class="col-md-3">
         <div class="side-bar">
-          <div class="first-row text-center">
-            <i class="fas fa-graduation-cap"></i> ProperLearn
-          </div>
-          <hr>
           <div class="dashbord">
             <div class="students">
             </div>
@@ -33,13 +40,7 @@
       </div>
 
       <div class="col-md-9">
-        <div class="head-profile">
-          <div class="icons d-flex justify-content-end">
-            <a href=""><i class="fas fa-bell"></i></a>
-            <a href=""><i class="fas custom fa-comment-alt"></i></a>
-            <a href=""><i class="fas fa-user-circle"></i></a>John Doe
-          </div>
-        </div>
+        
         <div class="dash-body " id = 'dashbord-body'>
           <div class="cats">
             <div (click) = 'get_posts()'class="posts text-center pt-3">
@@ -86,7 +87,18 @@
         </div>
         <div id="dashbord-posts">
           <div class="motivations" *ngFor = 'let motivation of motivations'>
-            <h1>{{motivation.description}}</h1>
+           <div class="motivation">
+             <div class="image-moti">
+               <img src="{{motivation.image}}" alt="">
+             </div>
+             <div class="image-description">
+                <h6>{{motivation.title}}</h6>
+                <small>{{motivation.description}}</small>
+
+             </div>
+             <hr>
+           </div>
+           
           </div>
         </div>
         <div id="dashbord-admins">
