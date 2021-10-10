@@ -21,19 +21,19 @@
           <div class="dashbord">
             <div class="students">
             </div>
-            <h6 (click) = 'get_admin()' pt=4 class='text-center '><i class="fas fa-home"></i> Dashbord</h6>
+            <h5 (click) = 'get_admin()' pt=4 class='text-center '><i class="fas fa-home"></i> Dashbord</h5>
           </div>
           <div class="students">            
-             <h3 id = 'students' (click) = 'get_users()'> <i class="fas fa-user-friends"></i> Students</h3>
+             <h6 id = 'students' (click) = 'get_users()'> <i class="fas fa-user-friends"></i> Students</h6>
           </div>
           <div class="students">
-            <h3 (click) ='get_posts()'> <i class="fas fa-plus"></i> Posts</h3>
+            <h6 (click) ='get_posts()'> <i class="fas fa-plus"></i> Posts</h6>
           </div>
           <div class="students">
             
               
           
-            <h3 (click)='get_categories()'> <i class="fas fa-tag"></i> Categories</h3>
+            <h6 (click)='get_categories()'> <i class="fas fa-tag"></i> Categories</h6>
           </div>
         </div>
 
@@ -83,6 +83,39 @@
           <h1>Awadh</h1>
         </div>
         <div id="dashbord-categories">
+          <div class="top">
+            <div class="cat-head">
+              <h4>Categories</h4>
+              <button type="button" class="btn d-flex btn-outline-success" data-bs-toggle="modal" data-bs-target="#post">
+                Add
+              </button>
+            </div>
+            <div class="modal fade" id="post" tabindex="-1" aria-labelledby="postLabel" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Post</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                    <div class="post-form">
+                      <form #postForm="ngForm" novalidate>
+                        <div class="form-group">
+                          <label for="title">Name</label>
+                          <input type="text" id="title" name="title" class="form-control">
+                        </div>
+        
+                        <button type="submit" class='custom btn btn-lg btn-outline-info'>Save</button>
+                      </form>
+                    </div>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
           <div class="cats" *ngFor = 'let category of categories'>
             <h1>{{category.category_name}}</h1>
           </div>
