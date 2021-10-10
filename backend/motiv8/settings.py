@@ -106,6 +106,7 @@ DATABASES = {
         'NAME':'motivation',
         'USER':'moringa',
         'PASSWORD':'frank50',
+
     }
 }
 

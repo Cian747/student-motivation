@@ -26,9 +26,10 @@ from .serializers import (
     SubscriptionSerializer,
     SuperUserSerializer,
     ActiveUserSerializer,
+
 )
 
-from .models import StudentUser
+from .models import StudentUser, Profile
 
 # Create your views here.
 
