@@ -1,4 +1,4 @@
-from .models import StudentUser,Motivation,Review,Profile
+from .models import Category, StudentUser,Motivation,Review,Profile
 from rest_framework import serializers
 from rest_framework_simplejwt.tokens import RefreshToken
 from django.contrib.auth import authenticate
@@ -16,6 +16,20 @@ class UserRegistrationSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         auth_user = StudentUser.objects.create_user(**validated_data)
         return auth_user
+
+class SuperUserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = StudentUser
+        fields = (
+            'is_superuser',
+        )
+
+class ActiveUserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = StudentUser
+        fields = (
+            'is_active',
+        )
 
 
 class UserLoginSerializer(serializers.Serializer):
@@ -61,8 +75,13 @@ class UserListSerializer(serializers.ModelSerializer):
     class Meta:
         model = StudentUser
         fields = (
+            'id',
+            'username',
             'email',
-            'role'
+            'role',
+            'is_active',
+            'is_staff',
+            'is_superuser',
         )
 
 class ProfileSerializer(serializers.ModelSerializer):
@@ -99,3 +118,8 @@ class ReviewSerializer(serializers.ModelSerializer):
     class Meta:
         model = Review
         fields = ('id', 'review', 'motivation')
+
+class SubscriptionSerializer(serializers.ModelSerializer):
+    class Meta:
+        model= Category
+        fields = ('id','name','email','category')
