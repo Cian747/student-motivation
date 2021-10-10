@@ -2,10 +2,11 @@ from django.shortcuts import render
 from django.http.response import JsonResponse, Http404, HttpResponseRedirect
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from rest_framework import generics
 from rest_framework.parsers import JSONParser 
 from rest_framework import status
-from .models import  Category, Motivation,Review,Profile
-from .serializer import MotivationSerializer, ReviewSerializer,CategorySerializer
+from .models import  Category, Motivation,Review, Profile
+from .serializers import MotivationSerializer, ReviewSerializer,CategorySerializer, ProfileSerializer
 from django.contrib.auth.decorators import user_passes_test
 from rest_framework import viewsets
 from rest_framework.authentication import TokenAuthentication
@@ -15,6 +16,7 @@ from rest_framework.generics import RetrieveAPIView
 from django.contrib.auth.models import User
 from rest_framework.decorators import api_view, permission_classes,authentication_classes
 from django.http import Http404
+from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.permissions import AllowAny, IsAuthenticated,IsAdminUser
 from .serializers import (
     UserRegistrationSerializer,
@@ -39,8 +41,12 @@ class MotivationList(APIView):
         return Response(serializers.data)
 
     def post(self, request, format=None):
+        user = request.user
+        profile = Profile.objects.get(user=user)
         serializers = MotivationSerializer(data=request.data)
+        profile_serializer = ProfileSerializer(profile, many=False)
         if serializers.is_valid():
+            serializers.profile=profile_serializer
             serializers.save()
             return Response(serializers.data, status=status.HTTP_201_CREATED)
         return Response(serializers.errors, status=status.HTTP_400_BAD_REQUEST)
@@ -58,11 +64,21 @@ class MotivationalDescription(APIView):
         serializers = MotivationSerializer(motivation)
         return Response(serializers.data)
 
+class MotList(generics.ListAPIView):
+    permission_classes = (AllowAny, )
+    queryset = Motivation.objects.all()
+    serializer_class = MotivationSerializer
+    filter_backends = [DjangoFilterBackend]
+    filterset_fields = ['category','profile']
+
+
 class MotivationalByCategory(APIView):
     permission_classes = (AllowAny, )
     def get_mot(self, cat_pk):
         try:
-            return Motivation.objects.get(category=cat_pk)
+            # return Motivation.objects.get(category=cat_pk)
+            motivations=Motivation.objects.filter(category=cat_pk)
+            return motivations
         except Motivation.DoesNotExist:
             return Http404
 
@@ -131,6 +147,13 @@ class ReviewList(APIView):
             serializers.save()
             return Response(serializers.data, status=status.HTTP_201_CREATED)
         return Response(serializers.errors, status=status.HTTP_400_BAD_REQUEST)
+
+class RevList(generics.ListAPIView):
+    permission_classes = (AllowAny, )
+    queryset = Review.objects.all()
+    serializer_class = ReviewSerializer
+    filter_backends = [DjangoFilterBackend]
+    filterset_fields = ['motivation',]
 
 class ReviewDescription(APIView):
     permission_classes = (AllowAny, )
@@ -225,7 +248,6 @@ def all_users(request):
     user = request.user
 
     users = StudentUser.objects.all()
-
     if request.method == 'GET':
         serializer = UserListSerializer(users, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
@@ -329,6 +351,5 @@ def subscription_service(request):
             return Response(subscription_serializer.data, status=status.HTTP_200_OK)
         else:
             return Response(subscription_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
 
 

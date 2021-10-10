@@ -17,10 +17,14 @@ from .views import (
 
 urlpatterns = [
     url(r'^motivation/$', views.MotivationList.as_view()),
+    url(r'^mot/$', views.MotList.as_view()),
+    # http://127.0.0.1:8000/api/mot?category=2
     url(r'motivation/mot-id/(?P<pk>[0-9]+)/$', views.MotivationalDescription.as_view()),
     url(r'motivation/mot-cat/(?P<cat_pk>[0-9]+)/$', views.MotivationalByCategory.as_view()),
 
     url(r'^review/$', views.ReviewList.as_view()),
+    url(r'^rev/$', views.RevList.as_view()),
+    # http://127.0.0.1:8000/api/rev?motivation=2
     url(r'review/rev-id/(?P<pk>[0-9]+)/$', views.ReviewDescription.as_view()),
 
     url(r'^category/$', views.CategoryList.as_view()),
