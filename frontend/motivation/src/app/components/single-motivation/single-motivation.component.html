@@ -10,6 +10,9 @@
     <!-- post -->
     <div class="col-md-9">
       <div class="card mb-3">
+        <div *ngIf="motivation.image == null && motivation.video == null ">
+          <img src="assets/Motivation.jpg" class="card-img-top" alt="" height="550">
+        </div>
         <div *ngIf="motivation?.image">
           <img src="https://res.cloudinary.com/kenya12254/{{motivation.image}}" class="card-img-top" alt="..." height="550">
           <!-- <img src="https://cdn.educba.com/academy/wp-content/uploads/2018/10/Top-Uses-Of-Django.jpg" class="card-img-top" alt="..."> -->

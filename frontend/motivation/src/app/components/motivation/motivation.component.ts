@@ -5,12 +5,17 @@ import { Motivation } from 'src/app/models/motivation';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { MotivationService } from 'src/app/services/motivation.service';
 import { environment } from 'src/environments/environment';
+import { TruncateModule } from 'ng2-truncate';
+
 
 @Component({
   selector: 'app-motivation',
   templateUrl: './motivation.component.html',
   styleUrls: ['./motivation.component.css']
 })
+
+
+
 export class MotivationComponent implements OnInit {
 
 
@@ -78,5 +83,8 @@ export class MotivationComponent implements OnInit {
 
 
 }
+
+
+
 
 

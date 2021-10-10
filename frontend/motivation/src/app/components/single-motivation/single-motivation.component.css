@@ -25,6 +25,10 @@ video{
 
 }
 
+.card-body p{
+  line-height: 2;
+}
+
 #review-form, #hide-form{
   display: none;
 }
