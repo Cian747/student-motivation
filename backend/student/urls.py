@@ -17,10 +17,14 @@ from .views import (
 
 urlpatterns = [
     url(r'^motivation/$', views.MotivationList.as_view()),
+    url(r'^mot/$', views.MotList.as_view()),
+    # http://127.0.0.1:8000/api/mot?category=2
     url(r'motivation/mot-id/(?P<pk>[0-9]+)/$', views.MotivationalDescription.as_view()),
     url(r'motivation/mot-cat/(?P<cat_pk>[0-9]+)/$', views.MotivationalByCategory.as_view()),
 
     url(r'^review/$', views.ReviewList.as_view()),
+    url(r'^rev/$', views.RevList.as_view()),
+    # http://127.0.0.1:8000/api/rev?motivation=2
     url(r'review/rev-id/(?P<pk>[0-9]+)/$', views.ReviewDescription.as_view()),
 
     url(r'^category/$', views.CategoryList.as_view()),
@@ -31,7 +35,11 @@ urlpatterns = [
     path('token/refresh/', jwt_views.TokenRefreshView.as_view(), name='token_refresh'),
     path('register', AuthUserRegistrationView.as_view(), name='register'),
     path('login', AuthUserLoginView.as_view(), name='login'),
-    path('users', UserListView.as_view(), name='users'),
+    # path('users', UserListView.as_view(), name='users'),
+    path('users', views.all_users, name='users'),
+    path('remove_user',views.remove_user,name='user_deactivate'),
+    path('superuser',views.change_to_superuser,name='superuser_status'),
+
 ]
 if settings.DEBUG:
     urlpatterns+= static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)

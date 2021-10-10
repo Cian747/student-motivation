@@ -1,7 +1,12 @@
-from .models import StudentUser,Motivation,Review,Profile
+from .models import Category, StudentUser,Motivation,Review,Profile
 from rest_framework import serializers
 from rest_framework_simplejwt.tokens import RefreshToken
 from django.contrib.auth import authenticate
+from .models import Motivation, Review, Profile, Category
+
+
+
+
 
 class UserRegistrationSerializer(serializers.ModelSerializer):
     class Meta:
@@ -11,11 +16,26 @@ class UserRegistrationSerializer(serializers.ModelSerializer):
             'email',
             'role',
             'password'
+            # 'password2'
         )
 
     def create(self, validated_data):
         auth_user = StudentUser.objects.create_user(**validated_data)
         return auth_user
+
+class SuperUserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = StudentUser
+        fields = (
+            'is_superuser',
+        )
+
+class ActiveUserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = StudentUser
+        fields = (
+            'is_active',
+        )
 
 
 class UserLoginSerializer(serializers.Serializer):
@@ -61,8 +81,13 @@ class UserListSerializer(serializers.ModelSerializer):
     class Meta:
         model = StudentUser
         fields = (
+            'id',
+            'username',
             'email',
-            'role'
+            'role',
+            'is_active',
+            'is_staff',
+            'is_superuser',
         )
 
 class ProfileSerializer(serializers.ModelSerializer):
@@ -93,9 +118,21 @@ class ProfileSerializer(serializers.ModelSerializer):
 class MotivationSerializer(serializers.ModelSerializer):
     class Meta:
         model = Motivation
-        fields = ('id', 'image', 'video', 'title', 'category', 'description', 'profile', )
+        fields = ('id', 'image', 'video', 'title', 'category', 'description', 'profile', 'created_at')
 
 class ReviewSerializer(serializers.ModelSerializer):
     class Meta:
         model = Review
-        fields = ('id', 'review', 'motivation')
+
+        fields = ('id', 'review', 'user_id', 'motivation')
+
+class CategorySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Category
+        fields = ('id', 'category_name')
+
+class SubscriptionSerializer(serializers.ModelSerializer):
+    class Meta:
+        model= Category
+        fields = ('id','name','email','category')
+

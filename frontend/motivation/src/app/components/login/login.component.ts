@@ -29,15 +29,17 @@ export class LoginComponent implements OnInit {
       username: '',
       password: '',
       email: '',
+      role:'',
 
     };
   }
 
   LoginUser(){
     this.LoginService.loginUser(this.login).subscribe( response => {
-      console.log(response)
+      // console.log(response)
       // alert('User ' + this.login.username + ' has logged in'),
       this.loggedIn.next(true);
+      // if this.login.role ==
       this.router.navigate(['home'])
     },
     error => {

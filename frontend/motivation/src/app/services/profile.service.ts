@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
+import { Observable } from 'rxjs';
 
 
 @Injectable({
@@ -41,10 +42,13 @@ export class ProfileService {
   }
 
 
-	getUser(){
-    return this.http.get<any[]>(this.profUrl + 'profile', { headers: this.getHeaders() })
+	getUser():Observable<any[]>{
+    return this.http.get<any[]>(this.profUrl + 'profile/', { headers: this.getHeaders() })
 
 	}
+
+
+
 
 	updateUser(user: any){
     return this.http.put<any[]>(this.profUrl + 'user', user , { headers: this.getHeaders() })
