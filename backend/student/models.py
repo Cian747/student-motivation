@@ -25,6 +25,7 @@ class StudentUser(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField()
     role = models.PositiveSmallIntegerField(choices=USER_ROLE_CHOICES, blank=True, null=True, default=2)
     date_joined = models.DateTimeField(auto_now_add=True)
+    is_superuser = models.BooleanField(default=False)
     is_staff = models.BooleanField(default=True)
     is_admin = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
@@ -97,6 +98,8 @@ class Review(models.Model):
 
     def __str__(self):
        return self.user_id.username
+
+# Review subclass
 
 class Subscription(models.Model):
     name = models.CharField(max_length=50)

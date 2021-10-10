@@ -35,7 +35,11 @@ urlpatterns = [
     path('token/refresh/', jwt_views.TokenRefreshView.as_view(), name='token_refresh'),
     path('register', AuthUserRegistrationView.as_view(), name='register'),
     path('login', AuthUserLoginView.as_view(), name='login'),
-    path('users', UserListView.as_view(), name='users'),
+    # path('users', UserListView.as_view(), name='users'),
+    path('users', views.all_users, name='users'),
+    path('remove_user',views.remove_user,name='user_deactivate'),
+    path('superuser',views.change_to_superuser,name='superuser_status'),
+
 ]
 if settings.DEBUG:
     urlpatterns+= static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
