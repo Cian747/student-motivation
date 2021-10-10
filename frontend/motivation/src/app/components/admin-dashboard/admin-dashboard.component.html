@@ -29,8 +29,6 @@
 <!--             <span>
               <i class="fas fa-user-friends"></i>
             </span> -->
-            <a href="">Students</a>
-
           </div>
           <div class="students">
             <h6 (click) ='get_posts()'> <i class="fas fa-plus"></i> Posts</h6>
@@ -105,7 +103,7 @@
                   </div>
                   <div class="modal-body">
                     <div class="post-form">
-                      <form #postForm="ngForm" novalidate>
+                      <form #postForm="" novalidate>
                         <div class="form-group">
                           <label for="title">Name</label>
                           <input type="text" id="title" name="title" class="form-control">
@@ -128,7 +126,7 @@
          
         </div>
         <div id="dashbord-posts">
-          <div class="motivations" *ngFor = 'let motivation of motivations'>
+          <div class="motivations" *ngFor = 'let motivation of motivations; let i = index'>
            <div class="motivation">
              <div class="image-moti">
                <img src="{{motivation.image}}" alt="">
@@ -155,7 +153,9 @@
                           <p>Don't be stupid dude</p>
                           <div class="roles">
                             <i class="fas fa-flag"></i>
-                            <i class="fas fa-trash"></i>
+                            <div>
+                              <i class="fas fa-trash"></i>
+                            </div>
                           </div>
   
                         </div>
@@ -166,7 +166,7 @@
                     </div>
                   </div>
                 </div>
-                <div class="delete">
+                <div (click) = 'deletePost(i)'class="delete">
                   <i class="fas fa-trash"></i>
                 </div>
                 

@@ -81,5 +81,10 @@ export class AdminDashboardComponent implements OnInit {
     $('#dashbord-categories').hide()
     $('#dashbord-admins').show()
   }
+  deletePost(post:any){
+    this.motivations.splice(post,1)
+    
+
+  }
 }
 

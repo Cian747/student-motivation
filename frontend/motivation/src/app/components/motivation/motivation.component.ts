@@ -39,6 +39,7 @@ export class MotivationComponent implements OnInit {
       this.motivationService.getAllMotivations().toPromise().then(
         (response:any) => {
         this.motivations = response;
+        console.log(response)
         resolve()
       },
       (error:string) => {
