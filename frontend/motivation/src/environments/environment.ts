@@ -4,8 +4,9 @@
 
 export const environment = {
 	production: false,
-  
+
   URL:`http://localhost:8000/api/`,
+  mediaURL:`https://res.cloudinary.com/kenya12254/`
 
 };
 
