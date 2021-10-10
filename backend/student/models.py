@@ -25,6 +25,7 @@ class StudentUser(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField()
     role = models.PositiveSmallIntegerField(choices=USER_ROLE_CHOICES, blank=True, null=True, default=2)
     date_joined = models.DateTimeField(auto_now_add=True)
+    is_superuser = models.BooleanField(default=False)
     is_staff = models.BooleanField(default=True)
     is_admin = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
@@ -62,8 +63,8 @@ class Category(models.Model):
     category_name = models.CharField(max_length=50)
     created_at = models.DateTimeField(auto_now_add=True)
 
-    def __str__(self) -> str:
-       return self.category_name
+    def __str__(self):
+        return self.category_name
 
 class Profile(models.Model):
     user = models.OneToOneField(StudentUser, on_delete=models.CASCADE)
@@ -73,12 +74,12 @@ class Profile(models.Model):
     phone_number = models.CharField(max_length=20,null=True,blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
-    def __str__(self) -> str:
+    def __str__(self):
        return self.user.username
 
 class Motivation(models.Model):
     image = CloudinaryField('images', blank=True,null=True)
-    video = models.FileField(blank=True,null=True)
+    video = models.FileField(blank=True, null=True)
     title = models.CharField(max_length=255)
     category = models.ForeignKey(Category, null=True, on_delete=models.DO_NOTHING)
     description = models.TextField()
@@ -87,7 +88,7 @@ class Motivation(models.Model):
     updated = models.DateTimeField(auto_now=True)
     likes = models.ManyToManyField(StudentUser, related_name='motivation_posts')
 
-    def __str__(self) -> str:
+    def __str__(self):
        return self.title
 
 class Review(models.Model):
@@ -95,15 +96,17 @@ class Review(models.Model):
     user_id = models.ForeignKey(StudentUser,on_delete=models.CASCADE)
     motivation = models.ForeignKey(Motivation,on_delete=models.CASCADE)
 
-    def __str__(self) -> str:
+    def __str__(self):
        return self.user_id.username
+
+# Review subclass
 
 class Subscription(models.Model):
     name = models.CharField(max_length=50)
     email = models.EmailField()
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
 
-    def __str__(self) -> str:
+    def __str__(self):
        return self.name
 
 class WishList(models.Model):

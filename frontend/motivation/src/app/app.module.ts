@@ -12,6 +12,10 @@ import { ProfileComponent } from './components/profile/profile.component';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { NavbarComponent } from './components/navbar/navbar.component';
+import { MotivationComponent } from './components/motivation/motivation.component';
+import { SingleMotivationComponent } from './components/single-motivation/single-motivation.component';
+import { FilterCategoryComponent } from './components/filter-category/filter-category.component';
+import { TruncateModule } from 'ng2-truncate';
 
 
 @NgModule({
@@ -23,13 +27,17 @@ import { NavbarComponent } from './components/navbar/navbar.component';
     HomeComponent,
     AdminDashboardComponent,
     ProfileComponent,
-    NavbarComponent
+    NavbarComponent,
+    MotivationComponent,
+    SingleMotivationComponent,
+    FilterCategoryComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
+    TruncateModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

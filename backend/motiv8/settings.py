@@ -55,6 +55,7 @@ INSTALLED_APPS = [
     'corsheaders',
     'cloudinary',
     'rest_framework',
+    'django_filters',
 ]
 
 MIDDLEWARE = [
@@ -86,7 +87,6 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'django.template.context_processors.media',
-                'django.core.context_processors.request',
 
             ],
         },
@@ -105,7 +105,8 @@ DATABASES = {
         'ENGINE':'django.db.backends.postgresql',
         'NAME':'motivation',
         'USER':'moringa',
-        'PASSWORD':'Access',
+        'PASSWORD':'frank50',
+
     }
 }
 
@@ -162,6 +163,7 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.SessionAuthentication',
         'rest_framework.authentication.BasicAuthentication',
     ),
+    'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend']
 }
 
 SIMPLE_JWT = {
@@ -242,7 +244,6 @@ cloudinary.config(
 django_on_heroku.settings(locals())
 
 
-# Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'

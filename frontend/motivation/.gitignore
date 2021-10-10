@@ -44,6 +44,7 @@ testem.log
 .DS_Store
 Thumbs.db
 
+
 #enviroments
 .venv
 env/
@@ -51,3 +52,8 @@ env/
 ENV/
 env.bak/
 venv.bak/
+
+
+# others
+notes.txt
+
