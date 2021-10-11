@@ -18,6 +18,7 @@ import { FilterCategoryComponent } from './components/filter-category/filter-cat
 import { TruncateModule } from 'ng2-truncate';
 
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -31,6 +32,7 @@ import { TruncateModule } from 'ng2-truncate';
     MotivationComponent,
     SingleMotivationComponent,
     FilterCategoryComponent,
+  
   ],
   imports: [
     BrowserModule,

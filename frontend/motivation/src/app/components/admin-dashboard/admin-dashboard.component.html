@@ -135,7 +135,7 @@
                 <h6>{{motivation.title}}</h6>
                 <small>{{motivation.description}}</small>
                 <div class="comments">
-                  <a class="view-comment" href="" data-bs-toggle="modal" data-bs-target="#viewComment">
+                  <a (click) = 'getReview(motivation.id)' class="view-comment" href="" data-bs-toggle="modal" data-bs-target="#viewComment">
                     View Comments
                   </a>
                   <!-- Modal -->
@@ -147,18 +147,21 @@
                           <h5 class="modal-title" id="exampleModalLabel">Comments</h5>
                           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
-                        <div class="modal-body">
+                        <div class="modal-body" *ngIf = "reviews else elseBlock" >
                           <!-- loop all comments -->
-
-                          <p>Don't be stupid dude</p>
+                            <div class="comments" *ngFor = 'let review of reviews'>
+                              <p>{{review.service}}</p>
                           <div class="roles">
                             <i class="fas fa-flag"></i>
                             <div>
                               <i class="fas fa-trash"></i>
                             </div>
                           </div>
-  
-                        </div>
+                            </div>                 
+                          </div>
+                          <ng-template #elseBlock>
+                            <p>No comments at the moment</p>
+                          </ng-template>
                         <div class="modal-footer">
                           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                         </div>

@@ -6,6 +6,10 @@ import { MotivationService } from 'src/app/services/motivation.service';
 import { CategoriesService } from 'src/app/services/categories.service';
 import { Motivation } from 'src/app/models/motivation';
 import { Category } from 'src/app/models/category';
+import { Review } from 'src/app/models/review';
+import { Users } from 'src/app/models/users';
+import { UsersService } from 'src/app/services/users.service';
+import { ReviewService } from 'src/app/services/review.service';
 
 
 @Component({
@@ -16,9 +20,15 @@ import { Category } from 'src/app/models/category';
 export class AdminDashboardComponent implements OnInit {
 
   constructor(private http:HttpClient, private motivationService:MotivationService,
-              private categoryService: CategoriesService) { }
+              private categoryService: CategoriesService,
+               private user:UsersService,
+               private review:ReviewService) { }
+
+
   motivations!:Motivation[]
   categories!:Category[]
+  users!:Users[]
+  reviews!:Review[]
 
   ngOnInit() {
     let promise = new Promise <void> ((resolve,reject)=>{
@@ -42,6 +52,10 @@ export class AdminDashboardComponent implements OnInit {
     $('#dashbord-posts').hide()
     $('#dashbord-admins').hide()
     $('#dashbord-student').show()
+    this.user.getUsers().subscribe((response:any)=>{
+      this.users = response
+      console.log(response)
+    })
   }
   get_posts(){
     $('#dashbord-body').hide()
@@ -83,8 +97,16 @@ export class AdminDashboardComponent implements OnInit {
   }
   deletePost(post:any){
     this.motivations.splice(post,1)
-    
+  
 
+  }
+  getReview(id:any){
+    this.review.getSingleReview(id)
+    .subscribe(response=>{
+      this.reviews = response
+      
+    })
+    
   }
 }
 
