@@ -23,13 +23,16 @@ export class AdminDashboardComponent implements OnInit {
   constructor(private http:HttpClient, private motivationService:MotivationService,
               private categoryService: CategoriesService,
                private user:ProfileService,
-               private review:ReviewService) { }
+               private review:ReviewService,
+               ) { }
 
 
   motivations!:Motivation[]
   categories!:Category[]
   users!:Users[]
   reviews!:Review[]
+  categoryModel = new Category('')
+  
 
   ngOnInit() {
     let promise = new Promise <void> ((resolve,reject)=>{
@@ -76,6 +79,7 @@ export class AdminDashboardComponent implements OnInit {
     this.categoryService.getAllCategories().subscribe((response:any)=>{
         this.categories = response
         console.log(response)
+        console.log(this.categories.length)
       })
      
    
@@ -110,5 +114,13 @@ export class AdminDashboardComponent implements OnInit {
     })
     
   }
+  onSubmit(){
+    this.categoryService.addCategory(this.categoryModel)
+    .subscribe(data => console.log('success', data),
+               error => console.log('error', error)
+    )
+    console.log(this.categoryModel )
+  }
 }
 
+   

@@ -15,6 +15,8 @@ export class CategoriesService {
   getAllCategories():Observable<any[]>{
     return this.http.get<any[]>(this.url + 'category/')
   }
-  
+  addCategory(category:any):Observable<any>{
+    return this.http.post<any>(this.url + 'category/', category)
+  }
 }
 
