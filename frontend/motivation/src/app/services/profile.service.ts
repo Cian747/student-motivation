@@ -74,4 +74,8 @@ export class ProfileService {
 		return this.http.post(`${this.profUrl}/password-reset/confirm/`, email_token )
 	}
 
+	getAllUsers():Observable<any>{
+		return this.http.get<any>(this.profUrl + 'users', {headers: this.getHeaders()})
+	}
+
 }
