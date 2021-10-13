@@ -32,10 +32,11 @@ export class AdminDashboardComponent implements OnInit {
   users!:Users[]
   reviews!:Review[]
   categoryModel = new Category('')
+  hidden = true
+  active = true
   
 
   ngOnInit() {
-    this.get_categories()
     let promise = new Promise <void> ((resolve,reject)=>{
       this.motivationService.getAllMotivations().toPromise().then(
         (response:any) => {
@@ -113,9 +114,13 @@ export class AdminDashboardComponent implements OnInit {
     .subscribe(response=>{
       this.reviews = response
       console.log(response)
-      
-    })
+      })
     
+  }
+  flagReview(){
+    this.hidden = false
+    this.active = false
+
   }
   onSubmit(){
     this.categoryService.addCategory(this.categoryModel)
@@ -124,6 +129,7 @@ export class AdminDashboardComponent implements OnInit {
     )
     console.log(this.categoryModel )
     location.reload()
+ 
   }
   remove_User(){
   }

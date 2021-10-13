@@ -207,9 +207,10 @@
                         <div class="modal-body" *ngIf="reviews else elseBlock">
                           <!-- loop all comments -->
                           <div class="comments" *ngFor='let review of reviews; let i = index'>
-                            <p>{{review.review}}</p>
+                            <p [class.active] = 'active'> {{review.review}}</p>
                             <div class="roles">
-                              <i class="fas fa-flag"></i>
+                              <i (click) = 'flagReview()' class="fas fa-flag"></i> 
+                              <p class = 'flagged' [hidden] = 'hidden'>This comment has been flagged by the admin!!</p>
                               <div>
                                 <i (click) = 'deleteComment(i)' class="fas fa-trash"></i>
                               </div>

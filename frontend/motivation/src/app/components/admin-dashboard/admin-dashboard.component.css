@@ -149,6 +149,8 @@ h6{
   border:1px solid #074436;
 }
 .title h3:hover{
-  color: #074436;
-  
+  color: #074436;  
+}
+.flagged{
+  color: red;
 }
