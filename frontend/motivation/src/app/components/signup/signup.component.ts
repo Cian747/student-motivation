@@ -40,7 +40,7 @@ export class SignupComponent implements OnInit {
 
   registerUser(){
     this.RegisterService.registerUser(this.register).subscribe( response => {
-      console.log(response)
+      // console.log(response)
       alert('User ' + this.register.username + ' has been created'),
       this.loggedIn.next(true);
       this.router.navigate(['login'])

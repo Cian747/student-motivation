@@ -56,6 +56,7 @@ INSTALLED_APPS = [
     'cloudinary',
     'rest_framework',
     'django_filters',
+    'rest_framework_swagger'
 ]
 
 MIDDLEWARE = [
@@ -89,6 +90,9 @@ TEMPLATES = [
                 'django.template.context_processors.media',
 
             ],
+            'libraries' : {
+                'staticfiles': 'django.templatetags.static', 
+            }
         },
     },
 ]
@@ -162,7 +166,8 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.SessionAuthentication',
         'rest_framework.authentication.BasicAuthentication',
     ),
-    'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend']
+    'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend'],
+    'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.coreapi.AutoSchema'
 }
 
 SIMPLE_JWT = {
@@ -224,6 +229,8 @@ MEDIA_ROOT = os.path.join(BASE_DIR,'media')
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+VENV_PATH = os.path.dirname(BASE_DIR)
+STATIC_ROOT = os.path.join(VENV_PATH, 'static_root')
 
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR,"static"),
@@ -243,7 +250,6 @@ cloudinary.config(
 django_on_heroku.settings(locals())
 
 
-# Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'

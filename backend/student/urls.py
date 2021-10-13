@@ -20,7 +20,9 @@ urlpatterns = [
     url(r'^mot/$', views.MotList.as_view()),
     # http://127.0.0.1:8000/api/mot?category=2
     url(r'motivation/mot-id/(?P<mot_pk>[0-9]+)/$', views.motivation_id),
-    url(r'motivation/mot-cat/(?P<cat_pk>[0-9]+)/$', views.MotivationalByCategory.as_view()),
+
+    url(r'^motv/(?P<profile>[a-zA-Z0-9-]+)/$', views.motivat, name='trial'),
+    
 
     url(r'^review/$', views.ReviewList.as_view()),
     url(r'^rev/$', views.RevList.as_view()),
@@ -36,7 +38,11 @@ urlpatterns = [
     path('token/refresh/', jwt_views.TokenRefreshView.as_view(), name='token_refresh'),
     path('register', AuthUserRegistrationView.as_view(), name='register'),
     path('login', AuthUserLoginView.as_view(), name='login'),
-    path('users', UserListView.as_view(), name='users'),
+    # path('users', UserListView.as_view(), name='users'),
+    path('users', views.all_users, name='users'),
+    path('remove_user',views.remove_user,name='user_deactivate'),
+    path('superuser',views.change_to_superuser,name='superuser_status'),
+
 ]
 if settings.DEBUG:
     urlpatterns+= static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT) 

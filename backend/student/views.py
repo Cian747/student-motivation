@@ -7,31 +7,57 @@ from rest_framework.parsers import JSONParser
 from rest_framework import status
 from .models import  Category, Motivation,Review, Profile
 from .serializers import MotivationSerializer, ReviewSerializer,CategorySerializer, ProfileSerializer
+from django.contrib.auth.decorators import user_passes_test
 from rest_framework import viewsets
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.authtoken.views import ObtainAuthToken
 from rest_framework.authtoken.models import Token
 from rest_framework.generics import RetrieveAPIView
 from django.contrib.auth.models import User
-from rest_framework.decorators import api_view, permission_classes
+from rest_framework.decorators import api_view, permission_classes,authentication_classes
 from django.http import Http404
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.permissions import AllowAny, IsAuthenticated,IsAdminUser
 from .serializers import (
     UserRegistrationSerializer,
     UserLoginSerializer,
-    UserListSerializer
+    UserListSerializer,
+    ProfileSerializer,
+    SubscriptionSerializer,
+    SuperUserSerializer,
+    ActiveUserSerializer,
+
 )
 
-from .models import StudentUser
+from .models import StudentUser, Profile
+
 
 # Create your views here.
 
 ###### motivation
 @api_view(['GET', 'POST', 'DELETE'])
 @permission_classes((AllowAny, ))
+def motivat(request, profile):
+    try:
+        topic = Motivation.objects.get(profile=profile)
+        
+    except:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+
+    if request.method == 'POST':
+        print(topic)
+        request.data["profile"] = topic
+        serializer = MotivationSerializer(data=request.data)
+        print (request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+@api_view(['GET', 'POST', 'DELETE'])
+@permission_classes((AllowAny, ))
 def motivation(request):
-    # user = request.user
+    user = request.user
     # profile = Profile.objects.get(user=user)
     # serializer = ProfileSerializer(profile, many=False)
     if request.method == 'GET':
@@ -41,15 +67,16 @@ def motivation(request):
         return JsonResponse(motivation_serializer.data, safe=False)
     
     elif request.method == 'POST':
+        user = request.user
+        serializers = MotivationSerializer(data=request.data)
+        if serializers.is_valid():
+            serializers.save(
+                profile = Profile.objects.filter(user=user).first()
+            )
+            return Response(serializers.data, status=status.HTTP_201_CREATED)
+        return Response(serializers.errors, status=status.HTTP_400_BAD_REQUEST)
         
-        motivational_data = JSONParser().parse(request)
         
-        motivational_serializer = MotivationSerializer(data=motivational_data)
-        if motivational_serializer.is_valid():
-            # motivational_serializer.profile=user
-            motivational_serializer.save()
-            return JsonResponse(motivational_serializer.data, status=status.HTTP_201_CREATED) 
-        return JsonResponse(motivational_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 @api_view(['GET', 'POST', 'DELETE'])
 @permission_classes((AllowAny, ))
@@ -62,7 +89,7 @@ def motivation_id(request, mot_pk):
     if request.method == 'GET': 
         motivation_serializer = MotivationSerializer(motivation) 
         return JsonResponse(motivation_serializer.data) 
-
+    
     elif request.method == 'PUT': 
         motivational_data = JSONParser().parse(request) 
         motivation_serializer = MotivationSerializer(motivation, data=motivational_data) 
@@ -84,14 +111,21 @@ class MotList(generics.ListAPIView):
     filterset_fields = ['category',]
 
 
+class MotList(generics.ListAPIView):
+    permission_classes = (AllowAny, )
+    queryset = Motivation.objects.all()
+    serializer_class = MotivationSerializer
+    filter_backends = [DjangoFilterBackend]
+    filterset_fields = ['category','profile']
+
+
 class MotivationalByCategory(APIView):
     permission_classes = (AllowAny, )
     filter_backends = [DjangoFilterBackend]
     def get_mot(self, cat_pk):
         try:
-            motivations=Motivation.objects.filter(category__id=cat_pk)
-            # Model.objects.filter(field_name=some_param)
-            print(motivations)
+            # return Motivation.objects.get(category=cat_pk)
+            motivations=Motivation.objects.filter(category=cat_pk)
             return motivations
         except Motivation.DoesNotExist:
             return Http404
@@ -153,9 +187,12 @@ class ReviewList(APIView):
         return Response(serializers.data)
 
     def post(self, request, format=None):
+        user = request.user
         serializers = ReviewSerializer(data=request.data)
         if serializers.is_valid():
-            serializers.save()
+            serializers.save(
+                profile = Profile.objects.filter(user=user).first()
+            )
             return Response(serializers.data, status=status.HTTP_201_CREATED)
         return Response(serializers.errors, status=status.HTTP_400_BAD_REQUEST)
 
@@ -265,53 +302,79 @@ class UserListView(APIView):
 
             }
             return Response(response, status=status.HTTP_200_OK)
-          
-class UserProfileView(RetrieveAPIView):
 
-    # permission_classes = (IsAuthenticated,)
-    # authentication_class = JSONWebTokenAuthentication
+@api_view(['GET','PUT','DELETE'])
+@permission_classes((IsAdminUser,))
+@user_passes_test(lambda u: u.is_superuser)
+def all_users(request):
 
-    def get_profile(self, pk):
-        try:
-            return Profile.objects.get(pk=pk)
-        except Profile.DoesNotExist:
-            return Http404
+    user = request.user
 
-    def get(self,request, pk):
-        try:
-            user_profile = self.get_profile(pk)
-            status_code = status.HTTP_200_OK
-            response = {
-                'success': 'true',
-                'status code': status_code,
-                'message': 'User profile fetched successfully',
-                'data': [{
-                    'profile_name': user_profile.profile_name,
-                    'profile_photo': user_profile.profile_photo,
-                    'profile_email': user_profile.profile_email,
-                    'phone_number': user_profile.phone_number,
-                    'created_at': user_profile.created_at,
-                    }]
-                }
+    users = StudentUser.objects.all()
 
-        except Exception as e:
-            status_code = status.HTTP_400_BAD_REQUEST
-            response = {
-                'success': 'false',
-                'status code': status.HTTP_400_BAD_REQUEST,
-                'message': 'User does not exists',
-                'error': str(e)
-                }
-        return Response(response, status=status_code)
+    if request.method == 'GET':
+        serializer = UserListSerializer(users, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+    # for use in users:
+    #     if request.method == 'PUT':
+    #         user_serializer = UserListSerializer(use,data=request.data['is_active'])
+
+    #         if user_serializer.is_valid():
+    #             user_serializer.save()
+    #             return Response(user_serializer.data, status=status.HTTP_200_OK)
+    #     else:
+    #         return Response(user_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+@api_view(['GET','PUT'])
+@permission_classes((IsAuthenticated,))
+@user_passes_test(lambda u: u.is_superuser)
+def remove_user(request):
+    user = request.user
+
+    # current_user = StudentUser.objects.get(id=user)
+
+    if request.method == 'GET':
+        serializer = UserListSerializer(user,many=False)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+    elif request.method == 'PUT':
+        user_serializer = ActiveUserSerializer(user,data=request.data)
+
+        if user_serializer.is_valid():
+            user_serializer.save()
+            return Response(user_serializer.data, status=status.HTTP_200_OK)
+        else:
+            return Response(user_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+@api_view(['GET','PUT'])
+@permission_classes((AllowAny,))
+def change_to_superuser(request):
+
+    user = request.user
+    if request.method == 'GET':
+        user_serializer = UserListSerializer(user,many=False)
+        return Response(user_serializer.data,status=status.HTTP_200_OK)
+
+    elif request.method == 'PUT':
+        new_user_serializer = SuperUserSerializer(user,data=request.data)
+
+        if new_user_serializer.is_valid():
+            new_user_serializer.save()
+            return Response(new_user_serializer.data,status = status.HTTP_200_OK)
+        else:
+            return Response(new_user_serializer.errors,status = status.HTTP_400_BAD_REQUEST)
+
+    
 
 @api_view(['GET', 'PUT', 'DELETE'])
-@permission_classes((IsAuthenticated,))
-# @authentication_classes((JWTAuthentication))
+@permission_classes((AllowAny,))
+# @authentication_classes((JWTAuthentication,))
 def profile(request):
     user = request.user
-    # print(user)
     profile = Profile.objects.get(user=user)
-    # print(profile)
+
     if request.method == 'GET':
         serializer = ProfileSerializer(profile, many=False)
         return Response(serializer.data, status=status.HTTP_200_OK)
@@ -327,9 +390,30 @@ def profile(request):
             return Response(profile_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     elif request.method == 'DELETE':
-        user.delete()
+        profile.delete()
         return Response("User deleted!...")
 
 # Check if the user has admin privileges 
 # Create a secondary function to handle deactivation of the user
+
+# Make subscription api
+@api_view(['GET', 'POST', 'DELETE'])
+@permission_classes((AllowAny,))
+def subscription_service(request):
+    category = Category.objects.last().id
+
+    if request.method == 'GET':
+        serializer = SubscriptionSerializer(category, many=False)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+    elif request.method == 'POST':
+        # serializer = UserProfileSerializer(user, many=False)
+        subscription_serializer = SubscriptionSerializer(catergory=category, data=request.data['profile'])
+        
+        if subscription_serializer.is_valid():
+            subscription_serializer.save()
+            return Response(subscription_serializer.data, status=status.HTTP_200_OK)
+        else:
+            return Response(subscription_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
 
