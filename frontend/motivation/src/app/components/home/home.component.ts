@@ -34,7 +34,7 @@ export class HomeComponent implements OnInit {
       // motivations
       this.motivationService.getAllMotivations().toPromise().then(
         (response:any) => {
-        console.log(response)
+        // console.log(response)
         this.motivations = response;
         resolve()
       },
@@ -69,7 +69,7 @@ export class HomeComponent implements OnInit {
     this.router.navigate(['/category',id])
   }
 
-  
+
 
 
 

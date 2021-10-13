@@ -78,6 +78,10 @@ export class MotivationComponent implements OnInit {
   }
 
 
+  copyUrl(){
+    alert("Motivation link has been copied. Share with your friends!")
+  }
+
 
 
 

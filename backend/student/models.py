@@ -25,6 +25,7 @@ class StudentUser(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField()
     role = models.PositiveSmallIntegerField(choices=USER_ROLE_CHOICES, blank=True, null=True, default=2)
     date_joined = models.DateTimeField(auto_now_add=True)
+    is_superuser = models.BooleanField(default=False)
     is_staff = models.BooleanField(default=True)
     is_admin = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
@@ -92,11 +93,15 @@ class Motivation(models.Model):
 
 class Review(models.Model):
     review = models.TextField()
-    user_id = models.ForeignKey(StudentUser,on_delete=models.CASCADE)
+    profile = models.ForeignKey(Profile,on_delete=models.CASCADE)
     motivation = models.ForeignKey(Motivation,on_delete=models.CASCADE)
+    created_at = models.DateTimeField(auto_now_add=True)
+
 
     def __str__(self):
-       return self.user_id.username
+       return self.profile.user.username
+
+# Review subclass
 
 class Subscription(models.Model):
     name = models.CharField(max_length=50)

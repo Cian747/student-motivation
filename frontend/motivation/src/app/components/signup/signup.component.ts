@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
+import { BackupService } from 'src/app/services/backup.service';
 
 @Component({
   selector: 'app-signup',
@@ -22,6 +23,7 @@ export class SignupComponent implements OnInit {
 
   constructor(
     private RegisterService: AuthenticationService,
+    private authBackup: BackupService,
     private router: Router,
   ) { }
 
@@ -39,7 +41,7 @@ export class SignupComponent implements OnInit {
   }
 
   registerUser(){
-    this.RegisterService.registerUser(this.register).subscribe( response => {
+    this.authBackup.signUp(this.register).subscribe( response => {
       // console.log(response)
       alert('User ' + this.register.username + ' has been created'),
       this.loggedIn.next(true);
@@ -53,5 +55,6 @@ export class SignupComponent implements OnInit {
     }
     );
   }
+
 
 }
