@@ -32,7 +32,8 @@ from .serializers import (
     WishListSerializer
 )
 
-from .models import StudentUser
+from .models import StudentUser, Profile
+
 
 # Create your views here.
 

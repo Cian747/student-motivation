@@ -38,6 +38,7 @@ import { TruncateModule } from 'ng2-truncate';
     HttpClientModule,
     FormsModule,
     TruncateModule,
+
   ],
   providers: [],
   bootstrap: [AppComponent]

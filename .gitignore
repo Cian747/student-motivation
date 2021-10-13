@@ -4,3 +4,4 @@ notes.txt
 .env
 .vscode
 env
+venv/
