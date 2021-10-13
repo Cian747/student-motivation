@@ -100,6 +100,11 @@ class Review(models.Model):
        return self.user_id.username
 
 # Review subclass
+class ReviewThread(models.Model):
+    user = models.ForeignKey(StudentUser,on_delete=models.CASCADE)
+    content = models.TextField()
+    review = models.ForeignKey(Review,on_delete=models.CASCADE)
+    posted_at = models.DateTimeField(auto_now_add=True)
 
 class Subscription(models.Model):
     name = models.CharField(max_length=50)
@@ -110,7 +115,7 @@ class Subscription(models.Model):
        return self.name
 
 class WishList(models.Model):
-   motivatation = models.ForeignKey(Motivation, null=True, on_delete=models.CASCADE)
+   motivation = models.ForeignKey(Motivation, null=True, on_delete=models.CASCADE)
    profile = models.ForeignKey(Profile,on_delete=models.CASCADE, null=True)
 
 # Classes
