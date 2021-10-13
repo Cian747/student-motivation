@@ -22,7 +22,7 @@ export class AdminDashboardComponent implements OnInit {
 
   constructor(private http:HttpClient, private motivationService:MotivationService,
               private categoryService: CategoriesService,
-               private user:ProfileService,
+               private userService:UsersService,
                private review:ReviewService,
                ) { }
 
@@ -35,6 +35,7 @@ export class AdminDashboardComponent implements OnInit {
   
 
   ngOnInit() {
+    this.get_categories()
     let promise = new Promise <void> ((resolve,reject)=>{
       this.motivationService.getAllMotivations().toPromise().then(
         (response:any) => {
@@ -56,7 +57,7 @@ export class AdminDashboardComponent implements OnInit {
     $('#dashbord-posts').fadeOut()
     $('#dashbord-admins').fadeOut()
     $('#dashbord-student').show()
-    this.user.getAllUsers().subscribe((response:any)=>{
+    this.userService.getUsers().subscribe((response:any)=>{
       this.users = response
       console.log(response)
     })
@@ -78,8 +79,8 @@ export class AdminDashboardComponent implements OnInit {
     $('#dashbord-categories').fadeIn()
     this.categoryService.getAllCategories().subscribe((response:any)=>{
         this.categories = response
-        console.log(response)
-        console.log(this.categories.length)
+        // console.log(response)
+        // console.log(this.categories.length)
       })
      
    
@@ -89,8 +90,7 @@ export class AdminDashboardComponent implements OnInit {
     $('#dashbord-student').fadeOut()
     $('#dashbord-posts').fadeOut()
     $('#dashbord-categories').fadeOut()
-    $('#dashbord-admins').fadeOut()
-    
+    $('#dashbord-admins').fadeOut()  
 
   }
   get_adm(){
@@ -104,6 +104,9 @@ export class AdminDashboardComponent implements OnInit {
     this.motivations.splice(post,1)
   
 
+  }
+  deleteComment(review:any){
+    this.reviews.splice(review,1)
   }
   getReview(id:any){
     this.review.getAllMotivationReviews(id)
@@ -120,6 +123,9 @@ export class AdminDashboardComponent implements OnInit {
                error => console.log('error', error)
     )
     console.log(this.categoryModel )
+    location.reload()
+  }
+  remove_User(){
   }
 }
 

@@ -105,15 +105,15 @@
         <!-- All User details -->
 
         <div id="dashbord-student">
-          <div class="user">
+          <div class="user" *ngFor = 'let user of users' >
             <!-- loop users -->
             <div class="avatar-image">
               <img class="avatar" src="assets/pp.png" alt="">
 
             </div>
             <hr>
-            <small>username</small><br>
-            <small>email</small>
+            <small>{{user.name}}</small><br>
+            <small>{{user.email}}</small>
             <div class="delete-user">
               <i class="fas fa-trash"></i>
             </div>
@@ -206,12 +206,12 @@
                         </div>
                         <div class="modal-body" *ngIf="reviews else elseBlock">
                           <!-- loop all comments -->
-                          <div class="comments" *ngFor='let review of reviews'>
+                          <div class="comments" *ngFor='let review of reviews; let i = index'>
                             <p>{{review.review}}</p>
                             <div class="roles">
                               <i class="fas fa-flag"></i>
                               <div>
-                                <i class="fas fa-trash"></i>
+                                <i (click) = 'deleteComment(i)' class="fas fa-trash"></i>
                               </div>
                             </div>
                           </div>
