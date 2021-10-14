@@ -15,19 +15,19 @@ export class ReviewService {
   }
 
   getAllMotivationReviews(id:any):Observable<any[]>{
-    return this.http.get<any[]>(this.APIUrl + `rev?motivation=${id}`)
+    return this.http.get<any[]>(this.APIUrl + `review/${id}`)
   }
 
 
   getSingleReview(id:any):Observable<any[]>{
-    return this.http.get<any[]>(this.APIUrl + `review/review-id/${id}/`)
+    return this.http.get<any[]>(this.APIUrl + `review/${id}/`)
   }
 
 
 
 
-  postReview(reviewData:any):Observable<any[]>{
-    return this.http.post<any[]>(this.APIUrl + 'review/', reviewData)
+  postReview(reviewData:any, id:any):Observable<any[]>{
+    return this.http.post<any[]>(this.APIUrl + `review/${id}`, reviewData)
   }
 
 }

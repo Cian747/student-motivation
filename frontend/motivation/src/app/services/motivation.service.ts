@@ -31,8 +31,11 @@ export class MotivationService {
 
 
 
-  postMotivation(motivationData:any):Observable<any[]>{
-    return this.http.post<any[]>(this.APIUrl + 'motivation/', motivationData)
+  postMotivation(motivationData:any, file:any){
+    const body = new FormData();
+    body.append('id', motivationData);
+    body.append('files', file, file.name);
+    return this.http.post<any[]>(this.APIUrl + 'motivation/', motivationData )
   }
 
   getAllCategories():Observable<any[]>{

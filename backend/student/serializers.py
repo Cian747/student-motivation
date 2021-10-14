@@ -124,6 +124,14 @@ class ProfileSerializer(serializers.ModelSerializer):
 
 
 
+class MotivationPostSerializer(serializers.ModelSerializer):
+    profile=ProfileSerializer(read_only=True)
+    # category = CategorySerializer( read_only=True)
+    class Meta:
+        model = Motivation
+        fields = ('id', 'image', 'video', 'title', 'category', 'description', 'profile', 'created_at')
+
+
 class MotivationSerializer(serializers.ModelSerializer):
     profile=ProfileSerializer(read_only=True)
     category = CategorySerializer( read_only=True)
@@ -133,6 +141,7 @@ class MotivationSerializer(serializers.ModelSerializer):
 
 class ReviewSerializer(serializers.ModelSerializer):
     profile=ProfileSerializer(read_only=True)
+    motivation= MotivationSerializer(read_only = True)
     class Meta:
         model = Review
 

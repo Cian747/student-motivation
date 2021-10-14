@@ -37,10 +37,7 @@ export class BackupService {
         // console.log(res.access)
           this.router.navigate(['home']);
 
-        // this.getUserProfile().subscribe((res) => {
-        //   this.currentUser = res;
-        //   this.router.navigate(['profile/']);
-        // })
+
       })
   }
 
@@ -64,6 +61,21 @@ export class BackupService {
   getUserProfile():Observable<any>{
     let api = this.authUrl+ 'profile/'
     return this.http.get(api, {headers: this.headers})
+
+  }
+
+
+  // current user
+  getCurrentUser():Observable<any>{
+    let user = this.authUrl+ 'current_user'
+    return this.http.get(user, {headers: this.headers})
+
+  }
+
+  // update profile
+  updateProfile():Observable<any>{
+    let api = this.authUrl+ 'profile/'
+    return this.http.put(api, {headers: this.headers})
 
   }
 

@@ -35,13 +35,7 @@ export class SingleMotivationComponent implements OnInit {
 
   ngOnInit(){
 
-    this.reviewPost = {
-      review: '',
-      profile: '',
-      motivation: '',
-      created_at: Date,
-
-    };
+    this.reviewPost = {};
 
 
     let id = this.route.snapshot.paramMap.get('id');
@@ -60,6 +54,8 @@ export class SingleMotivationComponent implements OnInit {
       this.reviewService.getAllMotivationReviews(id).toPromise().then(
         (response:any) => {
         this.reviews = response;
+        // console.log(response)
+
         resolve()
       },
       (error:string) => {
@@ -108,12 +104,12 @@ export class SingleMotivationComponent implements OnInit {
   }
 
 
-  postReview(){
+  postReview(id:any){
     console.log(this.reviewPost)
-    this.reviewService.postReview(this.reviewPost).subscribe( response => {
-      console.log(response)
+    this.reviewService.postReview(this.reviewPost, id).subscribe( response => {
+      // console.log(response)
       // this.loggedIn.next(true);
-      this.router.navigate(['home'])
+      this.router.navigate([`motivation/${id}`])
 
     },
 
@@ -123,6 +119,10 @@ export class SingleMotivationComponent implements OnInit {
     }
     );
   }
+
+  refresh(): void {
+    window.location.reload();
+}
 
 
 

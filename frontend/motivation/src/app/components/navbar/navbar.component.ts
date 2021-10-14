@@ -6,6 +6,9 @@ import { AuthenticationService } from 'src/app/services/authentication.service';
 import { BackupService } from 'src/app/services/backup.service';
 import { MotivationService } from 'src/app/services/motivation.service';
 import { ProfileService } from 'src/app/services/profile.service';
+import { first } from 'rxjs/operators';
+import { StudentUser } from 'src/app/models/student-user';
+
 
 @Component({
   selector: 'app-navbar',
@@ -18,9 +21,15 @@ export class NavbarComponent implements OnInit {
   logout:any;
   error: any;
   user:any;
+  currentUser!:StudentUser;
+  loading = false;
+
 
   // motivationModel = new Motivation('','', '', 'Category': category_name,'','1', '2021-10-14')
 
+  public new_motivation: any;
+  newCat: any;
+  file: any;
 
   constructor(
     private authService: AuthenticationService,
@@ -33,20 +42,18 @@ export class NavbarComponent implements OnInit {
     { }
 
   ngOnInit(): void {
-    this.motivationPost = {
-      image: '',
-      video: '',
-      title: '',
-      category: '1',
-      description: '',
-      profile:'1',
-      created_at:'2021-10-14',
 
-    };
+
     this.user = {
       username: '',
       password: ''
     };
+
+    this.motivationPost = {};
+
+
+
+
 
 
     let promise = new Promise <void> ((resolve,reject)=>{
@@ -64,13 +71,24 @@ export class NavbarComponent implements OnInit {
     })
 
 
+
+  this.authBackup.getCurrentUser().pipe(first()).subscribe((loggedUser: StudentUser) => {
+    this.currentUser = loggedUser;
+    // console.log(loggedUser)
+  });
+
   }
 
+  onFileSelected(e:any) {
+    this.file = e.target.files[0];
+
+  }
 
 
   publishMotivation(){
     console.log(this.motivationPost)
-    this.motivationService.postMotivation(this.motivationPost).subscribe( response => {
+    this.loading = true;
+    this.motivationService.postMotivation(this.motivationPost, this.file).subscribe( response => {
       console.log(response)
 
 
@@ -82,26 +100,27 @@ export class NavbarComponent implements OnInit {
 
     error => {
       this.error = error
+      this.loading = true;
       console.log('error',error)
     }
     );
   }
 
-  // logout
-
-  // onLogout(){
-  //   this.authService.logout();
-  // }
 
   isLogout(){
     this.authBackup.Logout();
 
   }
 
-  // current user
-  currentProfile(){
-    this.profService.currentUser()
-  }
+  refresh(): void {
+    window.location.reload();
+}
+
+
+
+
+
+
 
 
 }
