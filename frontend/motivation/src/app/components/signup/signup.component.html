@@ -1,0 +1,56 @@
+<div class="container-fluid signup">
+  <h1>Register</h1>
+  <div class="row">
+      <div class="col-md-5 signup-form">
+        <form action="" class="form">
+          <div class="form-item">
+             <label for="username" class="mb-2">username</label>
+            <input [(ngModel)]="register.username"  name = "username" type="text" class=" input mb-3"  placeholder="Username"
+              required="required">
+          </div>
+
+          <div class="form-item">
+            <label for="email"  class="mb-2">email</label>
+            <input [(ngModel)]="register.email"  name = "email" type="text" class=" input mb-3"  placeholder="Username"
+              required="required">
+          </div>
+          <div class="form-item">
+
+            <label for="password"  class="mb-2">password</label>
+            <input [(ngModel)]="register.password" name="password" type="password" class=" input mb-3"  placeholder="Password"
+              required="required">
+          </div>
+          <!-- <div class="form-item">
+            <label for="password"  class="mb-2">confirm password</label>
+            <input [(ngModel)]="register.password2" name="password" type="password" class=" input mb-3"  placeholder="Password"
+              required="required">
+          </div> -->
+              <div class="button">
+                  <button (click)="registerUser()"
+                    type="submit"  class="btn btn-success  signup-btn">
+                      sign up
+                  </button>
+              </div>
+
+
+
+        </form>
+
+      </div>
+    <div class="col-md-7 signup-image">
+      <img src="assets/signin.png" alt="">
+      <p>Already have an account?</p>
+      <div class="button">
+       <a href="/login"><button  type="submit"  class="btn btn-success  signup-btn">
+            Sign in
+        </button>
+      </a>
+    </div>
+
+    </div>
+
+
+  </div>
+
+
+</div>

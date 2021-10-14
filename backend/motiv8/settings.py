@@ -18,6 +18,7 @@ from decouple import config,Csv
 import cloudinary
 import cloudinary.uploader
 import cloudinary.api
+import datetime
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -36,6 +37,9 @@ DEBUG = True
 
 MODE=config("MODE", default="dev")
 
+AUTH_USER_MODEL = "student.StudentUser"
+
+
 # ALLOWED_HOSTS=[]
 
 # Application definition
@@ -51,12 +55,16 @@ INSTALLED_APPS = [
     'corsheaders',
     'cloudinary',
     'rest_framework',
+    'rest_framework_simplejwt.token_blacklist',
+    'django_filters',
+    'rest_framework_swagger'
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'corsheaders.middleware.CorsMiddleware',
+    # 'simple_history.middleware.HistoryRequestMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'corsheaders.middleware.CorsPostCsrfMiddleware',
@@ -83,12 +91,16 @@ TEMPLATES = [
                 'django.template.context_processors.media',
 
             ],
+            'libraries' : {
+                'staticfiles': 'django.templatetags.static', 
+            }
         },
     },
 ]
 
 WSGI_APPLICATION = 'motiv8.wsgi.application'
 
+# ROOT_URLCONF = 'django_rest_role_jwt.urls'
 
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
@@ -127,9 +139,9 @@ DATABASES = {
 
 # ALLOWED_HOSTS = config('ALLOWED_HOSTS', cast=Csv())
 
-# ALLOWED_HOSTS=['*']
+ALLOWED_HOSTS=['*']
 
-# CORS_ORIGIN_ALLOW_ALL = True
+CORS_ORIGIN_ALLOW_ALL = True
 
 
 ALLOWED_HOSTS=['http://localhost:4200']    
@@ -144,8 +156,40 @@ CSRF_TRUSTED_ORIGINS = [
     "http://localhost:4200",
 ]
 
-# Password validation
-# https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': (
+        # 'rest_framework.permissions.IsAuthenticated',
+        # 'rest_framework.permissions.IsAdminUser',
+        'rest_framework.permissions.AllowAny',
+    ),
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.BasicAuthentication',
+    ),
+    'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend'],
+    'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.coreapi.AutoSchema'
+}
+
+SIMPLE_JWT = {
+    'ACCESS_TOKEN_LIFETIME': datetime.timedelta(days=1),
+    'REFRESH_TOKEN_LIFETIME': datetime.timedelta(days=14),
+    'ROTATE_REFRESH_TOKENS': True,
+    'BLACKLIST_AFTER_ROTATION': True,
+    'ALGORITHM': 'HS256',
+    'SIGNING_KEY': SECRET_KEY,
+    'VERIFYING_KEY': None,
+    'AUTH_HEADER_TYPES': ('Bearer',),
+    'USER_ID_FIELD': 'id',
+    'USER_ID_CLAIM': 'user_id',
+    'AUTH_TOKEN_CLASSES': ('rest_framework_simplejwt.tokens.AccessToken',),
+    'TOKEN_TYPE_CLAIM': 'token_type',
+    'JTI_CLAIM': 'jti',
+    # 'SLIDING_TOKEN_REFRESH_EXP_CLAIM': 'refresh_exp',
+    # 'SLIDING_TOKEN_LIFETIME': datetime.timedelta(days=1),
+    # 'SLIDING_TOKEN_REFRESH_LIFETIME': datetime.timedelta(days=14),
+}
+
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -186,6 +230,8 @@ MEDIA_ROOT = os.path.join(BASE_DIR,'media')
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+VENV_PATH = os.path.dirname(BASE_DIR)
+STATIC_ROOT = os.path.join(VENV_PATH, 'static_root')
 
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR,"static"),
@@ -204,8 +250,13 @@ cloudinary.config(
 
 django_on_heroku.settings(locals())
 
+# Email configurations remember to install python-decouple
+EMAIL_USE_TLS = config('EMAIL_USE_TLS')
+EMAIL_HOST = config('EMAIL_HOST')
+EMAIL_PORT = config('EMAIL_PORT')
+EMAIL_HOST_USER = config('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
 
-# Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'

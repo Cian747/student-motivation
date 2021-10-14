@@ -1,0 +1,78 @@
+<div class="container-fluid" id="main">
+  <section id="nav">
+    <app-navbar></app-navbar>
+  </section>
+  <!-- category looping -->
+  <div class="container">
+    <h5 class="text-center text-white">Choose category</h5>
+      <div class="buttons">
+        <div>
+          <a href="/home" ><button class='all-btn btn btn-lg' id="all">All</button></a>
+        </div>
+        <div class="" *ngFor="let category of categories">
+          <div>
+            <button (click)='goToCategory(category.id)'  (click)="refresh()"  class='custom btn btn-lg '>{{category.category_name}}</button>
+          </div>
+        </div>
+
+      </div>
+      <div class="subscribe">
+          <button   (click)="refresh()"  class=' btn-danger btn-sm '>Subscribe</button>
+      </div>
+
+  </div>
+
+
+  <div class="container-fluid motivations" id="motivation">
+
+    <!-- post looping -->
+      <div class="row" >
+        <div class="col-md-3 m-2" *ngFor="let motivation of motivations">
+           <div class="card mb-3">
+            <div *ngIf="motivation.image == null && motivation.video == null ">
+              <img src="assets/Motivation.jpg" class="card-img-top" alt="" height="300">
+            </div>
+            <div *ngIf="motivation.image">
+              <!-- <img [src]="motivation.image" class="card-img-top" alt="image " height="300"> -->
+              <img src="https://res.cloudinary.com/kenya12254/{{motivation.image}}" class="card-img-top vid-link" alt="..." height="300">
+
+            </div>
+            <div *ngIf="motivation?.video" class="video-icon">
+              <div class="col-md-8">
+                <img src="assets/vid-icon.png" class="card-img-top" alt="Video" (click)='goToUrl(motivation.id)' height="300">
+
+              </div>
+            </div>            <div class="card-body ">
+            <h5 class="card-title">{{motivation.title}}</h5>
+            <p class="card-text">Category:{{motivation.category}}</p>
+            <p class="card-text small">{{motivation.description| words : 6}}</p>
+
+            <p class="card-text"><small class="">published by {{motivation.profile.user}}</small></p>
+            <p class="card-text"><small class="">{{motivation.created_at|date}}</small></p>
+          </div>
+          <div class="card-footer">
+            <div class="icons">
+               <a href=""><i class="fas fa-save"></i></a>
+                <a href=""><i class="fas fa-share-alt"></i></a>
+            </div>
+            <div class="details">
+                <button (click)='goToUrl(motivation.id)' class=" view-details btn btn-secondary">View Details</button>
+
+            </div>
+
+          </div>
+        </div>
+        </div>
+
+
+    </div>
+
+
+
+
+
+  </div>
+
+
+
+</div>

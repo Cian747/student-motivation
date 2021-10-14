@@ -1,0 +1,77 @@
+<div class="container-fluid login">
+  <h1>Login</h1>
+  <div class="row">
+    <div class="col-md-5 login-form">
+      <!-- <form action="" class="form" #loginForm="ngForm" (ngSubmit)=" loginForm.resetForm()">
+        <div class="form-item">
+          <label for="username">username</label>
+          <input [(ngModel)]="login.username" name="username" type="text"  class="input" placeholder="Username" required="required">
+        </div>
+
+        <div class="form-item">
+
+          <label for="password">password</label>
+          <input [(ngModel)]="login.password" name="password" type="password" class="input" placeholder="Password" required="required">
+
+        </div>
+
+
+        <div class="button">
+          <button (click)="LoginUser()" type="submit" class="btn btn-success  signin-btn">
+            Sign in
+          </button>
+        </div>
+
+      </form> -->
+
+
+      <form action="" class="form"  [formGroup]="signinForm" (ngSubmit)="loginUser()">
+        <div class="form-item">
+          <label for="username">username</label>
+          <input formControlName="username"  type="text"  class="input" placeholder="Username" required="required">
+        </div>
+
+        <div class="form-item">
+
+          <label for="password">password</label>
+          <input formControlName="password"  type="password" class="input" placeholder="Password" required="required">
+
+        </div>
+
+
+        <div class="button">
+          <button  type="submit" class="btn btn-success  signin-btn">
+            Sign in
+          </button>
+        </div>
+
+
+
+      </form>
+
+
+
+
+
+  <!-- <div class="alert alert-success" *ngIf="isLoggedIn">
+    Logged in as {{ roles }}.
+  </div> -->
+
+  </div>
+    <div class="col-md-7 login-image">
+      <img src="assets/signin.png" alt="">
+      <p>Dont have an account?</p>
+      <div class="button">
+        <a href="/signup"><button type="submit" class="btn btn-success  signup-btn">
+            Sign up
+          </button>
+        </a>
+      </div>
+
+    </div>
+
+
+  </div>
+
+
+</div>

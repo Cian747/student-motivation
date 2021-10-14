@@ -43,3 +43,17 @@ testem.log
 # System Files
 .DS_Store
 Thumbs.db
+
+
+#enviroments
+.venv
+env/
+/venv/
+ENV/
+env.bak/
+venv.bak/
+
+
+# others
+notes.txt
+

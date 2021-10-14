@@ -3,7 +3,11 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+	production: false,
+
+  URL:`http://localhost:8000/api/`,
+  mediaURL:`https://res.cloudinary.com/kenya12254/`
+
 };
 
 /*

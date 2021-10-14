@@ -1,0 +1,36 @@
+<div class="container-fluid" id="main">
+  <section id="nav">
+    <app-navbar></app-navbar>
+  </section>
+  <!-- category looping -->
+  <div class="container">
+    <h5 class="text-center text-white">Choose category</h5>
+      <div class="buttons">
+        <div>
+          <a  href="/home"><button class='all-btn btn btn-lg ' id="all">All</button></a>
+        </div>
+        <div class="" *ngFor="let category of categories">
+          <div>
+            <button (click)='goToCategory(category.id)' class='custom btn btn-lg'>{{category.category_name}}</button>
+          </div>
+        </div>
+
+
+
+      </div>
+  </div>
+
+
+  <div class="container-fluid motivations" id="motivation">
+
+      <app-motivation></app-motivation>
+
+
+
+
+  </div>
+
+
+  
+
+</div>
