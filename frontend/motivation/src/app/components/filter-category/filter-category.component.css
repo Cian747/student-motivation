@@ -109,3 +109,9 @@
     background-color:rgba(189, 214, 192, 0.9) !important;
     color: rgb(21, 8, 56) !important;
   }
+
+  .subscribe{
+    display: flex;
+    justify-content: center;
+    margin: 5px;
+  }

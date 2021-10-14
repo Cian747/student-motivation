@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { Observable } from 'rxjs';
+import { Profile } from '../models/profile';
 
 
 @Injectable({
@@ -12,12 +13,13 @@ export class ProfileService {
   currentUser: any;
 
 
-  constructor(private http: HttpClient) { }
+  constructor(
+    private http: HttpClient) { }
 
   profUrl: string = environment.URL;
 
   getHeaders(){
-		let user: any = JSON.parse(localStorage.getItem("FULL_STACK_AUTH_COMP_USER") || '{}');
+		let user: any = JSON.parse(localStorage.getItem("authToken") || '{}');
 
 		if (user) {
 			if (user.access && user.refresh) {
@@ -36,6 +38,8 @@ export class ProfileService {
 		return
 	}
 
+
+
   getCurrentUser(){
     return this.currentUser = JSON.parse(localStorage.getItem('currentUser') || '{}');
 
@@ -43,7 +47,12 @@ export class ProfileService {
 
 
 	getUser():Observable<any[]>{
-    return this.http.get<any[]>(this.profUrl + 'profile/', { headers: this.getHeaders() })
+
+    var reqHeader = new HttpHeaders({
+      "Content-Type": "application/json",
+    });
+
+    return this.http.get<Profile[]>(this.profUrl + 'profile',{headers: reqHeader})
 
 	}
 

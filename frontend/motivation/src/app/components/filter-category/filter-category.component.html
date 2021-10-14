@@ -15,19 +15,19 @@
           </div>
         </div>
 
-
-
       </div>
+      <div class="subscribe">
+          <button   (click)="refresh()"  class=' btn-danger btn-sm '>Subscribe</button>
+      </div>
+
   </div>
 
 
   <div class="container-fluid motivations" id="motivation">
 
     <!-- post looping -->
-    <div class="d-flex">
-
       <div class="row" >
-        <div class="col-md-3" *ngFor="let motivation of motivations">
+        <div class="col-md-3 m-2" *ngFor="let motivation of motivations">
            <div class="card mb-3">
             <div *ngIf="motivation.image == null && motivation.video == null ">
               <img src="assets/Motivation.jpg" class="card-img-top" alt="" height="300">
@@ -45,10 +45,10 @@
             </div>            <div class="card-body ">
             <h5 class="card-title">{{motivation.title}}</h5>
             <p class="card-text">Category:{{motivation.category}}</p>
-            <p class="card-text small">{{motivation.description| words : 10}}</p>
+            <p class="card-text small">{{motivation.description| words : 6}}</p>
 
-            <p class="card-text"><small class="text-muted">{{motivation.profile}}</small></p>
-            <!-- {{motivation.created_at}} -->
+            <p class="card-text"><small class="">published by {{motivation.profile.user}}</small></p>
+            <p class="card-text"><small class="">{{motivation.created_at|date}}</small></p>
           </div>
           <div class="card-footer">
             <div class="icons">
@@ -68,7 +68,6 @@
     </div>
 
 
-    </div>
 
 
 
