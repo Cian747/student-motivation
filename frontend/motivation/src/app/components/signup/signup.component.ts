@@ -41,7 +41,8 @@ export class SignupComponent implements OnInit {
   }
 
   registerUser(){
-    this.authBackup.signUp(this.register).subscribe( response => {
+    this.RegisterService.signUp(this.register).subscribe( response => {
+
       // console.log(response)
       alert('User ' + this.register.username + ' has been created'),
       this.loggedIn.next(true);

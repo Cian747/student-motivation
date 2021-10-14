@@ -34,8 +34,6 @@ export class ProfileService {
 				'Authorization': `token ${user.token}`
 			});
 		}
-
-		return
 	}
 
 
@@ -81,6 +79,10 @@ export class ProfileService {
 
 	passwordConfirm(email_token: any){
 		return this.http.post(`${this.profUrl}/password-reset/confirm/`, email_token )
+	}
+
+	getAllUsers():Observable<any>{
+		return this.http.get<any>(this.profUrl + 'users', {headers: this.getHeaders()})
 	}
 
 }

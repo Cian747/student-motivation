@@ -15,12 +15,11 @@ import { ProfileService } from 'src/app/services/profile.service';
 })
 export class LoginComponent implements OnInit {
 
-  login:any;
-  error = '';
-  loginForm!: FormGroup;
-  loading = false;
-  submitted = false;
 
+ public login:any;
+  error: any;
+  public token: any
+  public errors: any = [];
 
   private loggedIn = new BehaviorSubject<boolean>(false);
 
@@ -39,16 +38,9 @@ export class LoginComponent implements OnInit {
     private profile: ProfileService,
     private auth: BackupService,
     private router: Router,
-    private fb: FormBuilder,
+    
   ) {
-    this.currentUserSubject = new BehaviorSubject<StudentUser>(JSON.parse(localStorage.getItem('currentUser') || '{}'));
-    this.currentUser = this.currentUserSubject.asObservable();
-
-    this.signinForm = this.fb.group({
-      username: [''],
-      password: ['']
-    })
-
+   
    }
 
   ngOnInit(): void {
@@ -57,6 +49,7 @@ export class LoginComponent implements OnInit {
       password: '',
       email: '',
       role:'',
+
 
     };
 
@@ -83,6 +76,27 @@ export class LoginComponent implements OnInit {
     }
     );
   }
+  // LoginUser(){
+  //   this.LoginService.signIn(this.login).subscribe(response => {
+  //     // alert('User ' + this.login.username + ' has logged in'),
+  //     this.loggedIn.next(true);
+  //     // if this.login.role ==
+  //     this.router.navigate(['home'])
+  //   },
+  //   error => {
+  //     alert('Invalid User Credentials');
+  //     console.log('error',error)
+  //   }
+  //   );
+  //   this.login.reset();
+  // }
+
+// login() {
+//   this.LoginService.login({'username': this.user.username, 'password': this.user.password});
+// }
+// }
+
+
 
 
 
@@ -97,3 +111,5 @@ export class LoginComponent implements OnInit {
 
 
 }
+
+

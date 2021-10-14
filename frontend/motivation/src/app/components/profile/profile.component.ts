@@ -6,6 +6,7 @@ import { Profile } from 'src/app/models/profile';
 import { StudentUser } from 'src/app/models/student-user';
 import { BackupService } from 'src/app/services/backup.service';
 import { ProfileService } from 'src/app/services/profile.service';
+import { AuthenticationService } from 'src/app/services/authentication.service';
 
 @Component({
   selector: 'app-profile',
@@ -26,13 +27,13 @@ export class ProfileComponent implements OnInit {
     private profileService: ProfileService,
     private authBackup: BackupService,
     private router: Router,
+    private authService:AuthenticationService
 
   )
 
   { }
 
   ngOnInit(){
-
     this.loading = true;
     this.authBackup.getUserProfile().pipe(first()).subscribe(user => {
         this.loading = false;

@@ -6,6 +6,7 @@ export class Review {
     public rating: number,
     public reviewed_by: string,
     public reviewed_on: Date,
+    public review:string,
 
   )
   {

@@ -1,4 +1,6 @@
 <main id='admin'>
+
+  <!-- Nav section -->
   <section id="top-row">
 
     <nav class="navbar navbar-light fixed-top">
@@ -6,13 +8,16 @@
         <a class="navbar-brand"> <i class="fas fa-graduation-cap"></i> ProperLearn</a>
         <div class="d-flex">
           <a href=""><i class="fas fa-bell"></i></a>
-        <a href=""><i class="fas custom fa-comment-alt"></i></a>
-        <a href=""><i class="fas fa-user-circle"></i></a>John Doe
+          <a href=""><i class="fas custom fa-comment-alt"></i></a>
+          <a href=""><i class="fas fa-user-circle"></i></a>John Doe
         </div>
       </div>
     </nav>
-
   </section>
+
+
+  <!-- Dashbord -->
+
 
   <section id="bar">
     <div class="row">
@@ -21,78 +26,69 @@
           <div class="dashbord">
             <div class="students">
             </div>
-            <h5 (click) = 'get_admin()' pt=4 class='text-center '><i class="fas fa-home"></i> Dashbord</h5>
+            <h5 (click)='get_admin()' pt=4 class='text-center '><i class="fas fa-home"></i> Dashbord</h5>
           </div>
-
-          <div class="students">            
-             <h6 id = 'students' (click) = 'get_users()'> <i class="fas fa-user-friends"></i> Students</h6>
-<!--             <span>
-              <i class="fas fa-user-friends"></i>
-            </span> -->
-            <a href="">Students</a>
-
-          </div>
-          <div class="students">
-            <h6 (click) ='get_posts()'> <i class="fas fa-plus"></i> Posts</h6>
-          </div>
-          <div class="students">
-            
-              
-          
-            <h6 (click)='get_categories()'> <i class="fas fa-tag"></i> Categories</h6>
+          <div class="row-cats">
+            <div class="students">
+              <h6 id='students' (click)='get_users()'> <i class="fas fa-user-friends"></i> Students</h6>
+            </div>
+            <div class="students">
+              <h6 (click)='get_posts()'> <i class="fas fa-plus"></i> Posts</h6>
+            </div>
+            <div class="students">
+              <h6 (click)='get_categories()'> <i class="fas fa-tag"></i> Categories</h6>
+            </div>
           </div>
         </div>
-
       </div>
 
+
+      <!-- statatistics -->
+
+
       <div class="col-md-9">
-        
-        <div class="dash-body " id = 'dashbord-body'>
+        <div class="dash-body " id='dashbord-body'>
+
+          <!-- Category statistics -->
+
           <div class="cats">
-            <div (click) = 'get_posts()'class="posts text-center pt-3">
-                <div class="content">
-                  <h3><i class="fas fa-images"></i> Posts</h3>
-                  <h3 class='text-center'>0</h3>
-                </div>
-              </a>
-            </div>
-
-            <div (click)='get_users()'class="users">
-                <div class="content text-center pt-3">
-
-                  <h3><i class="fas fa-users"></i>Users</h3>
-                  <h3 class = 'text-center'>0</h3>
-                </div>              
+            <div (click)='get_posts()' class="posts text-center pt-3">
+              <div class="content">
+                <h3><i class="fas fa-images"></i> Posts</h3>
+                <h3 class='text-center'>{{motivations.length}}</h3>
               </div>
-            
-            <div (click) = 'get_categories()'class="categories text-center pt-3">
-                <div class="content">
-                  <h3><i class="fas fa-user-tag"></i>Categories</h3>
-                  <h3 class = 'text-center'>0</h3>
-                </div>             
-                  <h3 class='text-center'>0</h3>
-                </div>
-              </a>
-
             </div>
 
-            <div class="categories text-center pt-3">
-              <a href="">
-                <div class="content">
-                  <h3><i class="fas fa-user-tag"></i>Categories</h3>
-                  <h3 class='text-center'>0</h3>
-                </div>
-              </a>
+            <!-- Users statistics -->
 
-
+            <div (click)='get_users()' class="users">
+              <div class="content text-center pt-3">
+                <h3><i class="fas fa-users"></i>Users</h3>
+                <h3 class='text-center'>0</h3>
+              </div>
             </div>
+
+            <!-- Category statistics -->
+
+            <div (click)='get_categories()' class="categories text-center pt-3">
+              <div class="content">
+                <h3><i class="fas fa-user-tag"></i>Categories</h3>
+                <h3 class='text-center'></h3>
+              </div>
+            </div>
+
+            <!-- Admins stats -->
+
             <div class="admins text-center pt-3">
-                <div class="content">
-                  <h3 (click)='get_adm()'><i class="fas fa-user-shield"></i> Admins</h3>
-                  <h3 class = 'text-center'>0</h3>
-                </div>              
+              <div class="content">
+                <h3 (click)='get_adm()'><i class="fas fa-user-shield"></i> Admins</h3>
+                <h3 class='text-center'>0</h3>
+              </div>
             </div>
           </div>
+
+          <!-- chart -->
+
           <div class="chart">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
               <path fill="#074436" fill-opacity="1"
@@ -101,17 +97,44 @@
             </svg>
           </div>
         </div>
+
+
+        <!-- per section details -->
+
+
+        <!-- All User details -->
+
         <div id="dashbord-student">
-          <h1>Awadh</h1>
+          <div class="user" *ngFor = 'let user of users' >
+            <!-- loop users -->
+            <div class="avatar-image">
+              <img class="avatar" src="assets/pp.png" alt="">
+
+            </div>
+            <hr>
+            <small>{{user.username}}</small><br>
+            <small>{{user.email}}</small>
+            <div class="delete-user">
+              <i class="fas fa-trash"></i>
+            </div>
+          </div>
         </div>
+
+        <!-- All categories details -->
+
         <div id="dashbord-categories">
           <div class="top">
             <div class="cat-head">
               <h4>Categories</h4>
-              <button type="button" class="btn d-flex btn-outline-success" data-bs-toggle="modal" data-bs-target="#post">
+
+              <!-- Category form modal button -->
+
+              <button type="button" class="btn d-flex btn-outline-success" data-bs-toggle="modal"
+                data-bs-target="#post">
                 Add
               </button>
             </div>
+            <!-- Modal -->
             <div class="modal fade" id="post" tabindex="-1" aria-labelledby="postLabel" aria-hidden="true">
               <div class="modal-dialog">
                 <div class="modal-content">
@@ -121,14 +144,16 @@
                   </div>
                   <div class="modal-body">
                     <div class="post-form">
-                      <form #postForm="ngForm" novalidate>
+                        <!-- form -->
+                      <form #postForm="ngForm" novalidate (ngSubmit) = "onSubmit()">
                         <div class="form-group">
                           <label for="title">Name</label>
-                          <input type="text" id="title" name="title" class="form-control">
+                          <input type="text" id="title" name="title" class="form-control" [(ngModel)]= "categoryModel.category_name">
                         </div>
-        
-                        <button type="submit" class='custom btn btn-lg btn-outline-info'>Save</button>
+
+                        <button type="submit" class='custom cat-button btn btn-lg btn-outline-success'>Save</button>
                       </form>
+
                     </div>
                   </div>
                   <div class="modal-footer">
@@ -138,22 +163,36 @@
               </div>
             </div>
           </div>
-          <div class="cats" *ngFor = 'let category of categories'>
-            <h1>{{category.category_name}}</h1>
+
+          <!-- Loop categories -->
+
+          <div class="filtered-cats" *ngFor='let category of categories'>
+            <div class="title">
+              <h3>{{category.category_name}}</h3>
+            </div>
           </div>
-         
         </div>
+
+        <!-- All Motivations -->
+
+
         <div id="dashbord-posts">
-          <div class="motivations" *ngFor = 'let motivation of motivations'>
-           <div class="motivation">
-             <div class="image-moti">
-               <img src="{{motivation.image}}" alt="">
-             </div>
-             <div class="image-description">
+
+          <!-- Loop motivations -->
+
+          <div class="motivations" *ngFor='let motivation of motivations; let i = index'>
+            <div class="motivation">
+              <div class="image-moti">
+                <img class='motimage' src="https://res.cloudinary.com/kenya12254/{{motivation.image}}" alt="">
+              </div>
+              <div class="image-description">
                 <h6>{{motivation.title}}</h6>
                 <small>{{motivation.description}}</small>
+
+                <!-- View comments modal -->
                 <div class="comments">
-                  <a class="view-comment" href="" data-bs-toggle="modal" data-bs-target="#viewComment">
+                  <a (click)='getReview(motivation.id)' class="view-comment" href="" data-bs-toggle="modal"
+                    data-bs-target="#viewComment">
                     View Comments
                   </a>
                   <!-- Modal -->
@@ -165,37 +204,47 @@
                           <h5 class="modal-title" id="exampleModalLabel">Comments</h5>
                           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
-                        <div class="modal-body">
+                        <div class="modal-body" *ngIf="reviews else elseBlock">
                           <!-- loop all comments -->
-
-                          <p>Don't be stupid dude</p>
-                          <div class="roles">
-                            <i class="fas fa-flag"></i>
-                            <i class="fas fa-trash"></i>
+                          <div class="comments" *ngFor='let review of reviews; let i = index'>
+                            <p [class.active] = 'active'> {{review.review}}</p>
+                            <div class="roles">
+                              <i (click) = 'flagReview()' class="fas fa-flag"></i> 
+                              <p class = 'flagged' [hidden] = 'hidden'>This comment has been flagged by the admin!!</p>
+                              <div>
+                                <i (click) = 'deleteComment(i)' class="fas fa-trash"></i>
+                              </div>
+                            </div>
                           </div>
-  
                         </div>
+                        <ng-template #elseBlock>
+                          <p>No comments at the moment</p>
+                        </ng-template>
                         <div class="modal-footer">
                           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                         </div>
                       </div>
                     </div>
                   </div>
+
+                  <!-- delete icon -->
+
                 </div>
-                <div class="delete">
+                <div (click)='deletePost(i)' class="delete">
                   <i class="fas fa-trash"></i>
                 </div>
-                
-
-             </div>
-             <hr>
-           </div>
-           
+              </div>
+              <hr>
+            </div>
           </div>
         </div>
+
+        <!-- Admins -->
         <div id="dashbord-admins">
-          <h1>Admin</h1>
+
         </div>
+
+
       </div>
     </div>
   </section>

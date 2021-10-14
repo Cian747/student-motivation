@@ -8,6 +8,7 @@ import { environment } from 'src/environments/environment';
 import { TruncateModule } from 'ng2-truncate';
 
 
+
 @Component({
   selector: 'app-motivation',
   templateUrl: './motivation.component.html',
@@ -40,6 +41,7 @@ export class MotivationComponent implements OnInit {
         (response:any) => {
           console.log(response)
         this.motivations = response;
+        console.log(response)
         resolve()
       },
       (error:string) => {
@@ -82,9 +84,6 @@ export class MotivationComponent implements OnInit {
   copyUrl(){
     alert("Motivation link has been copied. Share with your friends!")
   }
-
-
-
 
 
 }
