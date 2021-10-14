@@ -143,7 +143,6 @@ class ReviewSerializer(serializers.ModelSerializer):
     motivation= MotivationSerializer(read_only = True)
     class Meta:
         model = Review
-
         fields = ('id', 'review', 'profile', 'motivation', 'created_at')
 
 

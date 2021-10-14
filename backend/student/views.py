@@ -36,6 +36,25 @@ from .models import StudentUser, Profile
 
 # Create your views here.
 ###### motivation
+@api_view(['GET', 'POST', 'DELETE'])
+@permission_classes((AllowAny, ))
+def motivat(request, profile):
+    try:
+        topic = Motivation.objects.get(profile=profile)
+        
+    except:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+
+    if request.method == 'POST':
+        print(topic)
+        request.data["profile"] = topic
+        serializer = MotivationSerializer(data=request.data)
+        print (request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
 
 @api_view(['GET', 'POST', 'DELETE'])
 @permission_classes((AllowAny, ))
@@ -52,6 +71,7 @@ def motivation(request):
     elif request.method == 'POST':
         user = request.user
         serializers = MotivationPostSerializer(data=request.data)
+
         if serializers.is_valid():
             serializers.save(
                 profile = Profile.objects.filter(user=user).first()
@@ -59,26 +79,44 @@ def motivation(request):
             return Response(serializers.data, status=status.HTTP_201_CREATED)
         return Response(serializers.errors, status=status.HTTP_400_BAD_REQUEST)
         
+        
 
-class MotivationalDescription(APIView):
-    permission_classes = (AllowAny, )
-    def get_mot(self, pk):
-        try:
-            return Motivation.objects.get(pk=pk)
-        except Motivation.DoesNotExist:
-            return Http404
-    def get(self, request, pk, format=None):
-        motivation = self.get_mot(pk)
-        serializers = MotivationSerializer(motivation)
-        return Response(serializers.data)
+@api_view(['GET', 'POST', 'DELETE'])
+@permission_classes((AllowAny, ))
+def motivation_id(request, mot_pk):
+    try: 
+        motivation = Motivation.objects.get(pk=mot_pk) 
+    except Motivation.DoesNotExist: 
+        return JsonResponse({'message': 'The motivation does not exist'}, status=status.HTTP_404_NOT_FOUND) 
+
+    if request.method == 'GET': 
+        motivation_serializer = MotivationSerializer(motivation) 
+        return JsonResponse(motivation_serializer.data) 
+    
+    elif request.method == 'PUT': 
+        motivational_data = JSONParser().parse(request) 
+        motivation_serializer = MotivationSerializer(motivation, data=motivational_data) 
+        if motivation_serializer.is_valid(): 
+            motivation_serializer.save() 
+            return JsonResponse(motivation_serializer.data) 
+        return JsonResponse(motivation_serializer.errors, status=status.HTTP_400_BAD_REQUEST) 
+ 
+    elif request.method == 'DELETE': 
+        motivation.delete() 
+        return JsonResponse({'message': 'Motivation was deleted successfully!'}, status=status.HTTP_204_NO_CONTENT)
+    
+
 class MotList(generics.ListAPIView):
     permission_classes = (AllowAny, )
     queryset = Motivation.objects.all()
     serializer_class = MotivationSerializer
     filter_backends = [DjangoFilterBackend]
     filterset_fields = ['category','profile']
+    
+    
 class MotivationalByCategory(APIView):
     permission_classes = (AllowAny, )
+    filter_backends = [DjangoFilterBackend]
     def get_mot(self, cat_pk):
         try:
             # return Motivation.objects.get(category=cat_pk)
@@ -104,27 +142,33 @@ class CategoryList(APIView):
             serializers.save()
             return Response(serializers.data, status=status.HTTP_201_CREATED)
         return Response(serializers.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
 @api_view(['GET', 'POST', 'DELETE'])
 @permission_classes((AllowAny, ))
 def category_id(request, cat_pk):
-    try:
-        category = Category.objects.get(pk=cat_pk)
-    except Category.DoesNotExist:
-        return JsonResponse({'message': 'The category does not exist'}, status=status.HTTP_404_NOT_FOUND)
-    if request.method == 'GET':
-        category_serializer = CategorySerializer(category)
-        return JsonResponse(category_serializer.data)
-    elif request.method == 'PUT':
-        category_data = JSONParser().parse(request)
-        category_serializer = CategorySerializer(category, data=category_data)
-        if category_serializer.is_valid():
-            category_serializer.save()
-            return JsonResponse(category_serializer.data)
-        return JsonResponse(category_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-    elif request.method == 'DELETE':
-        category.delete()
-        return JsonResponse({'message': '{} category was deleted successfully!'.format(category[0])}, status=status.HTTP_204_NO_CONTENT)
+    try: 
+        category = Category.objects.get(pk=cat_pk) 
+    except Category.DoesNotExist: 
+        return JsonResponse({'message': 'The category does not exist'}, status=status.HTTP_404_NOT_FOUND) 
+ 
+    if request.method == 'GET': 
+        category_serializer = CategorySerializer(category) 
+        return JsonResponse(category_serializer.data) 
 
+    elif request.method == 'PUT': 
+        category_data = JSONParser().parse(request) 
+        category_serializer = CategorySerializer(category, data=category_data) 
+        if category_serializer.is_valid(): 
+            category_serializer.save() 
+            return JsonResponse(category_serializer.data) 
+        return JsonResponse(category_serializer.errors, status=status.HTTP_400_BAD_REQUEST) 
+ 
+
+    elif request.method == 'DELETE': 
+        category.delete() 
+        return JsonResponse({'message': 'Category was deleted successfully!'}, status=status.HTTP_204_NO_CONTENT)
+        
  
 ##### Review   
 
@@ -143,7 +187,7 @@ def review(request, id):
     elif request.method == 'POST':
         user = request.user
         serializers = ReviewSerializer(data = request.data)
-
+        
         if serializers.is_valid():
             serializers.save(
                 profile = Profile.objects.filter(user=user).first(),
@@ -171,6 +215,23 @@ class ReviewDescription(APIView):
         review = self.get_rev(pk)
         serializers = ReviewSerializer(review)
         return Response(serializers.data)
+
+
+@api_view(['GET', 'POST', 'DELETE'])
+@permission_classes((AllowAny, ))
+def review_mot_id(request, mot_pk):
+    try: 
+        review = Review.objects.get(motivation=mot_pk) 
+    except Review.DoesNotExist: 
+        return JsonResponse({'message': 'The review does not exist'}, status=status.HTTP_404_NOT_FOUND) 
+ 
+    if request.method == 'GET': 
+        review_serializer = ReviewSerializer(review) 
+        return JsonResponse(review_serializer.data) 
+
+    elif request.method == 'DELETE': 
+        review.delete() 
+        return JsonResponse({'message': 'Review was deleted successfully!'}, status=status.HTTP_204_NO_CONTENT)
 
 class AuthUserRegistrationView(APIView):
     serializer_class = UserRegistrationSerializer
@@ -265,6 +326,8 @@ def all_users(request):
     #             return Response(user_serializer.data, status=status.HTTP_200_OK)
     #     else:
     #         return Response(user_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    
+    
 @api_view(['GET','PUT'])
 @permission_classes((IsAuthenticated,))
 @user_passes_test(lambda u: u.is_superuser)

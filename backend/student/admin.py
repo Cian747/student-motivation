@@ -10,5 +10,4 @@ admin.site.register(ReviewThread)
 admin.site.register(Category)
 admin.site.register(Review)
 admin.site.register(WishList)
-admin.site.register(Category)
 
