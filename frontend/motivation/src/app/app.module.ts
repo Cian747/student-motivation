@@ -9,14 +9,18 @@ import { SignupComponent } from './components/signup/signup.component';
 import { HomeComponent } from './components/home/home.component';
 import { AdminDashboardComponent } from './components/admin-dashboard/admin-dashboard.component';
 import { ProfileComponent } from './components/profile/profile.component';
-import { FormsModule } from '@angular/forms';
+import { HttpClientModule , HTTP_INTERCEPTORS} from '@angular/common/http';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { MotivationComponent } from './components/motivation/motivation.component';
 import { SingleMotivationComponent } from './components/single-motivation/single-motivation.component';
 import { FilterCategoryComponent } from './components/filter-category/filter-category.component';
 import { TruncateModule } from 'ng2-truncate';
-
+import { AuthInterceptor } from './services/authconfig.interceptors';
+import { ClipboardModule } from 'ngx-clipboard';
+import { InterceptorInterceptor } from './Auth/interceptor.interceptor';
+import { JwtHelperService, JWT_OPTIONS  } from '@auth0/angular-jwt';
 
 @NgModule({
   declarations: [
@@ -31,6 +35,7 @@ import { TruncateModule } from 'ng2-truncate';
     MotivationComponent,
     SingleMotivationComponent,
     FilterCategoryComponent,
+  
   ],
   imports: [
     BrowserModule,
@@ -38,9 +43,19 @@ import { TruncateModule } from 'ng2-truncate';
     HttpClientModule,
     FormsModule,
     TruncateModule,
+    ClipboardModule,
+    ReactiveFormsModule,
+  ],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: InterceptorInterceptor,
+      useClass: AuthInterceptor,
+      multi: true
+    }
 
   ],
-  providers: [],
+
   bootstrap: [AppComponent]
 })
 export class AppModule { }

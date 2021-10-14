@@ -10,18 +10,18 @@
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="/home">Home</a>
         </li>
-        <!-- <li class="nav-item">
-          <a class="nav-link" href="">Link</a>
-        </li> -->
-        <li class="nav-item dropdown">
+        <li class="nav-item"  *ngIf="currentUser.is_superuser">
+          <a class="nav-link active" aria-current="page" href="/admin">Admin</a>
+        </li>
+        <li class="nav-item dropdown" >
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Profile
+            <i class="far fa-user"></i> {{currentUser.username}}
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
             <li><a class="dropdown-item" href="/profile">Profile</a></li>
-            <li><a class="dropdown-item" href="#">Another action</a></li>
+            <li><a class="dropdown-item" href="#">WishList</a></li>
             <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item"  (click)="onLogout()">Logout</a></li>
+            <li><a class="dropdown-item"  (click)="isLogout()">Logout</a></li>
           </ul>
         </li>
       </ul>
@@ -49,19 +49,20 @@
                 </div>
                 <div class="mb-3">
                   <label for="formFile" class="form-label">Image</label>
-                  <input  [(ngModel)]="motivationPost.image" name="image" class="form-control" type="file" id="formFile">
+                  <input  [(ngModel)]="motivationPost.image" name="image" class="form-control" (change)=(onFileSelected($event))  type="file" id="formFile">
                 </div>
 
                 <div class="mb-3">
                   <label for="formFile" class="form-label">Video</label>
                   <input  [(ngModel)]="motivationPost.video" name="video" class="form-control" type="file" id="formFile">
                 </div>
+
                 <div class="mb-3">
                   <label for="formFile" class="form-label">Category</label>
                   {{motivationPost.category}}
-                  <select [(ngModel)]="motivationPost.category" multiple class="form-control"  name="category" required>
+                  <select [(ngModel)]="motivationPost.category" class="form-control"  name="category" required>
 
-                    <option *ngFor="let category of categories" [value]="category.id">{{ category.category_name }}</option>
+                    <option *ngFor="let category of categories" [ngValue]="category.id">{{ category.category_name }}</option>
 
                   </select>
                 </div>
@@ -69,7 +70,8 @@
 
 
 
-                <button (click)="publishMotivation()" type="submit" class='custom btn btn-lg btn-outline-info'>Publish</button>
+                <button (click)="publishMotivation()" (click)=" refresh()" type="submit" class='custom btn btn-lg btn-outline-info'>Publish</button>
+                <!-- (click)=" refresh()" -->
               </form>
             </div>
           </div>

@@ -1,0 +1,2 @@
+Hey {{ name }}!!
+Thanks for subscribing to out {{ category.category_name }} category listings we really appreciate your support.
