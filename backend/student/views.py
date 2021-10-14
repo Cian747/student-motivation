@@ -32,7 +32,8 @@ from .serializers import (
     WishListSerializer
 )
 
-from .models import StudentUser
+from .models import StudentUser, Profile
+
 
 # Create your views here.
 
@@ -362,6 +363,7 @@ def review_thread(request,id):
             review_serializer.save(
                 review = Review.objects.get(id=id),
                 profile = Profile.objects.filter(user=user).first()
+
             )
             return Response(review_serializer.data,status = status.HTTP_200_OK)
         else:
