@@ -39,6 +39,7 @@ export class MotivationComponent implements OnInit {
       // motivations
       this.motivationService.getAllMotivations().toPromise().then(
         (response:any) => {
+          console.log(response)
         this.motivations = response;
         console.log(response)
         resolve()
@@ -78,6 +79,13 @@ export class MotivationComponent implements OnInit {
   goToUrl(id: any){
     this.router.navigate(['/motivation',id])
   }
+
+
+  copyUrl(){
+    alert("Motivation link has been copied. Share with your friends!")
+  }
+
+
 }
 
 

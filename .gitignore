@@ -3,3 +3,6 @@ notes.txt
 *.pyc
 .env
 venv/
+.vscode
+env
+

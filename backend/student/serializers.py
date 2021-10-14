@@ -1,10 +1,9 @@
-from .models import Category, StudentUser,Motivation,Review,Profile
+from .models import Category, StudentUser,Motivation,Review,Profile, Subscription, WishList
 from rest_framework import serializers
 from rest_framework_simplejwt.tokens import RefreshToken
 from django.contrib.auth import authenticate
-from .models import Motivation, Review, Profile, Category
-
-
+from .models import Motivation, Review, Profile, Category,ReviewThread
+from .email import send_welcome_email
 
 
 
@@ -90,11 +89,18 @@ class UserListSerializer(serializers.ModelSerializer):
             'is_superuser',
         )
 
+class CategorySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Category
+        fields = ('id', 'category_name')
+
 class ProfileSerializer(serializers.ModelSerializer):
-    user = serializers.PrimaryKeyRelatedField(read_only=True, default=serializers.CurrentUserDefault())
+    user = serializers.PrimaryKeyRelatedField(read_only=True, default=serializers.CurrentUserDefault(), source="user.username",)
+    category = CategorySerializer( read_only=True)
+
     class Meta:
         model = Profile
-        fields = ('id', 'user','profile_photo','category','profile_email','phone_number')
+        fields = ('id', 'user','profile_photo','category','profile_email','phone_number', 'created_at')
 
 # class UserSerializer(serializers.ModelSerializer):
 #     # account = ProfileSerializer(source="profilemodel", many=False)
@@ -115,24 +121,62 @@ class ProfileSerializer(serializers.ModelSerializer):
 #         instance.save()
 #         return instance
 
+
+
+class MotivationPostSerializer(serializers.ModelSerializer):
+    profile=ProfileSerializer(read_only=True)
+    # category = CategorySerializer( read_only=True)
+    class Meta:
+        model = Motivation
+        fields = ('id', 'image', 'video', 'title', 'category', 'description', 'profile', 'created_at')
+
+
 class MotivationSerializer(serializers.ModelSerializer):
+    profile=ProfileSerializer(read_only=True)
+    category = CategorySerializer( read_only=True)
     class Meta:
         model = Motivation
         fields = ('id', 'image', 'video', 'title', 'category', 'description', 'profile', 'created_at')
 
 class ReviewSerializer(serializers.ModelSerializer):
+    profile=ProfileSerializer(read_only=True)
+    motivation= MotivationSerializer(read_only = True)
     class Meta:
         model = Review
 
-        fields = ('id', 'review', 'user_id', 'motivation')
+        fields = ('id', 'review', 'profile', 'motivation', 'created_at')
 
-class CategorySerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Category
-        fields = ('id', 'category_name')
 
 class SubscriptionSerializer(serializers.ModelSerializer):
+    category = CategorySerializer(read_only=True)
     class Meta:
-        model= Category
+        model= Subscription
         fields = ('id','name','email','category')
+
+        def save(self):
+            name = self.validated_data['name']
+            email = self.validated_data['email']
+            # category = self.validated_data['category']
+            send_welcome_email(name=name, receiver=email)
+
+class ReviewThreadSerializer(serializers.ModelSerializer):
+    review = ReviewSerializer(read_only=True)
+    profile = ProfileSerializer(read_only=True)
+    class Meta:
+        model = ReviewThread
+        fields = ('id','review','profile','content','posted_at')
+
+        # def to_representation(self, instance):
+        #     response = super().to_representation(instance)
+        #     response['review'] = ReviewSerializer(instance.review).data
+        #     return response
+
+class WishListSerializer(serializers.ModelSerializer):
+    profile = ProfileSerializer(read_only=True)
+    motivation = MotivationSerializer(read_only=True)
+
+    class Meta:
+        model = WishList
+        fields = ('profile','motivation')
+
 
