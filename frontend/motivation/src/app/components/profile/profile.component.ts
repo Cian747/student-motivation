@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Profile } from 'src/app/models/profile';
 import { ProfileService } from 'src/app/services/profile.service';
+import { AuthenticationService } from 'src/app/services/authentication.service';
 
 @Component({
   selector: 'app-profile',
@@ -12,7 +13,7 @@ import { ProfileService } from 'src/app/services/profile.service';
 export class ProfileComponent implements OnInit {
 
 
-  profile!:any;
+  profile!:Profile;
   error: any;
 
 
@@ -20,6 +21,7 @@ export class ProfileComponent implements OnInit {
     private http: HttpClient,
     private profileService: ProfileService,
     private router: Router,
+    private authService:AuthenticationService
 
   )
 
@@ -27,7 +29,7 @@ export class ProfileComponent implements OnInit {
 
   ngOnInit(){
     let promise = new Promise <void> ((resolve,reject)=>{
-      this.profileService.getUser().toPromise().then(
+      this.authService.getUserProfile().toPromise().then(
         (response:any) => {
           console.log(response)
         this.profile = response;

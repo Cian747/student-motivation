@@ -32,8 +32,6 @@ export class ProfileService {
 				'Authorization': `token ${user.token}`
 			});
 		}
-
-		return
 	}
 
   getCurrentUser(){

@@ -70,7 +70,6 @@ export class AdminDashboardComponent implements OnInit {
     $('#dashbord-student').fadeOut()
     $('#dashbord-admins').fadeOut()
     
-    console.log('awadh')
   }
   get_categories(){
     $('#dashbord-body').fadeOut()

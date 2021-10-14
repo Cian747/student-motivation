@@ -8,6 +8,7 @@ import { environment } from 'src/environments/environment';
 import { TruncateModule } from 'ng2-truncate';
 
 
+
 @Component({
   selector: 'app-motivation',
   templateUrl: './motivation.component.html',
@@ -77,12 +78,6 @@ export class MotivationComponent implements OnInit {
   goToUrl(id: any){
     this.router.navigate(['/motivation',id])
   }
-
-
-
-
-
-
 }
 
 

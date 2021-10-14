@@ -88,6 +88,10 @@ h6{
   color: red;
   cursor: pointer
 }
+#dashbord-student{
+  display: flex;
+  flex-wrap: wrap;
+}
 .roles i{
   padding: 0.5rem;
   cursor:pointer
