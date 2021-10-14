@@ -1,87 +1,96 @@
 <main id='admin'>
   <section id="top-row">
 
+    <nav class="navbar navbar-light fixed-top">
+      <div class="container-fluid">
+        <a class="navbar-brand"> <i class="fas fa-graduation-cap"></i> ProperLearn</a>
+        <div class="d-flex">
+          <a href=""><i class="fas fa-bell"></i></a>
+        <a href=""><i class="fas custom fa-comment-alt"></i></a>
+        <a href=""><i class="fas fa-user-circle"></i></a>John Doe
+        </div>
+      </div>
+    </nav>
+
   </section>
 
   <section id="bar">
     <div class="row">
       <div class="col-md-3">
         <div class="side-bar">
-          <div class="first-row text-center">
-            <i class="fas fa-graduation-cap"></i> ProperLearn
-          </div>
-          <hr>
           <div class="dashbord">
             <div class="students">
             </div>
-            <h6 pt=4 class='text-center '><i class="fas fa-home"></i> Dashbord</h6>
+            <h5 (click) = 'get_admin()' pt=4 class='text-center '><i class="fas fa-home"></i> Dashbord</h5>
+          </div>
+
+          <div class="students">            
+             <h6 id = 'students' (click) = 'get_users()'> <i class="fas fa-user-friends"></i> Students</h6>
+<!--             <span>
+              <i class="fas fa-user-friends"></i>
+            </span> -->
+            <a href="">Students</a>
+
           </div>
           <div class="students">
-            <span>
-               <i class="fas fa-user-friends"></i>
-            </span>
-             <a href="">Students</a>
+            <h6 (click) ='get_posts()'> <i class="fas fa-plus"></i> Posts</h6>
           </div>
           <div class="students">
-            <span> <i class="fas fa-plus"></i> </span> <a href="">Posts</a>
-          </div>
-          <div class="students">
-            <span>
-              <i class="fas fa-tag"></i>
-            </span>
-            <a href="">Categories</a>
+            
+              
+          
+            <h6 (click)='get_categories()'> <i class="fas fa-tag"></i> Categories</h6>
           </div>
         </div>
 
       </div>
 
       <div class="col-md-9">
-        <div class="head-profile">
-          <div class="icons d-flex justify-content-end">
-            <a href=""><i class="fas fa-bell"></i></a>
-            <a href=""><i class="fas custom fa-comment-alt"></i></a>
-            <a href=""><i class="fas fa-user-circle"></i></a>John Doe
-          </div>
-        </div>
-        <div class="dash-body">
+        
+        <div class="dash-body " id = 'dashbord-body'>
           <div class="cats">
-            <div class="posts text-center pt-3">
-              <a href="">
+            <div (click) = 'get_posts()'class="posts text-center pt-3">
                 <div class="content">
                   <h3><i class="fas fa-images"></i> Posts</h3>
-                  <h3 class = 'text-center'>0</h3>
+                  <h3 class='text-center'>0</h3>
                 </div>
               </a>
-              
             </div>
-            <div class="users">
-              <a href="">
+
+            <div (click)='get_users()'class="users">
                 <div class="content text-center pt-3">
-                
+
                   <h3><i class="fas fa-users"></i>Users</h3>
                   <h3 class = 'text-center'>0</h3>
+                </div>              
+              </div>
+            
+            <div (click) = 'get_categories()'class="categories text-center pt-3">
+                <div class="content">
+                  <h3><i class="fas fa-user-tag"></i>Categories</h3>
+                  <h3 class = 'text-center'>0</h3>
+                </div>             
+                  <h3 class='text-center'>0</h3>
                 </div>
               </a>
-              
+
             </div>
-            
+
             <div class="categories text-center pt-3">
               <a href="">
                 <div class="content">
                   <h3><i class="fas fa-user-tag"></i>Categories</h3>
-                  <h3 class = 'text-center'>0</h3>
+                  <h3 class='text-center'>0</h3>
                 </div>
               </a>
-             
+
+
             </div>
             <div class="admins text-center pt-3">
-              <a href="">
                 <div class="content">
-                  <h3><i class="fas fa-user-shield"></i> Admins</h3>
+                  <h3 (click)='get_adm()'><i class="fas fa-user-shield"></i> Admins</h3>
                   <h3 class = 'text-center'>0</h3>
-                </div>
-              </a>
-              
+                </div>              
             </div>
           </div>
           <div class="chart">
@@ -91,6 +100,101 @@
               </path>
             </svg>
           </div>
+        </div>
+        <div id="dashbord-student">
+          <h1>Awadh</h1>
+        </div>
+        <div id="dashbord-categories">
+          <div class="top">
+            <div class="cat-head">
+              <h4>Categories</h4>
+              <button type="button" class="btn d-flex btn-outline-success" data-bs-toggle="modal" data-bs-target="#post">
+                Add
+              </button>
+            </div>
+            <div class="modal fade" id="post" tabindex="-1" aria-labelledby="postLabel" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Post</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                    <div class="post-form">
+                      <form #postForm="ngForm" novalidate>
+                        <div class="form-group">
+                          <label for="title">Name</label>
+                          <input type="text" id="title" name="title" class="form-control">
+                        </div>
+        
+                        <button type="submit" class='custom btn btn-lg btn-outline-info'>Save</button>
+                      </form>
+                    </div>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="cats" *ngFor = 'let category of categories'>
+            <h1>{{category.category_name}}</h1>
+          </div>
+         
+        </div>
+        <div id="dashbord-posts">
+          <div class="motivations" *ngFor = 'let motivation of motivations'>
+           <div class="motivation">
+             <div class="image-moti">
+               <img src="{{motivation.image}}" alt="">
+             </div>
+             <div class="image-description">
+                <h6>{{motivation.title}}</h6>
+                <small>{{motivation.description}}</small>
+                <div class="comments">
+                  <a class="view-comment" href="" data-bs-toggle="modal" data-bs-target="#viewComment">
+                    View Comments
+                  </a>
+                  <!-- Modal -->
+                  <div class="modal fade" id="viewComment" tabindex="-1" aria-labelledby="viewCommentLabel"
+                    aria-hidden="true">
+                    <div class="modal-dialog">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title" id="exampleModalLabel">Comments</h5>
+                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                          <!-- loop all comments -->
+
+                          <p>Don't be stupid dude</p>
+                          <div class="roles">
+                            <i class="fas fa-flag"></i>
+                            <i class="fas fa-trash"></i>
+                          </div>
+  
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="delete">
+                  <i class="fas fa-trash"></i>
+                </div>
+                
+
+             </div>
+             <hr>
+           </div>
+           
+          </div>
+        </div>
+        <div id="dashbord-admins">
+          <h1>Admin</h1>
         </div>
       </div>
     </div>

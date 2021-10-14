@@ -51,6 +51,7 @@ import { JwtHelperService, JWT_OPTIONS  } from '@auth0/angular-jwt';
       useClass: InterceptorInterceptor,
       multi: true
     }
+
   ],
   bootstrap: [AppComponent]
 })

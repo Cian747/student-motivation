@@ -32,17 +32,17 @@ from django.template.loader import render_to_string
 
 def send_welcome_email(name,receiver):
     # Creating message subject and sender
-    subject = 'Welcome to the MoringaTribune NewsLetter'
+    subject = 'Welcome to the Stud Motive Family'
     sender = 'kaisermoringa1@gmail.com'
 
     #passing in the context vairables
-    text_content = render_to_string('email/newsemail.txt',{"name": name})
-    html_content = render_to_string('email/newsemail.html',{"name": name})
+    text_content = render_to_string('email/studentemail.txt',{"name": name})
+    html_content = render_to_string('email/studentemail.html',{"name": name})
 
     msg = EmailMultiAlternatives(subject,text_content,sender,[receiver])
     msg.attach_alternative(html_content,'text/html')
     msg.send()
     
-name = 'Cian'
-receiver = 'cian.omondi@student.moringaschool.com'
-send_welcome_email(name,receiver)
+# name = 'Cian'
+# receiver = 'cian.omondi@student.moringaschool.com'
+# send_welcome_email(name,receiver)

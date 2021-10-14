@@ -2,3 +2,7 @@ virtual/
 notes.txt
 *.pyc
 .env
+.vscode
+env
+venv/
+
