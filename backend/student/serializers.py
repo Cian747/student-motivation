@@ -121,10 +121,12 @@ class MotivationSerializer(serializers.ModelSerializer):
         fields = ('id', 'image', 'video', 'title', 'category', 'description', 'profile', 'created_at')
 
 class ReviewSerializer(serializers.ModelSerializer):
+    profile = ProfileSerializer(read_only=True)
+    motivation = MotivationSerializer(read_only=True)
     class Meta:
         model = Review
 
-        fields = ('id', 'review', 'user_id', 'motivation')
+        fields = ('id', 'review', 'profile', 'motivation')
 
 class CategorySerializer(serializers.ModelSerializer):
     class Meta:
@@ -145,10 +147,10 @@ class SubscriptionSerializer(serializers.ModelSerializer):
 
 class ReviewThreadSerializer(serializers.ModelSerializer):
     review = ReviewSerializer(read_only=True)
-    user = serializers.PrimaryKeyRelatedField(read_only=True, default=serializers.CurrentUserDefault())
+    profile = ProfileSerializer(read_only=True)
     class Meta:
         model = ReviewThread
-        fields = ('id','review','user','content','posted_at')
+        fields = ('id','review','profile','content','posted_at')
 
         # def to_representation(self, instance):
         #     response = super().to_representation(instance)

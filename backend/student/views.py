@@ -343,38 +343,41 @@ def profile(request):
         else:
             return Response(profile_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-    elif request.method == 'DELETE':
-        profile.delete()
-        return Response("User deleted!...")
-
 # Check if the user has admin privileges 
 @api_view(['GET','POST'])
 @permission_classes((IsAuthenticated,))
 def review_thread(request,id):
-    # user = request.user
+    user = request.user
 
     review = Review.objects.filter(id=id).first()
     found_thread = ReviewThread.objects.filter(review=review).all()
     if request.method == 'GET':
         serializer = ReviewThreadSerializer(found_thread,many=True)
-        # if serializer.is_valid():
         return Response(serializer.data,status = status.HTTP_200_OK)
 
     elif request.method == 'POST':
-        # r_serializer = ReviewSerializer(review,many=False)
-        # request.data["review_id"] = review.id
         review_serializer = ReviewThreadSerializer(data=request.data,context={'request': request})
-        # print(request.data)
 
         if review_serializer.is_valid():
             # review_serializer.review = review
             review_serializer.save(
                 review = Review.objects.get(id=id),
-                user = request.user
+                profile = Profile.objects.filter(user=user).first()
+
             )
             return Response(review_serializer.data,status = status.HTTP_200_OK)
         else:
             return Response(review_serializer.errors,status = status.HTTP_400_BAD_REQUEST)
+
+@api_view(['GET', 'PUT', 'DELETE'])
+@permission_classes((IsAuthenticated,))
+# @authentication_classes((JWTAuthentication,))
+def current_user(request):
+    user = request.user
+
+    if request.method == 'GET':
+        serializer = UserListSerializer(user, many=False)
+        return Response(serializer.data, status=status.HTTP_200_OK)
 
 
 # Make subscription api
@@ -388,9 +391,6 @@ def subscription_service(request,pk):
         return Response(serializer.data, status=status.HTTP_200_OK)
 
     elif request.method == 'POST':
-        # serializer = UserProfileSerializer(user, many=False)
-        # request.data['category'] = category
-        # print(request.data)
         subscription_serializer = SubscriptionSerializer(data=request.data)
         
         if subscription_serializer.is_valid():
