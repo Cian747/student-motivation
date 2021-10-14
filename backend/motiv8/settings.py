@@ -135,9 +135,9 @@ DATABASES = {
 
 # ALLOWED_HOSTS = config('ALLOWED_HOSTS', cast=Csv())
 
-# ALLOWED_HOSTS=['*']
+ALLOWED_HOSTS=['*']
 
-# CORS_ORIGIN_ALLOW_ALL = True
+CORS_ORIGIN_ALLOW_ALL = True
 
 
 ALLOWED_HOSTS=['http://localhost:4200']    
