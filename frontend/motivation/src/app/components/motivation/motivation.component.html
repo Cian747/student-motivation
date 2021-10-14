@@ -18,10 +18,10 @@
       <div class="card-body ">
         <h5 class="card-title">{{motivation.title}}</h5>
         <p class="card-text">Category: {{motivation.category.category_name}}</p>
-        <p class="card-text small">{{motivation.description| words : 10}}</p>
+        <p class="card-text small">{{motivation.description| words : 6}}</p>
 
-        <p class="card-text"><small class="">{{motivation.profile.user}}</small></p>
-        <p class="card-text"><small class="">Published on {{motivation.created_at|date}}</small></p>
+        <p class="card-text"><small class="">published by {{motivation.profile.user}}</small></p>
+        <p class="card-text"><small class="">{{motivation.created_at|date}}</small></p>
 
         <!-- {{motivation.created_at}} -->
       </div>

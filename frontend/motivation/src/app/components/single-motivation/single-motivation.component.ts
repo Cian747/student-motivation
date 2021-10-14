@@ -37,8 +37,9 @@ export class SingleMotivationComponent implements OnInit {
 
     this.reviewPost = {
       review: '',
-      user_id: '',
+      profile: '',
       motivation: '',
+      created_at: Date,
 
     };
 

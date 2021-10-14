@@ -30,22 +30,29 @@ from .serializers import (
 from .models import StudentUser, Profile
 # Create your views here.
 ###### motivation
-class MotivationList(APIView):
-    permission_classes = (AllowAny, )
-    def get(self, request, format=None):
-        all_merch = Motivation.objects.all()
-        serializers = MotivationSerializer(all_merch, many=True)
-        return Response(serializers.data)
-    def post(self, request, format=None):
+@api_view(['GET', 'POST', 'DELETE'])
+@permission_classes((AllowAny, ))
+def motivation(request):
+    user = request.user
+    # profile = Profile.objects.get(user=user)
+    # serializer = ProfileSerializer(profile, many=False)
+    if request.method == 'GET':
+        motivation = Motivation.objects.all()
+       
+        motivation_serializer = MotivationSerializer(motivation, many=True)
+        return JsonResponse(motivation_serializer.data, safe=False)
+    
+    elif request.method == 'POST':
         user = request.user
-        profile = Profile.objects.get(user=user)
         serializers = MotivationSerializer(data=request.data)
-        profile_serializer = ProfileSerializer(profile, many=False)
         if serializers.is_valid():
-            serializers.profile=profile_serializer
-            serializers.save()
+            serializers.save(
+                profile = Profile.objects.filter(user=user).first()
+            )
             return Response(serializers.data, status=status.HTTP_201_CREATED)
         return Response(serializers.errors, status=status.HTTP_400_BAD_REQUEST)
+        
+
 class MotivationalDescription(APIView):
     permission_classes = (AllowAny, )
     def get_mot(self, pk):
@@ -111,19 +118,26 @@ def category_id(request, cat_pk):
         category.delete()
         return JsonResponse({'message': '{} category was deleted successfully!'.format(category[0])}, status=status.HTTP_204_NO_CONTENT)
 
-        ##### Review
+ 
+##### Review   
+
 class ReviewList(APIView):
     permission_classes = (AllowAny, )
     def get(self, request, format=None):
         all_merch = Review.objects.all()
         serializers =ReviewSerializer(all_merch, many=True)
         return Response(serializers.data)
+
     def post(self, request, format=None):
+        user = request.user
         serializers = ReviewSerializer(data=request.data)
         if serializers.is_valid():
-            serializers.save()
+            serializers.save(
+                profile = Profile.objects.filter(user=user).first()
+            )
             return Response(serializers.data, status=status.HTTP_201_CREATED)
         return Response(serializers.errors, status=status.HTTP_400_BAD_REQUEST)
+        
 class RevList(generics.ListAPIView):
     permission_classes = (AllowAny, )
     queryset = Review.objects.all()

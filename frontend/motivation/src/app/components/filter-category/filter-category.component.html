@@ -47,8 +47,8 @@
             <p class="card-text">Category:{{motivation.category.category_name}}</p>
             <p class="card-text small">{{motivation.description| words : 10}}</p>
 
-            <p class="card-text"><small class="">{{motivation.profile.user}}</small></p>
-            <!-- {{motivation.created_at}} -->
+            <p class="card-text"><small class="">published by {{motivation.profile.user}}</small></p>
+            <p class="card-text"><small class="">{{motivation.created_at|date}}</small></p>
           </div>
           <div class="card-footer">
             <div class="icons">
