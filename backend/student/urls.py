@@ -8,6 +8,11 @@ from rest_framework_simplejwt import views as jwt_views
 from django.conf.urls.static import static
 from django.conf import settings
 # from rest_framework_jwt.views import obtain_jwt_token, refresh_jwt_token
+from rest_framework_swagger.views import get_swagger_view
+
+schema_view = get_swagger_view(title='Pastebin API')
+
+
 
 from .views import (
     AuthLogoutView,
@@ -16,6 +21,7 @@ from .views import (
     UserListView,
 )
 urlpatterns = [
+    path('swagger/', schema_view),
     url(r'^motivation/$', views.motivation),    
     url(r'^mot/$', views.MotList.as_view()),
     # http://127.0.0.1:8000/api/mot?category=2
@@ -33,15 +39,13 @@ urlpatterns = [
     path('token/obtain/', jwt_views.TokenObtainPairView.as_view(), name='token_create'),
     path('token/refresh/', jwt_views.TokenRefreshView.as_view(), name='token_refresh'),
     path('register', AuthUserRegistrationView.as_view(), name='register'),
-    # path('login', obtain_jwt_token),
     path('login', AuthUserLoginView.as_view(), name='login'),
     path('logout',AuthLogoutView.as_view(),name='logout'),
-    # path('users', UserListView.as_view(), name='users'),
     path('subscribe/<int:pk>',views.subscription_service,name='category_subscription'),
     path('users', views.all_users, name='users'),
     path('remove_user',views.remove_user,name='user_deactivate'),
     path('review/<int:id>', views.review,  name = 'review'),
-    path('current_user', views.current_user),
+    path('current_user', views.current_user,name='current_user'),
     path('superuser/<int:pk>',views.change_to_superuser,name='superuser_status'),
 
 
