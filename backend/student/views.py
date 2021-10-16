@@ -105,7 +105,19 @@ def motivation_id(request, mot_pk):
         motivation.delete() 
         return JsonResponse({'message': 'Motivation was deleted successfully!'}, status=status.HTTP_204_NO_CONTENT)
     
+class MotivationalDescription(APIView):
+    permission_classes = (AllowAny, )
+    def get_mot(self, pk):
+        try:
+            return Motivation.objects.get(pk=pk)
+        except Motivation.DoesNotExist:
+            return Http404
+    def get(self, request, pk, format=None):
+        motivation = self.get_mot(pk)
+        serializers = MotivationSerializer(motivation)
+        return Response(serializers.data)
 
+        
 class MotList(generics.ListAPIView):
     permission_classes = (AllowAny, )
     queryset = Motivation.objects.all()

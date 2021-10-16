@@ -11,7 +11,6 @@ import { AdminDashboardComponent } from './components/admin-dashboard/admin-dash
 import { ProfileComponent } from './components/profile/profile.component';
 import { HttpClientModule , HTTP_INTERCEPTORS} from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { MotivationComponent } from './components/motivation/motivation.component';
 import { SingleMotivationComponent } from './components/single-motivation/single-motivation.component';
@@ -35,7 +34,7 @@ import { JwtHelperService, JWT_OPTIONS  } from '@auth0/angular-jwt';
     MotivationComponent,
     SingleMotivationComponent,
     FilterCategoryComponent,
-  
+
   ],
   imports: [
     BrowserModule,
@@ -49,7 +48,7 @@ import { JwtHelperService, JWT_OPTIONS  } from '@auth0/angular-jwt';
   providers: [
     {
       provide: HTTP_INTERCEPTORS,
-      useClass: InterceptorInterceptor,
+      // useClass: InterceptorInterceptor,
       useClass: AuthInterceptor,
       multi: true
     }

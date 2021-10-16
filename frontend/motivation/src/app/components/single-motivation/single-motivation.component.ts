@@ -43,6 +43,7 @@ export class SingleMotivationComponent implements OnInit {
     let promise = new Promise <void> ((resolve,reject)=>{
       this.motivationService.getSingleMotivation(id).toPromise().then(
         (response:any) => {
+          console.log(response)
         this.motivation = response;
         resolve()
       },

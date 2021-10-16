@@ -15,11 +15,12 @@ import { ProfileService } from 'src/app/services/profile.service';
 })
 export class LoginComponent implements OnInit {
 
+  login:any;
+  error = '';
+  loginForm!: FormGroup;
+  loading = false;
+  submitted = false;
 
- public login:any;
-  error: any;
-  public token: any
-  public errors: any = [];
 
   private loggedIn = new BehaviorSubject<boolean>(false);
 
@@ -38,9 +39,16 @@ export class LoginComponent implements OnInit {
     private profile: ProfileService,
     private auth: BackupService,
     private router: Router,
-    
+    private fb: FormBuilder,
   ) {
-   
+    this.currentUserSubject = new BehaviorSubject<StudentUser>(JSON.parse(localStorage.getItem('currentUser') || '{}'));
+    this.currentUser = this.currentUserSubject.asObservable();
+
+    this.signinForm = this.fb.group({
+      username: [''],
+      password: ['']
+    })
+
    }
 
   ngOnInit(): void {
@@ -50,7 +58,6 @@ export class LoginComponent implements OnInit {
       email: '',
       role:'',
 
-
     };
 
 
@@ -58,51 +65,31 @@ export class LoginComponent implements OnInit {
 
 
 
-  LoginUser(){
-    this.LoginService.loginUser(this.login).subscribe( (response:any)=> {
-      localStorage.setItem('authToken', JSON.stringify(response.Token));
-      console.log(response.Token)
-
-      this.loggedIn.next(true);
-
-      this.router.navigate(['home'])
-      // localStorage.setItem('currentUser', JSON.stringify(response));
-      // this.currentUserSubject.next(response);
-      // return response;
-    },
-    error => {
-      alert('Invalid User Credentials');
-      console.log('error',error)
-    }
-    );
-  }
   // LoginUser(){
-  //   this.LoginService.signIn(this.login).subscribe(response => {
-  //     // alert('User ' + this.login.username + ' has logged in'),
+  //   this.LoginService.loginUser(this.login).subscribe( (response:any)=> {
+  //     localStorage.setItem('authToken', JSON.stringify(response.Token));
+  //     console.log(response.Token)
+
   //     this.loggedIn.next(true);
-  //     // if this.login.role ==
+
   //     this.router.navigate(['home'])
+  //     // localStorage.setItem('currentUser', JSON.stringify(response));
+  //     // this.currentUserSubject.next(response);
+  //     // return response;
   //   },
   //   error => {
   //     alert('Invalid User Credentials');
   //     console.log('error',error)
   //   }
   //   );
-  //   this.login.reset();
   // }
-
-// login() {
-//   this.LoginService.login({'username': this.user.username, 'password': this.user.password});
-// }
-// }
-
-
 
 
 
    loginUser() {
     this.auth.signIn(this.signinForm.value)
     this.loading = true;
+
 
   }
 
@@ -111,5 +98,3 @@ export class LoginComponent implements OnInit {
 
 
 }
-
-
