@@ -4,9 +4,7 @@ import { CanActivate, Router } from '@angular/router';
 import { Observable, BehaviorSubject, throwError } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { tap, shareReplay, catchError } from 'rxjs/operators';
-import { tap, shareReplay, map } from 'rxjs/operators';
-import jwtDecode from 'jwt-decode';
-import { JwtHelperService } from '@auth0/angular-jwt';
+// import { JwtHelperService } from '@auth0/angular-jwt';
 import * as moment from 'moment';
 import { Users } from '../models/users';
 import { map } from 'jquery';
@@ -23,25 +21,27 @@ const httpOptions = {
 })
 
 export class AuthenticationService {
-  // private loggedIn = new BehaviorSubject<boolean>(false);
+   private loggedIn = new BehaviorSubject<boolean>(false);
 
   // get isLoggedIn() {
   //   return this.loggedIn.asObservable();
   // }
 
-  private currentUserSubject: BehaviorSubject<StudentUser>;
-  public currentUser: Observable<StudentUser>;
+  //private currentUserSubject: BehaviorSubject<StudentUser>;
+  // public currentUser: Observable<StudentUser>;
 
 
 	authUrl: string = environment.URL;
-  headers = new HttpHeaders().set('Content-Type', 'application/json')
+  headers = new HttpHeaders().set('Content-Type', 'application/json') 
   currentUser = {}
   constructor(private http:HttpClient,  private router: Router) { }
 
   signUp(user:Users){
     let api = this.authUrl + 'register'
+
+  
     return this.http.post(api, user)
-      
+
   }
   signIn(user:Users){
     return this.http.post<any>(this.authUrl + 'token/obtain/', user)
@@ -71,9 +71,10 @@ logout(){
   let removeToken = localStorage.removeItem('access')
   if (removeToken == null){
     this.router.navigate(['login'])
+   }
   }
   
-}
+
 
 getUserProfile():Observable<any>{
   let api = this.authUrl+ 'profile/'
@@ -119,9 +120,9 @@ handleError(error: HttpErrorResponse){
   //   return this.http.post(this.authUrl + 'register',regData)
   // }
 
-  // loginUser(loginData:any):Observable<any[]>{
-  //   return this.http.post<any[]>(this.authUrl + 'login',loginData)
-  // }
+  loginUser(loginData:any):Observable<any[]>{
+    return this.http.post<any[]>(this.authUrl + 'login',loginData)
+  }
 
 
   // logout() {
@@ -129,9 +130,9 @@ handleError(error: HttpErrorResponse){
   //   this.router.navigate(['/landing']);
   // }
 
-  public get currentUserValue():StudentUser {
-    return this.currentUserSubject.value;
-}
+//   public get currentUserValue():StudentUser {
+//     return this.currentUserSubject.value;
+// }
   // public isAuthenticated(): boolean {
   //   // get the token
   //   const token = this.getToken();
@@ -154,15 +155,15 @@ handleError(error: HttpErrorResponse){
 	}
 
 
-  login(username: string, password: string) {
-    return this.http.post<any>(`${this.authUrl}token/obtain/`, { username, password })
-        .pipe(map(user => {
-            // store user details and jwt token in local storage to keep user logged in between page refreshes
-            localStorage.setItem('currentUser', JSON.stringify(user));
-            this.currentUserSubject.next(user);
-            return user;
-        }));
-}
+  // login(username: string, password: string) {
+  //   return this.http.post<any>(`${this.authUrl}token/obtain/`, { username, password })
+        // .pipe(map(user => {
+        //     // store user details and jwt token in local storage to keep user logged in between page refreshes
+        //     localStorage.setItem('currentUser', JSON.stringify(user));
+        //     this.currentUserSubject.next(user);
+        //     return user;
+        // }));
+
 
 // login(credentials:any): Observable<any> {
 //   return this.http.post(this.authUrl + 'token/obtain/', {
@@ -172,29 +173,29 @@ handleError(error: HttpErrorResponse){
 // }
 
 
-  loginUser(user: any){
-		let authUser = {
-			"username": user.username,
-			"password": user.password
-		}
+  // loginUser(user: any){
+	// 	let authUser = {
+	// 		"username": user.username,
+	// 		"password": user.password
+	// 	}
 
-		// if (user.jwt) {
-			return this.http.post(`${this.authUrl}token/obtain/`, authUser )
-		// }
+	// 	// if (user.jwt) {
+	// 		return this.http.post(`${this.authUrl}token/obtain/`, authUser )
+	// 	// }
 
-		// return this.http.post(`${this.authUrl}login`, authUser )
-	}
+	// 	// return this.http.post(`${this.authUrl}login`, authUser )
+	// }
 
-  logout() {
-      // remove user from local storage to log user out
-      // localStorage.removeItem('currentUser');
+  // logout(){
+  //     // remove user from local storage to log user out
+  //     // localStorage.removeItem('currentUser');
 
-      // this.currentUserSubject.next();
-    localStorage.removeItem('authToken');
-    this.loggedIn.next(false);
-    this.router.navigate(['/landing']);
+  //     // this.currentUserSubject.next();
+  //   localStorage.removeItem('authToken');
+  //   this.loggedIn.next(false);
+  //   this.router.navigate(['/landing']);
 
-  }
+  // }
 
 
 }

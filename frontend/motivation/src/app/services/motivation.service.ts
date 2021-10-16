@@ -21,11 +21,11 @@ export class MotivationService {
 
 
   getSingleMotivation(id:any):Observable<any[]>{
-    return this.http.get<any[]>(this.APIUrl + `motivation/mot-id/${id}/`)
+    return this.http.get<any[]>(this.APIUrl + `motivation/mot-id/${id}`)
   }
 
   filterByCategory(id:any):Observable<any[]>{
-    return this.http.get<any[]>(this.APIUrl + `mot?category=${id}`)
+    return this.http.get<any[]>(this.APIUrl + `motivation/mot-cat/${id}`)
   }
 
 
