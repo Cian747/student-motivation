@@ -148,9 +148,10 @@ class ReviewSerializer(serializers.ModelSerializer):
 
 class SubscriptionSerializer(serializers.ModelSerializer):
     category = CategorySerializer(read_only=True)
+    user = serializers.PrimaryKeyRelatedField(read_only=True, default=serializers.CurrentUserDefault(), source="user.username",)
     class Meta:
         model= Subscription
-        fields = ('id','name','email','category')
+        fields = ('id','user','category')
 
         def save(self):
             name = self.validated_data['name']
