@@ -89,11 +89,18 @@ class UserListSerializer(serializers.ModelSerializer):
             'is_superuser',
         )
 
+class CategorySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Category
+        fields = ('id', 'category_name')
+
 class ProfileSerializer(serializers.ModelSerializer):
-    user = serializers.PrimaryKeyRelatedField(read_only=True, default=serializers.CurrentUserDefault())
+    user = serializers.PrimaryKeyRelatedField(read_only=True, default=serializers.CurrentUserDefault(), source="user.username",)
+    category = CategorySerializer( read_only=True)
+
     class Meta:
         model = Profile
-        fields = ('id', 'user','profile_photo','category','profile_email','phone_number')
+        fields = ('id', 'user','profile_photo','category','profile_email','phone_number', 'created_at')
 
 # class UserSerializer(serializers.ModelSerializer):
 #     # account = ProfileSerializer(source="profilemodel", many=False)
@@ -114,19 +121,30 @@ class ProfileSerializer(serializers.ModelSerializer):
 #         instance.save()
 #         return instance
 
+
+
+class MotivationPostSerializer(serializers.ModelSerializer):
+    profile=ProfileSerializer(read_only=True)
+    # category = CategorySerializer( read_only=True)
+    class Meta:
+        model = Motivation
+        fields = ('id', 'image', 'video', 'title', 'category', 'description', 'profile', 'created_at')
+
+
 class MotivationSerializer(serializers.ModelSerializer):
-    profile = ProfileSerializer(read_only=True)
+    profile=ProfileSerializer(read_only=True)
+    category = CategorySerializer( read_only=True)
     class Meta:
         model = Motivation
         fields = ('id', 'image', 'video', 'title', 'category', 'description', 'profile', 'created_at')
 
 class ReviewSerializer(serializers.ModelSerializer):
-    profile = ProfileSerializer(read_only=True)
-    motivation = MotivationSerializer(read_only=True)
+    profile=ProfileSerializer(read_only=True)
+    motivation= MotivationSerializer(read_only = True)
     class Meta:
         model = Review
+        fields = ('id', 'review', 'profile', 'motivation', 'created_at')
 
-        fields = ('id', 'review', 'profile', 'motivation')
 
 class CategorySerializer(serializers.ModelSerializer):
     class Meta:
@@ -164,7 +182,5 @@ class WishListSerializer(serializers.ModelSerializer):
     class Meta:
         model = WishList
         fields = ('profile','motivation')
-
-
 
 

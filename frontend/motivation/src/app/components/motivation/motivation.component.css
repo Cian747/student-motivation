@@ -53,3 +53,15 @@ i{
 
 }
 
+.share-url{
+  /* visibility: hidden; */
+}
+
+
+.fas{
+  font-size: 20px;
+}
+.fas:hover{
+  cursor: pointer;
+}
+

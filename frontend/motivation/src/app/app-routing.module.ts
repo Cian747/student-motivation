@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AuthGuard } from './authguard/auth.guard';
 import { AdminDashboardComponent } from './components/admin-dashboard/admin-dashboard.component';
 import { FilterCategoryComponent } from './components/filter-category/filter-category.component';
 import { HomeComponent } from './components/home/home.component';
@@ -16,11 +17,11 @@ const routes: Routes = [
   { path: 'landing', component: LandingComponent },
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: SignupComponent },
-  { path: 'home', component: HomeComponent },
-  { path: 'motivation/:id', component: SingleMotivationComponent },
-  { path: 'category/:id', component: FilterCategoryComponent },
-  { path: 'profile', component: ProfileComponent },
-  { path: 'admin', component: AdminDashboardComponent},
+  { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
+  { path: 'motivation/:id', component: SingleMotivationComponent, canActivate: [AuthGuard]  },
+  { path: 'category/:id', component: FilterCategoryComponent, canActivate: [AuthGuard]  },
+  { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
+  { path: 'admin', component: AdminDashboardComponent, canActivate: [AuthGuard] },
 
 
 

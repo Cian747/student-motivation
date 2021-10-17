@@ -22,6 +22,7 @@ width: 350px;
 background: white;
 margin: 2rem 0;
 border-radius: 20px;
+cursor: pointer;
 
 }
 .content h3{
@@ -35,9 +36,7 @@ color: #074436 !important;
 a{
   text-decoration:none;
 }
-.first-row,.icons {
-  margin-top: 1rem;
-}
+
 .first-row{
   color: #074436;
   font-weight: 900;
@@ -47,8 +46,9 @@ span{
   margin: 0 .5rem;
   
 }
-.students a{
+.students h3{
   color: #074436;
+  cursor: pointer;
 }
 .students{
   margin: 2.5rem 0;
@@ -64,4 +64,97 @@ span{
   color: black;
   font-weight: 900;
   font-size: 1.5rem;
+}
+h6{
+  cursor: pointer;
+}
+#dashbord-student,#dashbord-categories,#dashbord-posts,#dashbord-admins{
+  display: none;
+  margin-top: 3rem;
+}
+.motivation{
+  margin-left: 2.5rem;
+}
+#bar{
+  margin-top:2rem !important;
+}
+/* .side-bar{
+  position: fixed;
+} */
+.navbar{
+  background-color: white !important;
+}
+.delete{
+  color: red;
+  cursor: pointer
+}
+#dashbord-student{
+  display: flex;
+  flex-wrap: wrap;
+}
+.roles i{
+  padding: 0.5rem;
+  cursor:pointer
+}
+.role i,.fa-trash{
+  color: red;
+}
+.cat-head{
+  display:flex;
+  justify-content: space-around;
+}
+.cat-button{
+  margin:2rem 0 0 0;
+}
+.user{
+  margin: 1rem;
+  border: 1px solid #074436;
+  height: auto;
+  width: 200px;
+  padding: 1rem;
+  border-radius: 20px;
+  
+}
+.delete-user{
+  margin-top: 2rem;
+}
+.avatar{
+  width: 50px;
+  height: 50px;
+}
+.avatar-image{
+  display: flex;
+  justify-content: center;
+}
+.row-cats{
+  margin-left: 1rem;
+}
+.motimage{
+  width: 400px ;
+  height: auto;
+}
+.filtered-cats{
+  background-color: #074436;
+  height: auto;
+  width: auto;
+  margin: 2rem;
+  padding: .7rem;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: .5s all;
+  
+}
+.title{
+  color: #fff;
+  
+}
+.filtered-cats:hover{
+  background-color: #fff;
+  border:1px solid #074436;
+}
+.title h3:hover{
+  color: #074436;  
+}
+.flagged{
+  color: red;
 }
