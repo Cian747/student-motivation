@@ -83,14 +83,16 @@ def motivation(request):
 
 @api_view(['GET', 'POST', 'DELETE'])
 @permission_classes((AllowAny, ))
-def motivation_id(request, mot_pk):
+def motivation_id(request, pk):
     try: 
-        motivation = Motivation.objects.get(pk=mot_pk) 
+        motivation = Motivation.objects.filter(pk=pk).first() 
+
     except Motivation.DoesNotExist: 
         return JsonResponse({'message': 'The motivation does not exist'}, status=status.HTTP_404_NOT_FOUND) 
 
     if request.method == 'GET': 
-        motivation_serializer = MotivationSerializer(motivation) 
+        motivation_serializer = MotivationSerializer(motivation,many=False) 
+
         return JsonResponse(motivation_serializer.data) 
     
     elif request.method == 'PUT': 
@@ -120,13 +122,15 @@ class MotivationalByCategory(APIView):
     def get_mot(self, cat_pk):
         try:
             # return Motivation.objects.get(category=cat_pk)
-            motivations=Motivation.objects.filter(category=cat_pk)
+            motivations=Motivation.objects.filter(category=cat_pk).all()
+
             return motivations
         except Motivation.DoesNotExist:
             return Http404
     def get(self, request,cat_pk, format=None):
         motivation = self.get_mot(cat_pk)
-        serializers = MotivationSerializer(motivation)
+        serializers = MotivationSerializer(motivation,many=True)
+
         return Response(serializers.data)
 #### Category
 class CategoryList(APIView):
@@ -413,7 +417,7 @@ def review_thread(request,id):
 @permission_classes((AllowAny,))
 def subscription_service(request,pk):
     category = Category.objects.filter(pk=pk).first()
-
+    user = request.user
 
     if request.method == 'GET':
         serializer = SubscriptionSerializer(category, many=False)
@@ -422,13 +426,13 @@ def subscription_service(request,pk):
         subscription_serializer = SubscriptionSerializer(data=request.data)
  
         if subscription_serializer.is_valid():
-            name = subscription_serializer.validated_data['name']
-            # print(name)
-            receiver = subscription_serializer.validated_data['email']
-            # print(receiver)
-            # category = subscription_serializer.validated_data['category']
-            # print(category)
-            subscription_serializer.save(category = Category.objects.filter(pk=pk).first())
+            name = user.username
+            receiver = user.email
+
+            subscription_serializer.save(
+                category = Category.objects.filter(pk=pk).first(),
+                user = request.user
+                )
             send_welcome_email(name=name, receiver=receiver)
             return Response(subscription_serializer.data, status=status.HTTP_200_OK)
         else:
@@ -459,6 +463,18 @@ def wishlist_motivation(request,pk):
         else:
             return Response(new_wish_serializer.errors,status=status.HTTP_400_BAD_REQUEST)
     
+
+@api_view(['GET'])
+@permission_classes((IsAuthenticated,))
+def all_wishlist(request):
+    user = request.user
+
+    profile = Profile.objects.filter(user=user).first()
+    wishlist = WishList.objects.filter(profile=profile).all()
+
+    if request.method == 'GET':
+        wishlist_serializer = WishListSerializer(wishlist,many=True)
+        return Response(wishlist_serializer.data,status=status.HTTP_200_OK)
 
 
 @api_view(['GET', 'PUT', 'DELETE'])

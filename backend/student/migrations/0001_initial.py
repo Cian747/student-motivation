@@ -74,13 +74,24 @@ class Migration(migrations.Migration):
                 ('created_at', models.DateTimeField(auto_now_add=True)),
                 ('category', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, to='student.category')),
                 ('user', models.OneToOneField(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
+
+            ],
+        ),
+        migrations.CreateModel(
+            name='Review',
+            fields=[
+                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('review', models.TextField()),
+                ('created_at', models.DateTimeField(auto_now_add=True)),
+                ('motivation', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='student.motivation')),
+                ('profile', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='student.profile')),
             ],
         ),
         migrations.CreateModel(
             name='WishList',
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('motivatation', models.ForeignKey(null=True, on_delete=django.db.models.deletion.CASCADE, to='student.motivation')),
+                ('motivation', models.ForeignKey(null=True, on_delete=django.db.models.deletion.CASCADE, to='student.motivation')),
                 ('profile', models.ForeignKey(null=True, on_delete=django.db.models.deletion.CASCADE, to='student.profile')),
             ],
         ),
@@ -94,13 +105,14 @@ class Migration(migrations.Migration):
             ],
         ),
         migrations.CreateModel(
-            name='Review',
+            name='ReviewThread',
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('review', models.TextField()),
-                ('created_at', models.DateTimeField(auto_now_add=True)),
-                ('motivation', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='student.motivation')),
+                ('content', models.TextField()),
+                ('posted_at', models.DateTimeField(auto_now_add=True)),
                 ('profile', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='student.profile')),
+                ('review', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='student.review')),
+
             ],
         ),
         migrations.AddField(
