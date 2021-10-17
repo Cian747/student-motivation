@@ -20,6 +20,7 @@ import { AuthInterceptor } from './services/authconfig.interceptors';
 import { ClipboardModule } from 'ngx-clipboard';
 import { InterceptorInterceptor } from './Auth/interceptor.interceptor';
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -49,6 +50,7 @@ import { InterceptorInterceptor } from './Auth/interceptor.interceptor';
       provide: HTTP_INTERCEPTORS,
       useClass: InterceptorInterceptor,
       // useClass: AuthInterceptor,
+
       multi: true
     }
 

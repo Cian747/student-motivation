@@ -49,7 +49,7 @@ urlpatterns = [
     path('current_user', views.current_user,name='current_user'),
     path('superuser/<int:pk>',views.change_to_superuser,name='superuser_status'),
 
-]
+
 if settings.DEBUG:
     urlpatterns+= static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
 

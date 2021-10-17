@@ -86,11 +86,13 @@ def motivation(request):
 def motivation_id(request, pk):
     try: 
         motivation = Motivation.objects.filter(pk=pk).first() 
+
     except Motivation.DoesNotExist: 
         return JsonResponse({'message': 'The motivation does not exist'}, status=status.HTTP_404_NOT_FOUND) 
 
     if request.method == 'GET': 
         motivation_serializer = MotivationSerializer(motivation,many=False) 
+
         return JsonResponse(motivation_serializer.data) 
     
     elif request.method == 'PUT': 
@@ -121,12 +123,14 @@ class MotivationalByCategory(APIView):
         try:
             # return Motivation.objects.get(category=cat_pk)
             motivations=Motivation.objects.filter(category=cat_pk).all()
+
             return motivations
         except Motivation.DoesNotExist:
             return Http404
     def get(self, request,cat_pk, format=None):
         motivation = self.get_mot(cat_pk)
         serializers = MotivationSerializer(motivation,many=True)
+
         return Response(serializers.data)
 #### Category
 class CategoryList(APIView):
@@ -442,7 +446,6 @@ def wishlist_motivation(request,pk):
     profile = Profile.objects.filter(user=user).first()
     wishlist = WishList.objects.filter(profile=profile).all()
     motivation = Motivation.objects.get(pk=pk)
-
 
     if request.method == 'GET':
         wishlist_serializer = WishListSerializer(wishlist,many=True)
