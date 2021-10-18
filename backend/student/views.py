@@ -123,7 +123,7 @@ class MotivationalByCategory(APIView):
     def get_mot(self, cat_pk):
         try:
             # return Motivation.objects.get(category=cat_pk)
-            motivations=Motivation.objects.filter(category=cat_pk).all()
+            motivations=Motivation.objects.filter(category=cat_pk).order_by('-created_at')
 
             return motivations
         except Motivation.DoesNotExist:
@@ -400,7 +400,7 @@ def review_thread(request,id):
     user = request.user
 
     review = Review.objects.filter(id=id).first()
-    found_thread = ReviewThread.objects.filter(review=review).all()
+    found_thread = ReviewThread.objects.filter(review=review).order_by('-posted_at')
     if request.method == 'GET':
         serializer = ReviewThreadSerializer(found_thread,many=True)
         return Response(serializer.data,status = status.HTTP_200_OK)
