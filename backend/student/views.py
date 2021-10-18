@@ -437,10 +437,11 @@ def subscription_service(request,pk):
     user = request.user
 
     if request.method == 'GET':
-        serializer = SubscriptionSerializer(category, many=False)
+        serializer = SubscriptionSerializer(category, many=False,context={'request': request})
         return Response(serializer.data, status=status.HTTP_200_OK)
+
     elif request.method == 'POST':
-        subscription_serializer = SubscriptionSerializer(data=request.data)
+        subscription_serializer = SubscriptionSerializer(data=request.data,context={'request': request})
  
         if subscription_serializer.is_valid():
             name = user.username
