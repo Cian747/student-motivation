@@ -1,6 +1,9 @@
 #main{
     background-color: #074436 !important;
+<<<<<<< HEAD
     /* height: 100vh; */
+=======
+>>>>>>> 3897a75b84e84f886e1891e9f51b3122f0825f76
     padding-left: 3%;
   }
 
@@ -48,9 +51,23 @@
     background-color: rgba(22, 54, 80, 0.5) !important;
     color: aliceblue;
 
+<<<<<<< HEAD
 
   }
 
+=======
+    box-shadow:  0 4px 8px 0 rgba(0, 0, 0, 0.2);
+
+
+  }
+
+  .card:hover{
+    filter:drop-shadow(8px 8px 10px rgb(19, 19, 19));
+}
+
+
+
+>>>>>>> 3897a75b84e84f886e1891e9f51b3122f0825f76
   .card-body{
     display: flex;
     flex-direction: column;
@@ -103,6 +120,23 @@
     border:  1px solid rgb(11, 36, 28);
   }
 
+<<<<<<< HEAD
+=======
+  .view-details:hover{
+    background-color:rgb(26, 66, 5) !important;
+    color: aliceblue !important;
+    border:  1px solid green;
+
+  }
+
+  .view-details{
+    background-color:rgb(164, 180, 185) !important;
+    color: rgb(16, 20, 9) !important;
+    border-radius: 25px;
+    border:  1px solid rgb(11, 36, 28);
+  }
+
+>>>>>>> 3897a75b84e84f886e1891e9f51b3122f0825f76
 
 
   .all-btn{
@@ -115,3 +149,65 @@
     justify-content: center;
     margin: 5px;
   }
+<<<<<<< HEAD
+=======
+
+
+  .goToUrl{
+    background-color:rgb(164, 180, 185) !important;
+    color: rgb(16, 20, 9) !important;
+    border-radius: 25px;
+    border:  1px solid rgb(11, 36, 28);
+  }
+
+  .goToUrl:hover{
+    background-color:rgb(26, 66, 5) !important;
+    color: aliceblue !important;
+    border:  1px solid green;
+
+  }
+
+
+  .fas, .fab{
+    font-size: 20px;
+  }
+  .fas:hover{
+    cursor: pointer;
+  }
+
+
+  .wishlist, .whatsapp  .fb{
+    position: relative;
+    display: inline-block;
+  }
+
+  .wishlisttext, .whatsappshare, .fbshare{
+    visibility: hidden;
+    width: 120px;
+    background-color:rgb(164, 180, 185) !important;
+    color: rgb(16, 20, 9) !important;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+
+    /* Position */
+    position: absolute;
+    z-index: 1;
+    top: -45px;
+    /* right: 10%; */
+  }
+
+  .wishlist:hover .wishlisttext {
+    visibility: visible;
+  }
+
+  .whatsapp:hover .whatsappshare {
+    visibility: visible;
+  }
+
+
+  .fb:hover .fbshare {
+    visibility: visible;
+  }
+
+>>>>>>> 3897a75b84e84f886e1891e9f51b3122f0825f76

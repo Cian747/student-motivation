@@ -6,7 +6,7 @@
         </div>
         <div *ngIf="motivation.image">
           <!-- <img [src]="motivation.image" class="card-img-top" alt="image " height="300"> -->
-          <img src="https://res.cloudinary.com/kenya12254/{{motivation.id}}" class="card-img-top vid-link" alt="..." height="300">
+          <img src="https://res.cloudinary.com/kenya12254/{{motivation.image}}" class="card-img-top vid-link" alt="..." height="300">
 
         </div>
         <div *ngIf="motivation?.video" class="video-icon">
@@ -25,14 +25,31 @@
 
         <!-- {{motivation.created_at}} -->
       </div>
-      
-      <div class="card-footer">
-        <div class="icons">
-           <i class="fas fa-save "></i>
-            <input hidden class="share-url" value="http://localhost:4200/motivation/{{motivation.id}}" #formInputText  />
-            <i (click)= 'copyUrl()' class="fas fa-share-alt" [ngxClipboard]="formInputText"></i>
 
-          <!-- <button [ngxClipboard]="formInputText">Copy Data</button> -->
+      <div class="card-footer">
+        <div class="icons d-flex">
+          <div class="wishlist">
+            <span class="wishlisttext">Add to wishlist</span>
+            <form action="">
+              <!-- <i class="fas fa-save "(click)="addWishlist(motivation.id)"  ></i> -->
+
+            </form>
+
+          </div>
+          <div class="whatsapp d-flex">
+            <span class="whatsappshare">whatsApp share</span>
+            <input hidden class="share-url" value="http://localhost:4200/motivation/{{motivation.id}}"   />
+            <a href="https://wa.me/15551234567" target="_blank"><i class="fab fa-whatsapp" ></i></a>
+            <!-- <a href="https://wa.me/15551234567"><i (click)= 'copyUrl()' class="fas fa-share-alt" [ngxClipboard]="formInputText"></i></a> -->
+
+          </div>
+
+          <div class="fb">
+            <span class="fbshare">facebook share</span>
+            <div class="fb-share-button" data-href="https://developers.facebook.com/docs/plugins/" data-layout="button_count" data-size="small"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore"><i class="fab fa-facebook"></i></a></div>
+
+          </div>
+
         </div>
         <div class="details">
             <button (click)='goToUrl(motivation.id)' class=" custom btn btn-info">View Details</button>

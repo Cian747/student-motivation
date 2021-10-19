@@ -13,6 +13,7 @@ export class BackupService {
 	authUrl: string = environment.URL;
   headers = new HttpHeaders().set('Content-Type', 'application/json');
   currentUser = {};
+  error:any;
 
   constructor(
     private http: HttpClient,
@@ -31,7 +32,6 @@ export class BackupService {
 
   // Sign-in
   signIn(user: StudentUser) {
-    // let reqHeader = new HttpHeaders({"No-Auth":"True"})
     return this.http.post<any>(`${this.authUrl}token/obtain/`, user)
       .subscribe((res: any) => {
         localStorage.setItem('access', res.access)
@@ -39,8 +39,15 @@ export class BackupService {
           this.router.navigate(['home']);
 
 
-      })
+      }
+      ,
+    error => {
+      this.error = error
+      alert("Incorrect login details")
+      console.log('error',error)
+    })
   }
+
 
   getToken() {
     return localStorage.getItem('access');
@@ -53,9 +60,9 @@ export class BackupService {
 
   Logout() {
     let removeToken = localStorage.removeItem('access');
-    // if (removeToken == null) {
+    if (removeToken == null) {
       this.router.navigate(['landing']);
-    
+    }
   }
 
   // User profile
@@ -74,11 +81,20 @@ export class BackupService {
   }
 
   // update profile
-  updateProfile():Observable<any>{
+  updateProfile(profile: any){
+    const body = {phone_number: profile.phone_number , profile_photo: profile.profile_photo };
     let api = this.authUrl+ 'profile/'
-    return this.http.put(api, {headers: this.headers})
+    return this.http.put(api, body, {headers: this.headers})
 
   }
+
+  // update user
+  updateUser(user: any):Observable<any>{
+    let api = this.authUrl+ 'current_user'
+    return this.http.put(api,user, {headers: this.headers})
+
+  }
+
 
   // Error
   handleError(error: HttpErrorResponse) {

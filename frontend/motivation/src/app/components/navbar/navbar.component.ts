@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 import { Component, OnInit } from '@angular/core';
+=======
+import { Component, NgZone, OnInit } from '@angular/core';
+>>>>>>> 3897a75b84e84f886e1891e9f51b3122f0825f76
 import { Router } from '@angular/router';
 import { Category } from 'src/app/models/category';
 import { Motivation } from 'src/app/models/motivation';
@@ -8,6 +12,12 @@ import { MotivationService } from 'src/app/services/motivation.service';
 import { ProfileService } from 'src/app/services/profile.service';
 import { first } from 'rxjs/operators';
 import { StudentUser } from 'src/app/models/student-user';
+<<<<<<< HEAD
+=======
+// import { FileUploader, FileUploaderOptions, ParsedResponseHeaders } from 'ng2-file-upload';
+// import { Cloudinary } from '@cloudinary/angular-5.x';
+
+>>>>>>> 3897a75b84e84f886e1891e9f51b3122f0825f76
 
 
 @Component({
@@ -24,12 +34,26 @@ export class NavbarComponent implements OnInit {
   currentUser!:StudentUser;
   loading = false;
 
+<<<<<<< HEAD
 
   // motivationModel = new Motivation('','', '', 'Category': category_name,'','1', '2021-10-14')
 
   public new_motivation: any;
   newCat: any;
   file: any;
+=======
+  public new_motivation: any;
+  newCat: any;
+  file: any;
+  filePath: any;
+  image!: File;
+  video!: File;
+  title!: string;
+  description!: string;
+  category!: any;
+
+
+>>>>>>> 3897a75b84e84f886e1891e9f51b3122f0825f76
 
   constructor(
     private authService: AuthenticationService,
@@ -37,6 +61,12 @@ export class NavbarComponent implements OnInit {
     private profService: ProfileService,
     private motivationService: MotivationService,
     private router: Router,
+<<<<<<< HEAD
+=======
+    // private cloudinary: Cloudinary,
+    // private zone: NgZone,
+    // private hasBaseDropZoneOver: boolean = false;
+>>>>>>> 3897a75b84e84f886e1891e9f51b3122f0825f76
 
     )
     { }
@@ -51,11 +81,14 @@ export class NavbarComponent implements OnInit {
 
     this.motivationPost = {};
 
+<<<<<<< HEAD
 
 
 
 
 
+=======
+>>>>>>> 3897a75b84e84f886e1891e9f51b3122f0825f76
     let promise = new Promise <void> ((resolve,reject)=>{
       this.motivationService.getAllCategories().toPromise().then(
         (response:any) => {
@@ -72,11 +105,16 @@ export class NavbarComponent implements OnInit {
 
 
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 3897a75b84e84f886e1891e9f51b3122f0825f76
   this.authBackup.getCurrentUser().pipe(first()).subscribe((loggedUser: StudentUser) => {
     this.currentUser = loggedUser;
     // console.log(loggedUser)
   });
 
+<<<<<<< HEAD
   }
 
   onFileSelected(e:any) {
@@ -102,6 +140,77 @@ export class NavbarComponent implements OnInit {
       // this.loggedIn.next(true);
       this.router.navigate(['home'])
      
+=======
+
+
+  }
+
+
+  public handleUpload(e:any) {
+    this.filePath = e.target.value; }
+
+
+  handleUpload1(event: any) {
+    if (event.target.files && event.target.files[0]) {
+      var reader = new FileReader();
+
+      reader.onload = (event: ProgressEvent) => {
+        this.filePath = (<FileReader>event.target).result;
+      }
+
+      reader.readAsDataURL(event.target.files[0]);
+    }
+  }
+
+
+
+  titleChange(event:any){
+    this.title = event.target.value;
+
+   }
+
+   descriptionChange(event:any){
+    this.description = event.target.value;
+    console.log(this.description)
+
+
+   }
+
+
+ imageUpload(event:any){
+   this.image = event.target.files[0];
+
+  }
+
+  videoUpload(event:any){
+    this.video = event.target.files[0];
+
+   }
+
+   categoryChange(event:any){
+    this.category = event.target.value;
+
+   }
+
+
+
+  publishMotivation(){
+
+    const uploadData = new FormData()
+    uploadData.append('title', this.title)
+    uploadData.append('description', this.description)
+    uploadData.append('image', this.image)
+    // uploadData.append('video', this.video)
+    uploadData.append('category', this.category)
+
+    this.motivationService.postMotivation(uploadData).subscribe( response => {
+    console.log(response)
+      alert('Motivation ' + this.motivationPost.username + ' has been created'),
+      this.router.navigate(['home'])
+
+
+
+>>>>>>> 3897a75b84e84f886e1891e9f51b3122f0825f76
 
     },
 
@@ -111,9 +220,18 @@ export class NavbarComponent implements OnInit {
       console.log('error',error)
     }
     );
+<<<<<<< HEAD
   }
 
 
+=======
+
+  }
+
+
+
+
+>>>>>>> 3897a75b84e84f886e1891e9f51b3122f0825f76
   isLogout(){
     this.authBackup.Logout();
 
@@ -123,6 +241,7 @@ export class NavbarComponent implements OnInit {
     window.location.reload();
 }
 
+<<<<<<< HEAD
 
 
 
@@ -131,3 +250,8 @@ export class NavbarComponent implements OnInit {
 
 
 }
+=======
+}
+
+
+>>>>>>> 3897a75b84e84f886e1891e9f51b3122f0825f76

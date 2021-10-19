@@ -19,7 +19,12 @@
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
             <li><a class="dropdown-item" href="/profile">Profile</a></li>
+<<<<<<< HEAD
             <li><a class="dropdown-item" href="#">WishList</a></li>
+=======
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="/wishlist">WishList</a></li>
+>>>>>>> 3897a75b84e84f886e1891e9f51b3122f0825f76
             <li><hr class="dropdown-divider"></li>
             <li><a class="dropdown-item"  (click)="isLogout()">Logout</a></li>
           </ul>
@@ -41,6 +46,7 @@
               <form action="" class="form"  enctype="multipart/form-data">
                 <div class="form-group">
                   <label for="title">Title</label>
+<<<<<<< HEAD
                   <input [(ngModel)]="motivationPost.title" type="text" id="title" name="title" class="form-control">
                 </div>
                 <div class="form-group">
@@ -73,6 +79,34 @@
                 <button (click)="publishMotivation()" type="submit" class='custom btn btn-lg btn-outline-info'>Publish</button>
                 <!-- (click)=" refresh()" -->
               </form>
+=======
+                  <input  (change)="titleChange($event)" type="text" id="title"  class="form-control">
+                </div>
+                <div class="form-group">
+                  <label for="des">Description</label>
+                  <textarea  (change)="descriptionChange($event)"  class="form-control" id="des" rows="3"></textarea>
+                </div>
+                <div class="mb-3">
+                  <label for="formFile" class="form-label">Image</label>
+                  <!-- <input type="file" ng2FileSelect [uploader]="uploader" /> -->
+                  <input  #image accept="image/*" class="form-control"  observeFiles (change)="imageUpload($event)" type="file" id="formFile">
+                </div>
+                <!-- <div class="mb-3">
+                  <label for="formFile" class="form-label">Video</label>
+                  <input  (change)="videoUpload($event)"  class="form-control" type="file" id="formFile">
+                </div> -->
+                <div class="mb-3">
+                  <label for="formFile" class="form-label">Category</label>
+                  {{motivationPost.category}}
+                  <select (change)="categoryChange($event)" class="form-control"   required>
+                    <option *ngFor="let category of categories" [ngValue]="category.id" value="{{category.id}}" >{{ category.category_name}}</option>
+                  </select>
+                </div>
+                <button (click)="publishMotivation()" (click)=" refresh()" type="submit" class='custom btn btn-lg btn-outline-info'>Publish</button>
+                <!-- (click)=" refresh()" -->
+              </form>
+
+>>>>>>> 3897a75b84e84f886e1891e9f51b3122f0825f76
             </div>
           </div>
           <div class="modal-footer">

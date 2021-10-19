@@ -18,17 +18,24 @@ export class LoginComponent implements OnInit {
   loginForm!: FormGroup;
   loading = false;
   submitted = false;
+
+
   private loggedIn = new BehaviorSubject<boolean>(false);
+
   get isLoggedIn() {
     return this.loggedIn.asObservable();
   }
+
   private currentUserSubject: BehaviorSubject<StudentUser>;
   public currentUser: Observable<StudentUser>;
+
   signinForm!: FormGroup;
+
+
   constructor(
     private LoginService: AuthenticationService,
     private profile: ProfileService,
-    private auth: AuthenticationService,
+    private auth: BackupService,
     private router: Router,
     private fb: FormBuilder,
   ) {
@@ -38,20 +45,30 @@ export class LoginComponent implements OnInit {
       username: [''],
       password: ['']
     })
+
    }
+
   ngOnInit(): void {
     this.login = {
       username: '',
       password: '',
       email: '',
       role:'',
+
     };
+
+
 }
+
+
+
   // LoginUser(){
   //   this.LoginService.loginUser(this.login).subscribe( (response:any)=> {
   //     localStorage.setItem('authToken', JSON.stringify(response.Token));
   //     console.log(response.Token)
+
   //     this.loggedIn.next(true);
+
   //     this.router.navigate(['home'])
   //     // localStorage.setItem('currentUser', JSON.stringify(response));
   //     // this.currentUserSubject.next(response);
@@ -63,8 +80,16 @@ export class LoginComponent implements OnInit {
   //   }
   //   );
   // }
+
+
+
    loginUser() {
-    this.LoginService.signIn(this.signinForm.value)
-    this.loading = true;
+    this.auth.signIn(this.signinForm.value)
+
   }
+
+
+
+
+
 }

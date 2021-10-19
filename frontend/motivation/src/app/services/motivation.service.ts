@@ -29,12 +29,38 @@ export class MotivationService {
   }
 
 
+<<<<<<< HEAD
 
 
   postMotivation(motivationData:any, file:any){
     const body = new FormData();
     body.append('id', motivationData);
     body.append('files', file, file.name);
+=======
+  subscribeCat(subscription:any, id:any):Observable<any[]>{
+    return this.http.post<any[]>(this.APIUrl + `subscribe/${id}`, subscription)
+  }
+
+
+  addToWishlist(favMotivationData:any, id:any){
+
+    return this.http.post<any[]>(this.APIUrl + `wishlist/${id}`, favMotivationData )
+  }
+
+  getWishlistPost():Observable<any[]>{
+    return this.http.get<any[]>(this.APIUrl + 'user_wishlist')
+  }
+
+
+
+  // /api/wishlist/{id}
+
+
+  postMotivation(motivationData:any){
+    // const body = new FormData();
+    // body.append('id', motivationData);
+    // body.append('files', file, file.name);
+>>>>>>> 3897a75b84e84f886e1891e9f51b3122f0825f76
     return this.http.post<any[]>(this.APIUrl + 'motivation/', motivationData )
   }
 

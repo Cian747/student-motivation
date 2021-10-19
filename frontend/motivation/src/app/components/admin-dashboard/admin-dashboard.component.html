@@ -88,6 +88,10 @@
           </div>
 
           
+            </div>
+          </div>
+
+          <!-- chart -->
 
           <div class="chart">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
@@ -96,7 +100,6 @@
               </path>
             </svg>
           </div>
-        </div>
 
 
         <!-- per section details -->
@@ -133,8 +136,12 @@
               <i (click) = "ChangeUser(user.id)" (click) = "refresh()" class="fas fa-user-edit"></i>
               
               <i (click)= "deactivateUser()" (click) = "refresh()" class="fas fa-trash custom-tr"></i>
+            <small>{{user.email}}</small>
+            <div class="delete-user">
+              <i class="fas fa-trash"></i>
             </div>
           </div>
+        </div>
         </div>
 
         <!-- All categories details -->
@@ -263,6 +270,6 @@
 
 
       </div>
-    </div>
+    
   </section>
 </main>

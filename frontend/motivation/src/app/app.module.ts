@@ -19,7 +19,15 @@ import { TruncateModule } from 'ng2-truncate';
 import { AuthInterceptor } from './services/authconfig.interceptors';
 import { ClipboardModule } from 'ngx-clipboard';
 import { InterceptorInterceptor } from './Auth/interceptor.interceptor';
+<<<<<<< HEAD
 
+=======
+import { NgHttpLoaderModule } from 'ng-http-loader';
+import { ReviewThreadComponent } from './components/review-thread/review-thread.component';
+import { WishlistComponent } from './components/wishlist/wishlist.component';
+// import { CloudinaryModule } from '@cloudinary/angular';
+// import { CloudinaryModule, CloudinaryConfiguration, provideCloudinary } from '@cloudinary/angular';
+>>>>>>> 3897a75b84e84f886e1891e9f51b3122f0825f76
 
 @NgModule({
   declarations: [
@@ -34,7 +42,13 @@ import { InterceptorInterceptor } from './Auth/interceptor.interceptor';
     MotivationComponent,
     SingleMotivationComponent,
     FilterCategoryComponent,
+<<<<<<< HEAD
   
+=======
+    ReviewThreadComponent,
+    WishlistComponent,
+
+>>>>>>> 3897a75b84e84f886e1891e9f51b3122f0825f76
   ],
   imports: [
     BrowserModule,
@@ -44,14 +58,26 @@ import { InterceptorInterceptor } from './Auth/interceptor.interceptor';
     TruncateModule,
     ClipboardModule,
     ReactiveFormsModule,
+<<<<<<< HEAD
+=======
+    NgHttpLoaderModule.forRoot(),
+    // CloudinaryModule,
+>>>>>>> 3897a75b84e84f886e1891e9f51b3122f0825f76
   ],
   providers: [
     {
       provide: HTTP_INTERCEPTORS,
+<<<<<<< HEAD
       //useClass: InterceptorInterceptor,
       useClass: AuthInterceptor,
       multi: true
     }
+=======
+      useClass: InterceptorInterceptor,
+      // useClass: AuthInterceptor,
+      multi: true
+    },
+>>>>>>> 3897a75b84e84f886e1891e9f51b3122f0825f76
 
   ],
 

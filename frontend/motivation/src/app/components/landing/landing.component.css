@@ -35,8 +35,13 @@
 .login-register-btn {
   margin-top: 3%;
 
+<<<<<<< HEAD
   width: 302px;
   height: 68px;
+=======
+  width: 230px;
+  height: 55px;
+>>>>>>> 3897a75b84e84f886e1891e9f51b3122f0825f76
   background: #FFFFFF;
   border: 2px solid #074436;
   border-radius: 10px;
@@ -91,8 +96,13 @@
 
 .get-started-btn {
   margin-top: 10%;
+<<<<<<< HEAD
   width: 235px;
   height: 80px;
+=======
+  width: 200px;
+  height: 60px;
+>>>>>>> 3897a75b84e84f886e1891e9f51b3122f0825f76
   left: 267px;
   top: 750px;
 

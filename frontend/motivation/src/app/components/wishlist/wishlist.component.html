@@ -1,0 +1,88 @@
+<div class="container-fluid" id="main">
+  <section id="nav">
+    <app-navbar></app-navbar>
+  </section>
+  <!-- category looping -->
+  <div class="container">
+    <h5 class="text-center text-white">My WishList</h5>
+
+
+  </div>
+
+
+
+
+
+  <div class="container-fluid motivations" id="motivation">
+
+    <!-- post looping -->
+      <div class="row" >
+
+        <div class="col-md-3" *ngFor="let wishlist of wishlist">
+          <div class="card mb-3">
+           <div *ngIf="wishlist.motivation.image == null && wishlist.motivation.video == null ">
+             <img src="assets/Motivation.jpg" class="card-img-top" alt="" height="300">
+           </div>
+           <div *ngIf="wishlist.motivation.image">
+             <!-- <img [src]="motivation.image" class="card-img-top" alt="image " height="300"> -->
+             <img src="https://res.cloudinary.com/kenya12254/{{wishlist.motivation.image}}" class="card-img-top vid-link" alt="..." height="300">
+
+           </div>
+           <div *ngIf="wishlist.motivation?.video" class="video-icon">
+             <div class="col-md-8">
+               <img src="assets/vid-icon.png" class="card-img-top" alt="Video" (click)='goToUrl(wishlist.motivation.id)' height="300">
+
+             </div>
+           </div>
+         <div class="card-body ">
+           <h5 class="card-title">{{wishlist.motivation.title}}</h5>
+           <p class="card-text">Category: {{wishlist.motivation.category.category_name}}</p>
+           <p class="card-text small">{{wishlist.motivation.description| words : 6}}</p>
+
+           <p class="card-text"><small class="">published by {{wishlist.profile.user}}</small></p>
+           <p class="card-text"><small class="">{{wishlist.motivation.created_at|date}}</small></p>
+
+           <!-- {{motivation.created_at}} -->
+         </div>
+
+         <div class="card-footer">
+          <div class="icons d-flex">
+
+            <div class="whatsapp d-flex">
+              <span class="whatsappshare">whatsApp share</span>
+              <input hidden class="share-url" value="http://localhost:4200/motivation/{{wishlist.motivation.id}}"   />
+              <a href="https://wa.me/15551234567" target="_blank"><i class="fab fa-whatsapp" ></i></a>
+            </div>
+
+            <div class="fb">
+              <span class="fbshare">facebook share</span>
+              <div class="fb-share-button" data-href="https://developers.facebook.com/docs/plugins/" data-layout="button_count" data-size="small"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore"><i class="fab fa-facebook"></i></a></div>
+
+            </div>
+
+          </div>
+          <div class="details">
+              <button (click)='goToUrl(wishlist.motivation.id)' class=" custom btn btn-info">View Details</button>
+
+          </div>
+
+        </div>
+       </div>
+       </div>
+
+
+    </div>
+
+
+
+
+
+
+  </div>
+
+
+
+</div>
+
+
+

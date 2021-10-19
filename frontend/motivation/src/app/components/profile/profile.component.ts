@@ -7,7 +7,8 @@ import { StudentUser } from 'src/app/models/student-user';
 import { BackupService } from 'src/app/services/backup.service';
 import { ProfileService } from 'src/app/services/profile.service';
 import { AuthenticationService } from 'src/app/services/authentication.service';
-import { updateLocale } from 'moment';
+import { MotivationService } from 'src/app/services/motivation.service';
+import { FormControl, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-profile',
@@ -21,81 +22,116 @@ export class ProfileComponent implements OnInit {
   error: any;
   currentUser!:StudentUser;
   loading = false;
-  file!:File
-  phone_number!:any;
-  address!: string;
-  email!:string;
-
-
-  onEmailChange(event:any){
-    this.email = event.target.value
-  }
-  onImageChange(event:any){
-    this.file = event.target.files[0]
-  }
-  onAddresschange(event: any){
-    this.address = event.target.value
-  }
-  onPhoneChange(event :any){
-    this.phone_number = event.target.value
-  }
-
+  categories:any;
+  update:any;
+  phone_number!: string;
+  profile_photo!: File;
+  profUpdate:any;
 
   constructor(
     private http: HttpClient,
     private profileService: ProfileService,
     private authBackup: BackupService,
     private router: Router,
-    private authService:AuthenticationService
+    private authService:AuthenticationService,
+    private motivationService: MotivationService
 
   )
 
-  { }
-  profileUpdate(){
-    
-    this.profileService.profileUpdate(this.profile).subscribe(data=>{
-      console.log(data)
-    })
-  }
-  
-
-  // updateProfile(){
-  //   const profileData = new FormData();
-  //   profileData.append('email', this.email)
-  //   profileData.append('file', this.file)
-  //   profileData.append('phone', this.phone_number)
-  //   profileData.append('address', this.address)
-
-  //   this.profileService.profileUpdate(profileData).subscribe(data=>{
-  //     console.log(data)
-  //   })
-  // }
-
+  {
+   }
 
   ngOnInit(){
     this.loading = true;
+
+
     this.authBackup.getUserProfile().pipe(first()).subscribe(user => {
         this.loading = false;
         this.profile = user;
-        console.log(user)
-    });     
-    
-    this.authBackup.getCurrentUser().pipe(first()).subscribe((loggedUser: StudentUser) => {
-      this.currentUser = loggedUser;
-      console.log(loggedUser)
+        // console.log(user)
     });
 
 
+    this.authBackup.getCurrentUser().pipe(first()).subscribe((loggedUser: StudentUser) => {
+      this.currentUser = loggedUser;
+      // console.log(loggedUser)
+    });
 
-    this.authBackup.updateProfile().subscribe((profile_res: any) => {
-      this.loading = true;
 
+    let promise = new Promise <void> ((resolve,reject)=>{
+      this.motivationService.getAllCategories().toPromise().then(
+        (response:any) => {
+          console.log(response)
+        this.categories = response;
+        resolve()
+      },
+      (error:string) => {
+
+      })
+
+
+    })
+
+
+
+  }
+
+  edit = new FormGroup({
+    phone_number: new FormControl(''),
+    profile_photo: new FormControl(''),
+   })
+
+
+  phoneChange(event:any){
+    this.phone_number = event.target.value;
+    console.log(this.phone_number)
+
+   }
+
+
+  profile_photoChange(event:any){
+    this.profile_photo = event.target.value[0];
+    console.log(this.profile_photo)
+
+
+   }
+
+  profileUpdate(){
+    const uploadData = new FormData()
+    // uploadData.append('phone_number', this.phone_number)
+    uploadData.append('profile_photo', this.profile_photo)
+    uploadData.append('phone_number', this.profile.phone_number)
+
+
+    // console.log(this.profiler)
+
+    this.authBackup.updateProfile(this.profile).subscribe(data => {
+
+      console.log(data)
+
+    }, (error: any)=> {
+
+      console.log(error);
+    })
+
+
+  }
+
+  userUpdate(){
+    this.authBackup.updateUser(this.currentUser).subscribe(data => {
+        console.log(this.currentUser)
     }, (error: any)=> {
       this.loading = false;
 
       console.log(error);
     })
   }
+
+  refresh(): void {
+    window.location.reload();
+}
+
+
 
 
 }
