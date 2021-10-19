@@ -87,7 +87,6 @@ export class SingleMotivationComponent implements OnInit {
 
     $("add-review").on('click' ,function() {
       window.location.hash = "review-list"+$(this).attr("id");
-    });
 
     $('#show-thread-form').on('click', function () {
       $("#thread-form").fadeIn(1000);
@@ -97,12 +96,10 @@ export class SingleMotivationComponent implements OnInit {
 
 
 
-
-
-
+   });
 
   }
-
+  
   toForm(){
     document.getElementById("review-list")?.scrollIntoView({behavior:'smooth', block:'start'});
   }

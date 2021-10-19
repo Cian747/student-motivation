@@ -89,7 +89,6 @@ export class LoginComponent implements OnInit {
    loginUser() {
     this.auth.signIn(this.signinForm.value)
 
-
   }
 
 

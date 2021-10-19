@@ -16,16 +16,7 @@
         <div *ngIf="motivation?.image">
           <img src="https://res.cloudinary.com/kenya12254/{{motivation.image}}" class="card-img-top" alt="..."
             height="550">
-          <!-- <img src="https://cdn.educba.com/academy/wp-content/uploads/2018/10/Top-Uses-Of-Django.jpg" class="card-img-top" alt="..."> -->
-
-        </div>
-        <div *ngIf="motivation?.video">
-          <div class="video">
-            <video controls #videoPlayer width="auto" height="auto">
-              <source src="http://127.0.0.1:8000/api{{motivation.video}}" type="video/mp4" />
-              Browser not supported
-            </video>
-          </div>
+              
         </div>
         <div class="card-body">
           <h4 class="card-title">{{motivation?.title}}</h4>

@@ -24,10 +24,9 @@ export class ProfileComponent implements OnInit {
   loading = false;
   categories:any;
   update:any;
-  profile_photo!: File;
   phone_number!: string;
+  profile_photo!: File;
   profUpdate:any;
-
 
   constructor(
     private http: HttpClient,

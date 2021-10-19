@@ -58,6 +58,10 @@ INSTALLED_APPS = [
     'rest_framework_simplejwt.token_blacklist',
     'django_filters',
     'rest_framework_swagger',
+<<<<<<< HEAD
+=======
+
+>>>>>>> 111adbb38492ecd3422bebcb58760584ea406c55
 ]
 
 MIDDLEWARE = [
@@ -139,7 +143,7 @@ DATABASES = {
 
 # ALLOWED_HOSTS = config('ALLOWED_HOSTS', cast=Csv())
 
-# ALLOWED_HOSTS=['*']
+ALLOWED_HOSTS=['*']
 
 CORS_ORIGIN_ALLOW_ALL = True
 

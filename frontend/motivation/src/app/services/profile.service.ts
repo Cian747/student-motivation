@@ -65,10 +65,9 @@ export class ProfileService {
 
 	updateProfile(profile: any){
 		return this.http.put(`${this.profUrl}/profile`, profile)
+		return this.http.put(`${this.profUrl}/profile/`, profile, { headers: this.getHeaders() })
+  }
     // return this.http.put<any[]>(this.profUrl + 'profile', profile , { headers: this.getHeaders() })
-
-	}
-
 	removeUserProfile(){
 		return this.http.delete(`${this.profUrl}/profile`, { headers: this.getHeaders() })
 	}

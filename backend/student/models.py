@@ -108,8 +108,7 @@ class ReviewThread(models.Model):
     posted_at = models.DateTimeField(auto_now_add=True)
 
 class Subscription(models.Model):
-    name = models.CharField(max_length=50)
-    email = models.EmailField()
+    user =models.ForeignKey(StudentUser,on_delete=models.CASCADE)
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
 
     def __str__(self):
