@@ -46,11 +46,7 @@ urlpatterns = [
     path('users', views.all_users, name='users'),
     path('remove_user',views.remove_user,name='user_deactivate'),
     path('review/<int:id>', views.review,  name = 'review'),
-<<<<<<< HEAD
-    path('current_user', views.current_user),
-=======
     path('current_user', views.current_user,name='current_user'),
->>>>>>> 8f879088ab953660e969ef5c5a25e498d3c8f4d4
     path('superuser/<int:pk>',views.change_to_superuser,name='superuser_status'),
 
 
