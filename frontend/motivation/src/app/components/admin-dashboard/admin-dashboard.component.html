@@ -7,9 +7,10 @@
       <div class="container-fluid">
         <a class="navbar-brand"> <i class="fas fa-graduation-cap"></i> ProperLearn</a>
         <div class="d-flex">
-          <a href=""><i class="fas fa-bell"></i></a>
+          <a href="/home"><button class="btn btn-outline-success">Home</button></a>
+          <!-- <a href=""><i class="fas fa-bell"></i></a>
           <a href=""><i class="fas custom fa-comment-alt"></i></a>
-          <a href=""><i class="fas fa-user-circle"></i></a>John Doe
+          <a href=""><i class="fas fa-user-circle"></i></a>John Doe -->
         </div>
       </div>
     </nav>
@@ -21,26 +22,27 @@
 
   <section id="bar">
     <div class="row">
-      <div class="col-md-3">
-        <div class="side-bar">
-          <div class="dashbord">
-            <div class="students">
+        <div class="col-md-3">        
+          <div class="side-bar">
+            <div class="dashbord">
+              <div class="students">
+              </div>
+              <h5 (click)='get_admin()' pt=4 class='text-center '><i class="fas fa-home"></i> Dashbord</h5>
             </div>
-            <h5 (click)='get_admin()' pt=4 class='text-center '><i class="fas fa-home"></i> Dashbord</h5>
-          </div>
-          <div class="row-cats">
-            <div class="students">
-              <h6 id='students' (click)='get_users()'> <i class="fas fa-user-friends"></i> Students</h6>
-            </div>
-            <div class="students">
-              <h6 (click)='get_posts()'> <i class="fas fa-plus"></i> Posts</h6>
-            </div>
-            <div class="students">
-              <h6 (click)='get_categories()'> <i class="fas fa-tag"></i> Categories</h6>
+            <div class="row-cats">
+              <div class="students">
+                <h6 id='students' (click)='get_users()'> <i class="fas fa-user-friends"></i> Students</h6>
+              </div>
+              <div class="students">
+                <h6 (click)='get_posts()'> <i class="fas fa-plus"></i> Posts</h6>
+              </div>
+              <div class="students">
+                <h6 (click)='get_categories()'> <i class="fas fa-tag"></i> Categories</h6>
+              </div>
             </div>
           </div>
         </div>
-      </div>
+      
 
 
       <!-- statatistics -->
@@ -64,7 +66,7 @@
             <div (click)='get_users()' class="users">
               <div class="content text-center pt-3">
                 <h3><i class="fas fa-users"></i>Users</h3>
-                <h3 class='text-center'>0</h3>
+                <h3 class='text-center'>{{users.length}}</h3>
               </div>
             </div>
 
@@ -73,17 +75,19 @@
             <div (click)='get_categories()' class="categories text-center pt-3">
               <div class="content">
                 <h3><i class="fas fa-user-tag"></i>Categories</h3>
-                <h3 class='text-center'></h3>
+                <h3 class='text-center'>{{categories.length}}</h3>
               </div>
             </div>
 
-            <!-- Admins stats -->
-
-            <div class="admins text-center pt-3">
+         <!-- <div class="admins text-center pt-3">
               <div class="content">
                 <h3 (click)='get_adm()'><i class="fas fa-user-shield"></i> Admins</h3>
                 <h3 class='text-center'>0</h3>
               </div>
+            </div> -->
+          </div>
+
+          
             </div>
           </div>
 
@@ -96,7 +100,6 @@
               </path>
             </svg>
           </div>
-        </div>
 
 
         <!-- per section details -->
@@ -113,11 +116,32 @@
             </div>
             <hr>
             <small>{{user.username}}</small><br>
+            <small class = 'text-muted'>{{user.email}}</small>
+
+            <div *ngIf = 'user.is_superuser; else elseBlock'>
+              <small class = "admin">Admin</small> 
+            </div>
+            <ng-template #elseBlock>
+              <div>
+                <small class = "admin">Student</small> 
+              </div>
+              
+            </ng-template>
+            <div class="active" *ngIf = '!user.is_active'>
+              <small class="deactive">User Deactivated</small>
+
+            </div>
+           
+            <div class="delete-user">
+              <i (click) = "ChangeUser(user.id)" (click) = "refresh()" class="fas fa-user-edit"></i>
+              
+              <i (click)= "deactivateUser()" (click) = "refresh()" class="fas fa-trash custom-tr"></i>
             <small>{{user.email}}</small>
             <div class="delete-user">
               <i class="fas fa-trash"></i>
             </div>
           </div>
+        </div>
         </div>
 
         <!-- All categories details -->
@@ -246,6 +270,6 @@
 
 
       </div>
-    </div>
+    
   </section>
 </main>

@@ -18,8 +18,11 @@ export class SingleMotivationComponent implements OnInit {
   motivation!:any;
   reviewPost:any;
   reviews: any;
+<<<<<<< HEAD
+=======
   thread:any;
   hideme!: {};
+>>>>>>> 3897a75b84e84f886e1891e9f51b3122f0825f76
 
 
 
@@ -45,7 +48,10 @@ export class SingleMotivationComponent implements OnInit {
     let promise = new Promise <void> ((resolve,reject)=>{
       this.motivationService.getSingleMotivation(id).toPromise().then(
         (response:any) => {
+<<<<<<< HEAD
+=======
           // console.log(response)
+>>>>>>> 3897a75b84e84f886e1891e9f51b3122f0825f76
         this.motivation = response;
         resolve()
       },
@@ -64,8 +70,11 @@ export class SingleMotivationComponent implements OnInit {
       (error:string) => {
 
       })
+<<<<<<< HEAD
+=======
 
 
+>>>>>>> 3897a75b84e84f886e1891e9f51b3122f0825f76
     })
 
 
@@ -76,12 +85,41 @@ export class SingleMotivationComponent implements OnInit {
        $("#add-review").hide();
        $("#hide-form").fadeIn(1000);
 
+<<<<<<< HEAD
+
+
+    });
+=======
     });
 
+>>>>>>> 3897a75b84e84f886e1891e9f51b3122f0825f76
     $('#hide-form').on('click', function () {
       $("#review-form").hide();
       $("#add-review").fadeIn(1000)
       $("#hide-form").hide();
+<<<<<<< HEAD
+
+
+
+   });
+
+    $("add-review").on('click' ,function() {
+      window.location.hash = "review-list"+$(this).attr("id");
+    });
+
+  //   $("#add-review").on('click' ,function() {
+  //     $('html, body').animate({
+  //         scrollTo: $("#review-list")
+  //     }, 2000);
+  // });
+
+
+
+
+
+  }
+
+=======
     });
 
 
@@ -100,6 +138,7 @@ export class SingleMotivationComponent implements OnInit {
 
   }
   
+>>>>>>> 3897a75b84e84f886e1891e9f51b3122f0825f76
   toForm(){
     document.getElementById("review-list")?.scrollIntoView({behavior:'smooth', block:'start'});
   }
@@ -116,6 +155,8 @@ export class SingleMotivationComponent implements OnInit {
 
     error => {
       this.error = error
+<<<<<<< HEAD
+=======
       // console.log('error',error)
     }
     );
@@ -144,6 +185,7 @@ export class SingleMotivationComponent implements OnInit {
 
     error => {
       this.error = error
+>>>>>>> 3897a75b84e84f886e1891e9f51b3122f0825f76
       console.log('error',error)
     }
     );
@@ -151,6 +193,9 @@ export class SingleMotivationComponent implements OnInit {
 
   refresh(): void {
     window.location.reload();
+<<<<<<< HEAD
+}
+=======
   }
 
   goToUrl(id: any){
@@ -178,6 +223,7 @@ export class SingleMotivationComponent implements OnInit {
 
 
 
+>>>>>>> 3897a75b84e84f886e1891e9f51b3122f0825f76
 
 
 
