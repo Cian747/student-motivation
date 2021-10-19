@@ -109,7 +109,6 @@ def motivation_id(request, pk):
         motivation.delete() 
         return JsonResponse({'message': 'Motivation was deleted successfully!'}, status=status.HTTP_204_NO_CONTENT)
     
-
 class MotList(generics.ListAPIView):
     permission_classes = (AllowAny, )
     queryset = Motivation.objects.all()
@@ -375,6 +374,7 @@ def change_to_superuser(request,pk):
             return Response(new_user_serializer.data,status = status.HTTP_200_OK)
         else:
             return Response(new_user_serializer.errors,status = status.HTTP_400_BAD_REQUEST)
+            
 @api_view(['GET', 'PUT', 'DELETE'])
 @permission_classes((IsAuthenticated,))
 # @authentication_classes((JWTAuthentication,))

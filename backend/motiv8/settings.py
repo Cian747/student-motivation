@@ -58,7 +58,10 @@ INSTALLED_APPS = [
     'rest_framework_simplejwt.token_blacklist',
     'django_filters',
     'rest_framework_swagger',
+<<<<<<< HEAD
+=======
 
+>>>>>>> 111adbb38492ecd3422bebcb58760584ea406c55
 ]
 
 MIDDLEWARE = [
@@ -110,8 +113,8 @@ DATABASES = {
     'default': {
         'ENGINE':'django.db.backends.postgresql',
         'NAME':'motivation',
-        'USER':'cyan',
-        'PASSWORD':'ms254',
+        'USER':'moringa',
+        'PASSWORD':'Frank50',
     }
 }
 

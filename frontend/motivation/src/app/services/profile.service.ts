@@ -58,19 +58,18 @@ export class ProfileService {
 
 
 	updateUser(user: any){
-    return this.http.put<any[]>(this.profUrl + 'user', user , { headers: this.getHeaders() })
+    return this.http.put<any[]>(this.profUrl + 'user', user )
 		// return this.http.put(`${this.profUrl}/user/`, user, { headers: this.getHeaders() })
 
 	}
 
 	updateProfile(profile: any){
+		return this.http.put(`${this.profUrl}/profile`, profile)
 		return this.http.put(`${this.profUrl}/profile/`, profile, { headers: this.getHeaders() })
+  }
     // return this.http.put<any[]>(this.profUrl + 'profile', profile , { headers: this.getHeaders() })
-
-	}
-
 	removeUserProfile(){
-		return this.http.delete(`${this.profUrl}/profile/`, { headers: this.getHeaders() })
+		return this.http.delete(`${this.profUrl}/profile`, { headers: this.getHeaders() })
 	}
 
 	passwordReset(email: any){

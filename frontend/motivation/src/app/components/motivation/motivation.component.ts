@@ -22,12 +22,14 @@ export class MotivationComponent implements OnInit {
 
   motivations!:Motivation[]
   error: any;
+  wishlist:any;
 
 
   constructor(
     private http: HttpClient,
     private motivationService: MotivationService,
     private authService: AuthenticationService,
+    private wishlistService: MotivationService,
     private router: Router,
 
   )
@@ -39,9 +41,9 @@ export class MotivationComponent implements OnInit {
       // motivations
       this.motivationService.getAllMotivations().toPromise().then(
         (response:any) => {
-          console.log(response)
+          // console.log(response)
         this.motivations = response;
-        console.log(response)
+        // console.log(response)
         resolve()
       },
       (error:string) => {
@@ -49,30 +51,44 @@ export class MotivationComponent implements OnInit {
       })
 
     })
+  //     let promise = new Promise <void> ((resolve,reject)=>{
+  //     this.motivationService.getAllMotivations().toPromise().then(
+  //       (response) => {
+  //         var image = (response[2].image.replace("C:\\fakepath\\", ""))
 
-    // let baseUrl = environment.mediaURL;
-
-    // let promise = new Promise <void> ((resolve,reject)=>{
-    //   this.motivationService.getAllMotivations().toPromise().then(
-    //     (response) => {
-    //     let new_response = response.map(item => {
-    //       let new_image = `${baseUrl}${item["image"]}`
-    //       item["image"] = new_image
-    //       return item
-
-    //     })
-    //     console.log(new_response)
-    //     this.motivations = response;
-
-    //     resolve()
-    //   },
-    //   (error:string) => {
-
-    //   })
-    // })
-    // return this.motivations
+  //       let new_response = response.map(item => {
+  //         let new_image = `${image}${item["image"]}`
+  //         item["image"] = new_image
+  //         return item
+  //       })
+  //       // console.log(new_response)
+  //       this.motivations = response;
+  //       resolve()
+  //     },
+  //     (error:string) => {
+  //     })
+  //   })
+  //   return this.motivations
+  }
 
 
+
+  addWishlist(id: any){
+    console.log(this.wishlist)
+    this.wishlistService.addToWishlist(this.wishlist, id).subscribe( response => {
+      // console.log(response)
+
+
+      alert('This motivation post has been added to wishlist'),
+      this.router.navigate(['home'])
+
+    },
+
+    error => {
+      this.error = error
+      console.log('error',error)
+    }
+    );
   }
 
 
