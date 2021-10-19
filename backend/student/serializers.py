@@ -1,5 +1,5 @@
 from .models import Category, StudentUser,Motivation,Review,Profile, Subscription, WishList
-from rest_framework import serializers
+from rest_framework import fields, serializers
 from rest_framework_simplejwt.tokens import RefreshToken
 from django.contrib.auth import authenticate
 from .models import Motivation, Review, Profile, Category,ReviewThread
@@ -35,6 +35,15 @@ class ActiveUserSerializer(serializers.ModelSerializer):
         fields = (
             'is_active',
         )
+
+class UserUpdateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = StudentUser
+        fields = (
+            'first_name',
+            'last_name'
+        )
+    
 
 
 class UserLoginSerializer(serializers.Serializer):
@@ -81,6 +90,8 @@ class UserListSerializer(serializers.ModelSerializer):
         model = StudentUser
         fields = (
             'id',
+            'first_name',
+            'last_name',
             'username',
             'email',
             'role',
@@ -152,8 +163,8 @@ class CategorySerializer(serializers.ModelSerializer):
         fields = ('id', 'category_name')
 
 class SubscriptionSerializer(serializers.ModelSerializer):
-    category = CategorySerializer(read_only=True)
     user = serializers.PrimaryKeyRelatedField(read_only=True, default=serializers.CurrentUserDefault(), source="user.username",)
+    category = CategorySerializer(read_only=True)
     class Meta:
         model= Subscription
         fields = ('id','user','category')

@@ -29,7 +29,8 @@ from .serializers import (
     SuperUserSerializer,
     ActiveUserSerializer,
     ReviewThreadSerializer,
-    WishListSerializer
+    WishListSerializer,
+    UserUpdateSerializer
 )
 
 from .models import StudentUser, Profile
@@ -428,10 +429,19 @@ def current_user(request):
         serializer = UserListSerializer(user, many=False)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
+    elif request.method == 'PUT':
+        user_serializer = UserUpdateSerializer(user, data=request.data,context={'request': request})
+        if user_serializer.is_valid():
+            user_serializer.save()
+            return Response(user_serializer.data, status=status.HTTP_200_OK)
+        else:
+            return Response(user_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
 
 # Make subscription api
 @api_view(['GET', 'POST', 'DELETE'])
-@permission_classes((AllowAny,))
+@permission_classes((IsAuthenticated,))
 def subscription_service(request,pk):
     category = Category.objects.filter(pk=pk).first()
     user = request.user
@@ -448,9 +458,9 @@ def subscription_service(request,pk):
             receiver = user.email
 
             subscription_serializer.save(
-                category = Category.objects.filter(pk=pk).first(),
-                user = request.user
-                )
+            category = Category.objects.filter(pk=pk).first(),
+            user = request.user
+            )
             send_welcome_email(name=name, receiver=receiver)
             return Response(subscription_serializer.data, status=status.HTTP_200_OK)
         else:
@@ -495,11 +505,11 @@ def all_wishlist(request):
         return Response(wishlist_serializer.data,status=status.HTTP_200_OK)
 
 
-@api_view(['GET', 'PUT', 'DELETE'])
-@permission_classes((IsAuthenticated,))
-def current_user(request):
-    user = request.user
+# @api_view(['GET', 'PUT', 'DELETE'])
+# @permission_classes((IsAuthenticated,))
+# def current_user(request):
+#     user = request.user
 
-    if request.method == 'GET':
-        serializer = UserListSerializer(user, many=False)
-        return Response(serializer.data, status=status.HTTP_200_OK)
+#     if request.method == 'GET':
+#         serializer = UserListSerializer(user, many=False)
+#         return Response(serializer.data, status=status.HTTP_200_OK)
