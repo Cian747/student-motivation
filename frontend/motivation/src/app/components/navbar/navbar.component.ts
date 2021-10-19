@@ -81,6 +81,11 @@ export class NavbarComponent implements OnInit {
 
   onFileSelected(e:any) {
     this.file = e.target.files[0];
+    console.log(e)
+    var path = "C:\\fakepath\\example.doc";
+    var filename = path.replace(/^.*\\/, "");
+    console.log(filename);
+    
 
   }
 
@@ -90,11 +95,13 @@ export class NavbarComponent implements OnInit {
     this.loading = true;
     this.motivationService.postMotivation(this.motivationPost, this.file).subscribe( response => {
       console.log(response)
+      console.log(response.slice(0,1))
 
 
       alert('Motivation ' + this.motivationPost.username + ' has been created'),
       // this.loggedIn.next(true);
       this.router.navigate(['home'])
+     
 
     },
 

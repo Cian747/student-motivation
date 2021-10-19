@@ -5,7 +5,7 @@
 export const environment = {
 	production: false,
 
-  URL:'https://properke.herokuapp.com/api/',
+  URL:'http://127.0.0.1:8000/api/',
   mediaURL:`https://res.cloudinary.com/kenya12254/`
 
 };

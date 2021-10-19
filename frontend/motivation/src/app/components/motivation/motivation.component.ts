@@ -22,7 +22,7 @@ export class MotivationComponent implements OnInit {
 
   motivations!:Motivation[]
   error: any;
-
+  image:any
 
   constructor(
     private http: HttpClient,
@@ -31,17 +31,21 @@ export class MotivationComponent implements OnInit {
     private router: Router,
 
   )
-
   { }
-
+    link:any = ''
   ngOnInit(){
     let promise = new Promise <void> ((resolve,reject)=>{
       // motivations
       this.motivationService.getAllMotivations().toPromise().then(
         (response:any) => {
           console.log(response)
-        this.motivations = response;
-        console.log(response)
+          this.motivations = response;
+          this.image = function imageUrl(id:any){
+            return response[id].image.replace("C:\\fakepath\\", "")
+          }
+           console.log(this.image(8))
+
+
         resolve()
       },
       (error:string) => {

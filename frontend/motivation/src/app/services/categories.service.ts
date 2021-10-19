@@ -18,5 +18,6 @@ export class CategoriesService {
   addCategory(category:any):Observable<any>{
     return this.http.post<any>(this.url + 'category/', category)
   }
+ 
 }
 

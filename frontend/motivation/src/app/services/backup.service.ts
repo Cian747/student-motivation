@@ -31,6 +31,7 @@ export class BackupService {
 
   // Sign-in
   signIn(user: StudentUser) {
+    // let reqHeader = new HttpHeaders({"No-Auth":"True"})
     return this.http.post<any>(`${this.authUrl}token/obtain/`, user)
       .subscribe((res: any) => {
         localStorage.setItem('access', res.access)
@@ -52,9 +53,9 @@ export class BackupService {
 
   Logout() {
     let removeToken = localStorage.removeItem('access');
-    if (removeToken == null) {
+    // if (removeToken == null) {
       this.router.navigate(['landing']);
-    }
+    
   }
 
   // User profile

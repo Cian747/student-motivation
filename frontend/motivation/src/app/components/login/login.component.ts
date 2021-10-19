@@ -28,7 +28,7 @@ export class LoginComponent implements OnInit {
   constructor(
     private LoginService: AuthenticationService,
     private profile: ProfileService,
-    private auth: BackupService,
+    private auth: AuthenticationService,
     private router: Router,
     private fb: FormBuilder,
   ) {
@@ -64,7 +64,7 @@ export class LoginComponent implements OnInit {
   //   );
   // }
    loginUser() {
-    this.auth.signIn(this.signinForm.value)
+    this.LoginService.signIn(this.signinForm.value)
     this.loading = true;
   }
 }

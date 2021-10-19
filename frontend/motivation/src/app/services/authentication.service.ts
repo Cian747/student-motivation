@@ -38,7 +38,7 @@ export class AuthenticationService {
 
   signUp(user:Users){
     let api = this.authUrl + 'register'
-
+    // let reqHeaders = new HttpHeaders({"No-Auth":'True'})
   
     return this.http.post(api, user)
 
@@ -73,6 +73,11 @@ logout(){
     this.router.navigate(['login'])
    }
   }
+
+// logout(){
+//   localStorage.removeItem('access')
+//   this.router.navigate(['login'])
+// }
   
 
 
