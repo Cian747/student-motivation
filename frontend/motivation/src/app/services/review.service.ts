@@ -20,7 +20,7 @@ export class ReviewService {
 
 
   getSingleReview(id:any):Observable<any[]>{
-    return this.http.get<any[]>(this.APIUrl + `review/${id}/`)
+    return this.http.get<any[]>(this.APIUrl + `review/rev-id/${id}/`)
   }
 
 
@@ -29,5 +29,20 @@ export class ReviewService {
   postReview(reviewData:any, id:any):Observable<any[]>{
     return this.http.post<any[]>(this.APIUrl + `review/${id}`, reviewData)
   }
+
+  postReviewThread(reviewData:any, id:any):Observable<any[]>{
+    return this.http.post<any[]>(this.APIUrl + `review_thread/${id}`, reviewData)
+  }
+
+  getReviewThread(id:any):Observable<any[]>{
+    return this.http.get<any[]>(this.APIUrl + `review_thread/${id}`)
+  }
+
+  // getSingleReview(id:any):Observable<any[]>{
+  //   return this.http.get<any[]>(this.APIUrl + `review/rev-id/${id}`)
+  // }
+
+
+
 
 }

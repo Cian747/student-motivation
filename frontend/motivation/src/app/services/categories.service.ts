@@ -11,12 +11,17 @@ export class CategoriesService {
   url = environment.URL
 
   constructor(private http:HttpClient) { }
-  
+
   getAllCategories():Observable<any[]>{
     return this.http.get<any[]>(this.url + 'category/')
   }
+
   addCategory(category:any):Observable<any>{
     return this.http.post<any>(this.url + 'category/', category)
+  }
+
+  getSingleCategory(id:any):Observable<any[]>{
+    return this.http.get<any[]>(this.url + `category/cat_idd/${id}`)
   }
 }
 

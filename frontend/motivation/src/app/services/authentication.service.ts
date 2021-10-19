@@ -56,12 +56,14 @@ get isLoggedIn():boolean{
   let authToken  = localStorage.getItem('access')
   return (authToken != null) ?true: false
 }
+
 logout(){
   let removeToken = localStorage.removeItem('access')
   if (removeToken == null){
     this.router.navigate(['login'])
    }
   }
+
 getUserProfile():Observable<any>{
   let api = this.authUrl+ 'profile/'
   return this.http.get(api, {headers: this.headers})

@@ -19,7 +19,11 @@ import { TruncateModule } from 'ng2-truncate';
 import { AuthInterceptor } from './services/authconfig.interceptors';
 import { ClipboardModule } from 'ngx-clipboard';
 import { InterceptorInterceptor } from './Auth/interceptor.interceptor';
-import { JwtHelperService, JWT_OPTIONS  } from '@auth0/angular-jwt';
+import { NgHttpLoaderModule } from 'ng-http-loader';
+import { ReviewThreadComponent } from './components/review-thread/review-thread.component';
+import { WishlistComponent } from './components/wishlist/wishlist.component';
+// import { CloudinaryModule } from '@cloudinary/angular';
+// import { CloudinaryModule, CloudinaryConfiguration, provideCloudinary } from '@cloudinary/angular';
 
 @NgModule({
   declarations: [
@@ -34,6 +38,8 @@ import { JwtHelperService, JWT_OPTIONS  } from '@auth0/angular-jwt';
     MotivationComponent,
     SingleMotivationComponent,
     FilterCategoryComponent,
+    ReviewThreadComponent,
+    WishlistComponent,
 
   ],
   imports: [
@@ -44,14 +50,18 @@ import { JwtHelperService, JWT_OPTIONS  } from '@auth0/angular-jwt';
     TruncateModule,
     ClipboardModule,
     ReactiveFormsModule,
+    NgHttpLoaderModule.forRoot(),
+    // CloudinaryModule,
   ],
   providers: [
     {
       provide: HTTP_INTERCEPTORS,
-      // useClass: InterceptorInterceptor,
-      useClass: AuthInterceptor,
+      useClass: InterceptorInterceptor,
+      // useClass: AuthInterceptor,
       multi: true
-    }
+    },
+    // provideCloudinary(require('cloudinary-core'), { cloud_name: 'kenya12254' } as CloudinaryConfiguration)
+
 
   ],
 

@@ -1,41 +1,29 @@
-#main{
-  background-color: #074436 !important;
-  /* height: 100vh; */
+.threadPage{
+    background-color: #074436 !important;
+    /* height: 100vh; */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
-.motivation{
-  display: flex;
-  justify-content: center;
-
-}
-.video{
-  display: flex;
-  justify-content: center;
-}
-video{
-  height: 100% !important;
-}
-
-.card-body{
+.single-review{
+  background-color: rgba(192, 224, 166, 0.5) !important;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
-  background-color: rgba(192, 224, 166, 0.5) !important;
 
 }
 
-.card-body p{
-  line-height: 2;
-}
-
-#review-form, #hide-form{
-  display: none;
+.single-item h4{
+  text-align: center;
+  margin: 4px;
+  color: rgb(223, 216, 212);
 }
 
 
 .comment {
   height: auto;
+  width: 100%;
   border: 1px solid rgba(16, 46, 46, 1);
   background-color: rgba(16, 46, 46, 0.973);
   float: left;
@@ -65,20 +53,6 @@ h5 {
     font-weight: bold
 }
 
-
-
-.review-loop{
-  display: flex;
-  flex-direction: column;
-}
-.reviewed-by{
-  display: flex;
-}
-
-.review-by span{
-  float: right;
-}
-
 a
 {
   text-decoration: none;
@@ -88,16 +62,12 @@ a
 .thread:hover{
   cursor: pointer;
 }
-#show-thread-form:hover{
-  color: orange;
+#thread-form{
+  /* display: none; */
 }
 
 #thread-form label {
   color: white !important;
-}
-
-#viewThread:hover{
-  color: orange;
 }
 
 
@@ -109,6 +79,7 @@ a
 
 .thread-box{
   background-color: rgb(159, 182, 182);
+  border-radius: 25px;
 }
 
 .thread-box p{

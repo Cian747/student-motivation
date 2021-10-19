@@ -57,7 +57,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework_simplejwt.token_blacklist',
     'django_filters',
-    'rest_framework_swagger'
+    'rest_framework_swagger',
 ]
 
 MIDDLEWARE = [
@@ -139,12 +139,11 @@ DATABASES = {
 
 # ALLOWED_HOSTS = config('ALLOWED_HOSTS', cast=Csv())
 
-ALLOWED_HOSTS=['*']
+# ALLOWED_HOSTS=['*']
 
 CORS_ORIGIN_ALLOW_ALL = True
 
-
-ALLOWED_HOSTS=['http://localhost:4200']    
+# ALLOWED_HOSTS=['http://localhost:4200']    
 
 CORS_ORIGIN_ALLOW_ALL = False
 
@@ -219,7 +218,6 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
-
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
