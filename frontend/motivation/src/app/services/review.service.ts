@@ -33,7 +33,6 @@ export class ReviewService {
   postReviewThread(reviewData:any, id:any):Observable<any[]>{
     return this.http.post<any[]>(this.APIUrl + `review_thread/${id}`, reviewData)
   }
-
   getReviewThread(id:any):Observable<any[]>{
     return this.http.get<any[]>(this.APIUrl + `review_thread/${id}`)
   }
@@ -41,7 +40,6 @@ export class ReviewService {
   // getSingleReview(id:any):Observable<any[]>{
   //   return this.http.get<any[]>(this.APIUrl + `review/rev-id/${id}`)
   // }
-
 
 
 

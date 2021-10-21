@@ -7,14 +7,12 @@ import { StudentUser } from 'src/app/models/student-user';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { BackupService } from 'src/app/services/backup.service';
 import { ProfileService } from 'src/app/services/profile.service';
-
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-
   login:any;
   error = '';
   loginForm!: FormGroup;
@@ -43,7 +41,6 @@ export class LoginComponent implements OnInit {
   ) {
     this.currentUserSubject = new BehaviorSubject<StudentUser>(JSON.parse(localStorage.getItem('currentUser') || '{}'));
     this.currentUser = this.currentUserSubject.asObservable();
-
     this.signinForm = this.fb.group({
       username: [''],
       password: ['']
@@ -88,7 +85,6 @@ export class LoginComponent implements OnInit {
 
    loginUser() {
     this.auth.signIn(this.signinForm.value)
-
 
   }
 

@@ -8,9 +8,6 @@ import { MotivationService } from 'src/app/services/motivation.service';
 import { ProfileService } from 'src/app/services/profile.service';
 import { first } from 'rxjs/operators';
 import { StudentUser } from 'src/app/models/student-user';
-// import { FileUploader, FileUploaderOptions, ParsedResponseHeaders } from 'ng2-file-upload';
-// import { Cloudinary } from '@cloudinary/angular-5.x';
-
 
 
 @Component({
@@ -75,7 +72,6 @@ export class NavbarComponent implements OnInit {
 
 
     })
-
 
 
 

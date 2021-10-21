@@ -1,6 +1,8 @@
 <main id='admin'>
+
   <!-- Nav section -->
   <section id="top-row">
+
     <nav class="navbar navbar-light fixed-top">
       <div class="container-fluid">
         <a class="navbar-brand"> <i class="fas fa-graduation-cap"></i> ProperLearn</a>
@@ -13,10 +15,14 @@
       </div>
     </nav>
   </section>
+
+
   <!-- Dashbord -->
+
+
   <section id="bar">
     <div class="row">
-        <div class="col-md-3">
+        <div class="col-md-3">        
           <div class="side-bar">
             <div class="dashbord">
               <div class="students">
@@ -36,10 +42,17 @@
             </div>
           </div>
         </div>
+      
+
+
       <!-- statatistics -->
+
+
       <div class="col-md-9">
-        <div class="dash-body " id='dashbord-body'>
+        <div class="dash-body " id='dashboard-body'>
+
           <!-- Category statistics -->
+
           <div class="cats">
             <div (click)='get_posts()' class="posts text-center pt-3">
               <div class="content">
@@ -47,14 +60,18 @@
                 <h3 class='text-center'>{{motivations.length}}</h3>
               </div>
             </div>
+
             <!-- Users statistics -->
+
             <div (click)='get_users()' class="users">
               <div class="content text-center pt-3">
                 <h3><i class="fas fa-users"></i>Users</h3>
                 <h3 class='text-center'>{{users.length}}</h3>
               </div>
             </div>
+
             <!-- Category statistics -->
+
             <div (click)='get_categories()' class="categories text-center pt-3">
               <div class="content">
                 <h3><i class="fas fa-user-tag"></i>Categories</h3>
@@ -68,6 +85,13 @@
               </div>
             </div> -->
           </div>
+
+          
+            </div>
+          </div>
+
+          <!-- chart -->
+
           <div class="chart">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
               <path fill="#074436" fill-opacity="1"
@@ -75,9 +99,13 @@
               </path>
             </svg>
           </div>
-        </div>
+
+
         <!-- per section details -->
+
+
         <!-- All User details -->
+
         <div id="dashbord-student">
           <div class="user" *ngFor = 'let user of users' >
             <!-- loop users -->
