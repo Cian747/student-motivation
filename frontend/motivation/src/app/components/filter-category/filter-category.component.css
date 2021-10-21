@@ -46,7 +46,6 @@
     /* background-color: rgba(140, 154, 194, 0.5) !important; */
     background-color: rgba(22, 54, 80, 0.5) !important;
     color: aliceblue;
-
     box-shadow:  0 4px 8px 0 rgba(0, 0, 0, 0.2);
 
 
@@ -136,7 +135,6 @@
     justify-content: center;
     margin: 5px;
   }
-
 
   .goToUrl{
     background-color:rgb(164, 180, 185) !important;

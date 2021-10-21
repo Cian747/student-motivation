@@ -34,7 +34,6 @@
 
 .login-register-btn {
   margin-top: 3%;
-
   width: 230px;
   height: 55px;
   background: #FFFFFF;
@@ -95,10 +94,8 @@
   height: 60px;
   left: 267px;
   top: 750px;
-
   background: #FFFFFF;
   border-radius: 50px;
-
   font-family: Poppins;
   font-style: normal;
   font-weight: 500;

@@ -29,13 +29,7 @@ export class MotivationComponent implements OnInit {
     private http: HttpClient,
     private motivationService: MotivationService,
     private authService: AuthenticationService,
-    private wishlistService: MotivationService,
-    private router: Router,
-
-  )
-
-  { }
-
+    private router:Router){}
   ngOnInit(){
     let promise = new Promise <void> ((resolve,reject)=>{
       // motivations
@@ -51,31 +45,13 @@ export class MotivationComponent implements OnInit {
       })
 
     })
-  //     let promise = new Promise <void> ((resolve,reject)=>{
-  //     this.motivationService.getAllMotivations().toPromise().then(
-  //       (response) => {
-  //         var image = (response[2].image.replace("C:\\fakepath\\", ""))
-
-  //       let new_response = response.map(item => {
-  //         let new_image = `${image}${item["image"]}`
-  //         item["image"] = new_image
-  //         return item
-  //       })
-  //       // console.log(new_response)
-  //       this.motivations = response;
-  //       resolve()
-  //     },
-  //     (error:string) => {
-  //     })
-  //   })
-  //   return this.motivations
   }
 
 
 
   addWishlist(id: any){
     console.log(this.wishlist)
-    this.wishlistService.addToWishlist(this.wishlist, id).subscribe( response => {
+    this.motivationService.addToWishlist(this.wishlist, id).subscribe( response => {
       // console.log(response)
 
 
@@ -84,7 +60,7 @@ export class MotivationComponent implements OnInit {
 
     },
 
-    error => {
+    (error:any) => {
       this.error = error
       console.log('error',error)
     }

@@ -6,9 +6,9 @@
 ProperLearn is an application that allows users to post motivational content in regards to software development, review each post and comment on specific reviews. As a user with student privileges all these features will be accessible. A staff member will have the privilege to oversee all user posts and create new categories. They will also be able to deactivate a user or give the staff privileges.
 ### Authors
 * [**Cian Omondi**](https://github.com/Cian747) - **Backend** 
-* [**Franklin Mutua**](https://github.com/MutuaFranklin/) - **Backend**
+* [**Franklin Mutua**](https://github.com/MutuaFranklin/) - **Frontend**
 * [**Awadh Said**](https://github.com/Awadh-Awadh) - **Frontend**
-* [**Robert Maina**](https://github.com/Robert-Moringa) - **Frontend** 
+* [**Robert Maina**](https://github.com/Robert-Moringa) - **Backend** 
 
 ### Date of current version
 
@@ -83,8 +83,7 @@ Run source virtual/bin/activate to activate the virtual environment and python m
 - Django
 - Django Rest Framework
 
-## Live link
-
+## Live links
 * Live link: [ProperLearnApp live link](https://mutuafranklin.github.io/ProperlearnApp/)
 * Api: https://properke.herokuapp.com
 

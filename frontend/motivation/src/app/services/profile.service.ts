@@ -12,7 +12,6 @@ export class ProfileService {
   headers: any = {}
   currentUser: any;
 
-
   constructor(
     private http: HttpClient) { }
 

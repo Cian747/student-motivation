@@ -28,11 +28,15 @@ export class AuthGuard implements CanActivate {
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
-    if (this.authBackup.isLoggedIn !== true) {
-      window.alert("Access not allowed!");
-      this.router.navigate(['login'])
-    }
-    return true;
+    // if (this.authBackup.isLoggedIn !== true) {
+    //   window.alert("Access not allowed!");
+    //   this.router.navigate(['login'])
+    // }
+    if (localStorage.getItem('access')!= null)
+      return true
+    this.router.navigate(['login'])
+    return false
+    
   }
 //   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
 //     const currentUser = this.authService.currentUserValue;

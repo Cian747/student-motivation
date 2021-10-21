@@ -29,6 +29,14 @@ export class UsersService {
    return this.http.get(this.usersUrl + 'users')
    
   }
+  ChangeAdmin(id:any, data:any){
+    return this.http.put(this.usersUrl+ `superuser/${id}`, data)
+   
+  }
+
+  deactivateUser(id:any, data:any){
+    return this.http.put(this.usersUrl + `remove_user/${id}`, data)
+  }
 
   
 }

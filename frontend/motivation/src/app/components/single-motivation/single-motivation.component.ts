@@ -177,9 +177,4 @@ export class SingleMotivationComponent implements OnInit {
   }
 
 
-
-
-
-
-
 }
