@@ -83,8 +83,7 @@ Run source virtual/bin/activate to activate the virtual environment and python m
 - Django
 - Django Rest Framework
 
-## Live link
-
+## Live links
 * Live link: [ProperLearnApp live link](https://mutuafranklin.github.io/ProperlearnApp/)
 * Api: https://properke.herokuapp.com
 

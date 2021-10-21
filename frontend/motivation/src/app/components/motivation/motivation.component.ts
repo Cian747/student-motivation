@@ -29,13 +29,7 @@ export class MotivationComponent implements OnInit {
     private http: HttpClient,
     private motivationService: MotivationService,
     private authService: AuthenticationService,
-    private wishlistService: MotivationService,
-    private router: Router,
-
-  )
-
-  { }
-
+    private router:Router){}
   ngOnInit(){
     let promise = new Promise <void> ((resolve,reject)=>{
       // motivations
@@ -73,23 +67,23 @@ export class MotivationComponent implements OnInit {
 
 
 
-  addWishlist(id: any){
-    console.log(this.wishlist)
-    this.wishlistService.addToWishlist(this.wishlist, id).subscribe( response => {
-      // console.log(response)
+  // addWishlist(id: any){
+  //   console.log(this.wishlist)
+  //   this.wishlistService.addToWishlist(this.wishlist, id).subscribe( response => {
+  //     // console.log(response)
 
 
-      alert('This motivation post has been added to wishlist'),
-      this.router.navigate(['home'])
+  //     alert('This motivation post has been added to wishlist'),
+  //     this.router.navigate(['home'])
 
-    },
+  //   },
 
-    error => {
-      this.error = error
-      console.log('error',error)
-    }
-    );
-  }
+  //   (error:any) => {
+  //     this.error = error
+  //     console.log('error',error)
+  //   }
+  //   );
+  // }
 
 
   goToUrl(id: any){
