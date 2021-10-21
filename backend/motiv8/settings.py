@@ -60,6 +60,7 @@ INSTALLED_APPS = [
     'rest_framework_swagger',
 ]
 
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -111,6 +112,7 @@ DATABASES = {
         'NAME':'motivation',
         'USER':'cyan',
         'PASSWORD':'ms254',
+
     }
 }
 
