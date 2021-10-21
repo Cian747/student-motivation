@@ -15,19 +15,12 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path,include
-<<<<<<< HEAD
-=======
 
 
->>>>>>> 111adbb38492ecd3422bebcb58760584ea406c55
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include('student.urls')),
     # path('swagger/', schema_view)
 
-<<<<<<< HEAD
-=======
-
->>>>>>> 111adbb38492ecd3422bebcb58760584ea406c55
 ]

@@ -344,19 +344,23 @@ def all_users(request):
 @api_view(['GET','PUT'])
 @permission_classes((IsAuthenticated,))
 @user_passes_test(lambda u: u.is_superuser)
-def remove_user(request):
-    user = request.user
-    # current_user = StudentUser.objects.get(id=user)
+def remove_user(request,id):
+
+    user = request.user.id
+    current_user = StudentUser.objects.get(id=id)
+    
     if request.method == 'GET':
-        serializer = UserListSerializer(user,many=False)
+        serializer = UserListSerializer(current_user,many=False)
         return Response(serializer.data, status=status.HTTP_200_OK)
+        
     elif request.method == 'PUT':
-        user_serializer = ActiveUserSerializer(user,data=request.data)
+        user_serializer = ActiveUserSerializer(current_user,data=request.data)
         if user_serializer.is_valid():
             user_serializer.save()
             return Response(user_serializer.data, status=status.HTTP_200_OK)
         else:
             return Response(user_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
 @api_view(['GET','PUT'])
 @permission_classes((IsAdminUser,))
 @user_passes_test(lambda u: u.is_superuser)
