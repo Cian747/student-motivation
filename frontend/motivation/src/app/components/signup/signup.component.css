@@ -140,3 +140,177 @@ form .signup-btn:hover{
   color: white;
 }
 
+
+/* RESPONSIVENESS */
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+
+  .signup h1 {
+    text-align: center;
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 28px;
+    line-height: 100px;
+    text-align: center;
+    color: #074436;
+
+
+
+  }
+
+  .signup-form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+  }
+
+  .form {
+    margin: 5px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+
+
+  .form-item{
+    display: flex;
+    flex-direction: column;
+  }
+
+
+  .input {
+
+    /* width: 638px; */
+    width: 100%;
+    height: 80px;
+    background: #FFFFFF;
+    border: 2px solid #074436;
+    box-sizing: border-box;
+    border-radius: 10px;
+
+  }
+
+  label {
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 20px;
+    line-height: 36px;
+    color: #074436;
+    display: flex;
+    float: left;
+
+
+  }
+
+  form .button{
+    display: flex;
+    justify-content: center;
+  }
+
+  form .signup-btn {
+    margin-top: 40px;
+    width: 150px;
+    height: 65px;
+    background: #074436;
+    border-radius: 50px;
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 18px;
+    line-height: 54px;
+    color: #FFFFFF;
+
+  }
+
+  form .signup-btn:hover{
+    background-color: white;
+    color: #074436;
+    border: 4px solid #074436;
+
+  }
+
+  .signup-image{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .signup-image img{
+
+    width: 70%;
+    height: 300px;
+
+
+  }
+
+
+  .signup-image p {
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 20px;
+    text-align: center;
+
+    color: #074436;
+
+
+  }
+
+  .signup-image .signup-btn {
+
+    width: 130px;
+    height: 50px;
+    background: #FFFFFF;
+    border: 4px solid #074436;
+    box-sizing: border-box;
+    border-radius: 50px;
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 18px;
+    line-height: 36px;
+    /* identical to box height */
+
+    color: #074436;
+    margin-bottom: 10px;
+
+
+  }
+
+
+
+  .signup-image .signup-btn:hover{
+    background-color: #074436;
+    color: white;
+  }
+
+
+
+
+
+
+
+
+
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px)and (max-width:991px){
+
+
+
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+
+}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {}

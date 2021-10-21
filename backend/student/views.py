@@ -360,7 +360,7 @@ def remove_user(request,id):
             return Response(user_serializer.data, status=status.HTTP_200_OK)
         else:
             return Response(user_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
+            
 @api_view(['GET','PUT'])
 @permission_classes((IsAdminUser,))
 @user_passes_test(lambda u: u.is_superuser)

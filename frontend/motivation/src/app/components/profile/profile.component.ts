@@ -24,9 +24,10 @@ export class ProfileComponent implements OnInit {
   loading = false;
   categories:any;
   update:any;
-  phone_number!: string;
   profile_photo!: File;
+  phone_number!: string;
   profUpdate:any;
+
 
   constructor(
     private http: HttpClient,
@@ -101,13 +102,12 @@ export class ProfileComponent implements OnInit {
     // uploadData.append('phone_number', this.phone_number)
     uploadData.append('profile_photo', this.profile_photo)
     uploadData.append('phone_number', this.profile.phone_number)
-
-
-    // console.log(this.profiler)
-
     this.authBackup.updateProfile(this.profile).subscribe(data => {
+      alert("Profile updated successfully")
+      window.location.reload();
 
-      console.log(data)
+
+      // console.log(data)
 
     }, (error: any)=> {
 

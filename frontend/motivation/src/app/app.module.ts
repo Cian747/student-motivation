@@ -60,6 +60,8 @@ import { WishlistComponent } from './components/wishlist/wishlist.component';
       // useClass: AuthInterceptor,
       multi: true
     },
+    // provideCloudinary(require('cloudinary-core'), { cloud_name: 'kenya12254' } as CloudinaryConfiguration)
+
 
   ],
 

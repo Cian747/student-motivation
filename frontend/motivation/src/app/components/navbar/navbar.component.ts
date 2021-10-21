@@ -143,9 +143,11 @@ export class NavbarComponent implements OnInit {
     uploadData.append('category', this.category)
 
     this.motivationService.postMotivation(uploadData).subscribe( response => {
-    console.log(response)
-      alert('Motivation ' + this.motivationPost.username + ' has been created'),
-      this.router.navigate(['home'])
+    // console.log(response)
+      alert("Your Motivation  Post has been published"),
+      window.location.reload();
+
+      // this.router.navigate(['home'])
 
 
 
@@ -161,6 +163,9 @@ export class NavbarComponent implements OnInit {
 
   }
 
+
+
+
   isLogout(){
     this.authBackup.Logout();
 
@@ -171,3 +176,5 @@ export class NavbarComponent implements OnInit {
 }
 
 }
+
+

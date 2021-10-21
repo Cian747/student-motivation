@@ -29,7 +29,13 @@ export class MotivationComponent implements OnInit {
     private http: HttpClient,
     private motivationService: MotivationService,
     private authService: AuthenticationService,
-    private router:Router){}
+    private wishlistService: MotivationService,
+    private router: Router,
+
+  )
+
+  { }
+
   ngOnInit(){
     let promise = new Promise <void> ((resolve,reject)=>{
       // motivations
@@ -60,7 +66,7 @@ export class MotivationComponent implements OnInit {
 
     },
 
-    (error:any) => {
+    error => {
       this.error = error
       console.log('error',error)
     }
