@@ -1,31 +1,29 @@
-<div class="row">
-    <div class="col-md-3" *ngFor="let motivation of motivations">
-       <div class="card mb-3">
-        <div *ngIf="motivation.image == null && motivation.video == null ">
-          <img src="assets/Motivation.jpg" class="card-img-top" alt="" height="300">
-        </div>
-        <div *ngIf="motivation.image">
-          <!-- <img [src]="motivation.image" class="card-img-top" alt="image " height="300"> -->
-          <img src="https://res.cloudinary.com/kenya12254/{{motivation.image}}" class="card-img-top vid-link" alt="..." height="300">
+<div class="row" >
+  <div class="col-md-3" *ngFor="let motivation of motivations">
+
+    <div class="card mb-3">
+      <div *ngIf="motivation.image == null && motivation.video == null ">
+        <img src="assets/Motivation.jpg" class="card-img-top" alt="" height="300">
+      </div>
+      <div *ngIf="motivation.image">
+        <!-- <img [src]="motivation.image" class="card-img-top" alt="image " height="300"> -->
+        <img src="https://res.cloudinary.com/kenya12254/{{motivation.image}}" class="card-img-top vid-link" alt="..." height="300">
+
+      </div>
+      <div *ngIf="motivation?.video" class="video-icon">
+        <div class="col-md-8">
+          <img src="assets/vid-icon.png" class="card-img-top" alt="Video" (click)='goToUrl(motivation.id)' height="300">
 
         </div>
-        <div *ngIf="motivation?.video" class="video-icon">
-          <div class="col-md-8">
-            <img src="assets/vid-icon.png" class="card-img-top" alt="Video" (click)='goToUrl(motivation.id)' height="300">
-
-          </div>
-        </div>
+      </div>
       <div class="card-body ">
         <h5 class="card-title">{{motivation.title}}</h5>
-        <p class="card-text">Category: {{motivation.category.category_name}}</p>
+        <p class="card-text">Category:{{motivation.category.category_name}}</p>
         <p class="card-text small">{{motivation.description| words : 6}}</p>
 
         <p class="card-text"><small class="">published by {{motivation.profile.user}}</small></p>
         <p class="card-text"><small class="">{{motivation.created_at|date}}</small></p>
-
-        <!-- {{motivation.created_at}} -->
       </div>
-
       <div class="card-footer">
         <div class="icons d-flex">
           <div class="wishlist">
@@ -39,26 +37,37 @@
           <div class="whatsapp d-flex">
             <span class="whatsappshare">whatsApp share</span>
             <input hidden class="share-url" value="http://localhost:4200/motivation/{{motivation.id}}"   />
-            <a href="https://wa.me/15551234567" target="_blank"><i class="fab fa-whatsapp" ></i></a>
+            <a href="whatsapp://send?text=https://mutuafranklin.github.io/ProperlearnApp/home"
+              data-action="share/whatsapp/share"
+              target="_blank">
+              <i class="fab fa-whatsapp" ></i>
+            </a>
             <!-- <a href="https://wa.me/15551234567"><i (click)= 'copyUrl()' class="fas fa-share-alt" [ngxClipboard]="formInputText"></i></a> -->
 
           </div>
 
           <div class="fb">
-            <span class="fbshare">facebook share</span>
-            <div class="fb-share-button" data-href="https://developers.facebook.com/docs/plugins/" data-layout="button_count" data-size="small"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore"><i class="fab fa-facebook"></i></a></div>
-
+            <div class="fb-share-button"
+              data-href="https://mutuafranklin.github.io/ProperlearnApp/home"
+              data-layout="button_count" data-size="large">
+              <a target="_blank"
+                href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fmutuafranklin.github.io%2FProperlearnApp%2Fhome&amp;src=sdkpreparse"
+                class="fb-xfbml-parse-ignore">
+                <i class="fab fa-facebook"></i>
+              </a>
+            </div>
           </div>
 
         </div>
         <div class="details">
-            <button (click)='goToUrl(motivation.id)' class=" custom btn btn-info">View Details</button>
+            <button (click)='goToUrl(motivation.id)' class=" view-details btn btn-info">View Details</button>
 
         </div>
 
       </div>
-    </div>
-    </div>
+
+  </div>
+  </div>
 
 
 </div>

@@ -27,11 +27,13 @@ export class InterceptorInterceptor implements HttpInterceptor {
 
   intercept(req: HttpRequest<any>, next: HttpHandler) {
     const authToken = this.authBackup.getToken();
-    req = req.clone({
-        setHeaders: {
-            Authorization: "Bearer " + authToken
-        }
-    });
+    if (this.authBackup.isLoggedIn){
+      req = req.clone({
+          setHeaders: {
+              Authorization: "Bearer " + authToken
+          }
+      });
+    }
     return next.handle(req);
 }
 
