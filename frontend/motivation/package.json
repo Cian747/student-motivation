@@ -26,10 +26,7 @@
     "jquery": "^3.6.0",
     "jwt-decode": "^3.1.2",
     "moment": "^2.29.1",
-<<<<<<< HEAD
-=======
     "ng-http-loader": "^10.0.0",
->>>>>>> 3897a75b84e84f886e1891e9f51b3122f0825f76
     "ng2-file-upload": "^1.4.0",
     "ng2-truncate": "^1.3.17",
     "ngx-clipboard": "^14.0.1",

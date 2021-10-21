@@ -5,11 +5,7 @@
 
 
 
-<<<<<<< HEAD
-  <div class="container-fluid motivation" >
-=======
   <div class="container-fluid motivation">
->>>>>>> 3897a75b84e84f886e1891e9f51b3122f0825f76
 
     <!-- post -->
     <div class="col-md-9">
@@ -18,49 +14,23 @@
           <img src="assets/Motivation.jpg" class="card-img-top" alt="" height="550">
         </div>
         <div *ngIf="motivation?.image">
-<<<<<<< HEAD
-          <img src="https://res.cloudinary.com/kenya12254/{{motivation.image}}" class="card-img-top" alt="..." height="550">
-          <!-- <img src="https://cdn.educba.com/academy/wp-content/uploads/2018/10/Top-Uses-Of-Django.jpg" class="card-img-top" alt="..."> -->
-
-        </div>
-        <div *ngIf="motivation?.video">
-          <div class="video">
-            <video controls #videoPlayer width="auto"  height="auto">
-                <source src="http://127.0.0.1:8000/api{{motivation.video}}" type="video/mp4" />
-                Browser not supported
-            </video>
-          </div>
-=======
           <img src="https://res.cloudinary.com/kenya12254/{{motivation.image}}" class="card-img-top" alt="..."
             height="550">
               
->>>>>>> 3897a75b84e84f886e1891e9f51b3122f0825f76
         </div>
         <div class="card-body">
           <h4 class="card-title">{{motivation?.title}}</h4>
           <p class="card-text"> {{motivation?.description}}</p>
           <p class="card-text"><small class="">published by {{motivation.profile.user}}</small></p>
-<<<<<<< HEAD
-          <p class="card-text"><small class="">{{motivation.created_at|date}}</small></p>          <a ><button (click) ="toForm()" type="button" id="add-review" class="btn btn-warning">Add a Review</button></a>
-          <a ><button type="button" id="hide-form" class="btn btn-danger">Hide form</button></a>
-=======
           <p class="card-text"><small class="">{{motivation.created_at|date}}</small></p>
           <a><button (click)="toForm()" type="button" id="add-review" class="btn btn-warning">Add a Review</button></a>
           <a><button type="button" id="hide-form" class="btn btn-danger">Hide form</button></a>
->>>>>>> 3897a75b84e84f886e1891e9f51b3122f0825f76
 
           <div class="col-md-10 form">
             <form action="" id="review-form">
 
               <div class="mb-3">
                 <label for="exampleFormControlTextarea1" class="form-label">Review</label>
-<<<<<<< HEAD
-                <textarea [(ngModel)]="reviewPost.review"  name="review" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-
-              </div>
-
-              <button (click)="postReview(motivation.id)" (click)=" refresh()" type="submit" class="btn btn-secondary">Post</button>
-=======
                 <textarea [(ngModel)]="reviewPost.review" name="review" class="form-control"
                   id="exampleFormControlTextarea1" rows="3"></textarea>
 
@@ -68,47 +38,12 @@
 
               <button (click)="postReview(motivation.id)" (click)=" refresh()" type="submit"
                 class="btn btn-secondary">Post</button>
->>>>>>> 3897a75b84e84f886e1891e9f51b3122f0825f76
 
             </form>
 
             <div class="reviews mt-5" id="review-list">
               <h4>Reviews</h4>
               <div class="col-sm-5 col-md-12 col-12 pb-4">
-<<<<<<< HEAD
-                <div class="review-loop" *ngFor="let review of reviews">
-                  <div class="comment mt-4 text-justify float-left">
-                    <div class="d-flex reviewed-by">
-                      <img src="https://i.imgur.com/yTFUilP.jpg" alt="" class="rounded-circle" width="40" height="40">
-                      <h5 class="m-2">{{review.profile.user}}</h5> <span class="m-2">- {{review.created_at|date}}</span> <br>
-                    </div>
-
-                    <p class="mt-4">{{review.review}}</p>
-                  </div>
-
-                </div>
-
-
-               </div>
-
-
-            </div>
-          </div>
-
-
-        </div>
-      </div>
-
-
-    </div>
-
-
-
-  </div>
-
-
-</div>
-=======
                 <div class="review-loop" *ngFor="let review of reviews; let i=index">
                   <div class="comment mt-4 text-justify float-left">
                     <div class="d-flex reviewed-by">
@@ -181,4 +116,3 @@
 
 
   </div>
->>>>>>> 3897a75b84e84f886e1891e9f51b3122f0825f76

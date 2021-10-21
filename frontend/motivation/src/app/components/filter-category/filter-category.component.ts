@@ -1,9 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-<<<<<<< HEAD
-import { Motivation } from 'src/app/models/motivation';
-=======
 import { first } from 'rxjs/operators';
 import { Category } from 'src/app/models/category';
 import { Motivation } from 'src/app/models/motivation';
@@ -11,7 +8,6 @@ import { StudentUser } from 'src/app/models/student-user';
 import { Subscription } from 'src/app/models/subscription';
 import { BackupService } from 'src/app/services/backup.service';
 import { CategoriesService } from 'src/app/services/categories.service';
->>>>>>> 3897a75b84e84f886e1891e9f51b3122f0825f76
 import { MotivationService } from 'src/app/services/motivation.service';
 
 @Component({
@@ -26,24 +22,18 @@ export class FilterCategoryComponent implements OnInit {
 
   categories:any;
   error: any;
-<<<<<<< HEAD
-=======
   subscription: any;
   wishlist:any;
   category:any;
   currentUser!:StudentUser;
 
->>>>>>> 3897a75b84e84f886e1891e9f51b3122f0825f76
 
 
   constructor(
     private http: HttpClient,
     private motivationService: MotivationService,
-<<<<<<< HEAD
-=======
     private categoryService: CategoriesService,
     private authBackup: BackupService,
->>>>>>> 3897a75b84e84f886e1891e9f51b3122f0825f76
     private route:ActivatedRoute,
     private router: Router,
 
@@ -64,8 +54,6 @@ export class FilterCategoryComponent implements OnInit {
       (error:string) => {
 
       })
-<<<<<<< HEAD
-=======
 
       this.categoryService.getSingleCategory(id).toPromise().then(
         (response:any) => {
@@ -78,7 +66,6 @@ export class FilterCategoryComponent implements OnInit {
 
       })
 
->>>>>>> 3897a75b84e84f886e1891e9f51b3122f0825f76
         // categories
       this.motivationService.getAllCategories().toPromise().then(
         (response:any) => {
@@ -88,12 +75,6 @@ export class FilterCategoryComponent implements OnInit {
       (error:string) => {
 
       })
-<<<<<<< HEAD
-    })
-    // return promise
-  }
-
-=======
       this.authBackup.getCurrentUser().pipe(first()).subscribe((loggedUser: StudentUser) => {
         this.currentUser = loggedUser;
         // console.log(loggedUser)
@@ -136,7 +117,6 @@ export class FilterCategoryComponent implements OnInit {
     }
     );
   }
->>>>>>> 3897a75b84e84f886e1891e9f51b3122f0825f76
 
    goToCategory(id: any){
     this.router.navigate(['/category',id])
@@ -144,21 +124,14 @@ export class FilterCategoryComponent implements OnInit {
 
   refresh(): void {
     window.location.reload();
-<<<<<<< HEAD
-}
-=======
   }
->>>>>>> 3897a75b84e84f886e1891e9f51b3122f0825f76
   goToUrl(id: any){
     this.router.navigate(['/motivation',id])
   }
 
-<<<<<<< HEAD
-=======
   copyUrl(){
     alert("Motivation link has been copied. Share with your friends!")
   }
 
->>>>>>> 3897a75b84e84f886e1891e9f51b3122f0825f76
 
 }

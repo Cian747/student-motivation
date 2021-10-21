@@ -35,10 +35,7 @@ video{
 
 
 .comment {
-<<<<<<< HEAD
-=======
   height: auto;
->>>>>>> 3897a75b84e84f886e1891e9f51b3122f0825f76
   border: 1px solid rgba(16, 46, 46, 1);
   background-color: rgba(16, 46, 46, 0.973);
   float: left;
@@ -81,8 +78,6 @@ h5 {
 .review-by span{
   float: right;
 }
-<<<<<<< HEAD
-=======
 
 a
 {
@@ -124,4 +119,3 @@ a
 .thread-box span{
   color: rgb(82, 72, 72);
 }
->>>>>>> 3897a75b84e84f886e1891e9f51b3122f0825f76
