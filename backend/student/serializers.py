@@ -165,6 +165,7 @@ class CategorySerializer(serializers.ModelSerializer):
 class SubscriptionSerializer(serializers.ModelSerializer):
     user = serializers.PrimaryKeyRelatedField(read_only=True, default=serializers.CurrentUserDefault(), source="user.username",)
     category = CategorySerializer(read_only=True)
+    user = serializers.PrimaryKeyRelatedField(read_only=True, default=serializers.CurrentUserDefault(), source="user.username",)
     class Meta:
         model= Subscription
         fields = ('id','user','category')

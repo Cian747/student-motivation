@@ -22,8 +22,7 @@ import { InterceptorInterceptor } from './Auth/interceptor.interceptor';
 import { NgHttpLoaderModule } from 'ng-http-loader';
 import { ReviewThreadComponent } from './components/review-thread/review-thread.component';
 import { WishlistComponent } from './components/wishlist/wishlist.component';
-// import { CloudinaryModule } from '@cloudinary/angular';
-// import { CloudinaryModule, CloudinaryConfiguration, provideCloudinary } from '@cloudinary/angular';
+
 
 @NgModule({
   declarations: [

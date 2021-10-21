@@ -125,6 +125,7 @@ class MotivationalByCategory(APIView):
             # return Motivation.objects.get(category=cat_pk)
             motivations=Motivation.objects.filter(category=cat_pk).order_by('-created_at')
 
+
             return motivations
         except Motivation.DoesNotExist:
             return Http404
@@ -465,6 +466,7 @@ def subscription_service(request,pk):
             category = Category.objects.filter(pk=pk).first(),
             user = request.user
             )
+
             send_welcome_email(name=name, receiver=receiver)
             return Response(subscription_serializer.data, status=status.HTTP_200_OK)
         else:
@@ -507,6 +509,9 @@ def all_wishlist(request):
     if request.method == 'GET':
         wishlist_serializer = WishListSerializer(wishlist,many=True)
         return Response(wishlist_serializer.data,status=status.HTTP_200_OK)
+
+
+
 
 
 # @api_view(['GET', 'PUT', 'DELETE'])
