@@ -100,7 +100,7 @@
             </div>
             <div class="delete-user">
               <i (click) = "ChangeUser(user.id)" (click) = "refresh()" class="fas fa-user-edit"></i>
-              <i (click)= "deactivateUser()" (click) = "refresh()" class="fas fa-trash custom-tr"></i>
+              <i (click)= "deactivateUser(user.id)" (click) = "refresh()" class="fas fa-trash custom-tr"></i>
             </div>
           </div>
         </div>

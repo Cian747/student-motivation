@@ -157,8 +157,8 @@ export class AdminDashboardComponent implements OnInit {
       $(".user").addClass("changeBg")
     }
   }
-  deactivateUser() {
-    this.userService.deactivateUser(this.status).subscribe(resp => {
+  deactivateUser(id:any) {
+    this.userService.deactivateUser(id,this.status).subscribe(resp => {
       console.log(resp)
     })
     alert('user deactivated')

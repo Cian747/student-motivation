@@ -21,7 +21,7 @@ export class UsersService {
   ChangeAdmin(id:any, data:any){
     return this.http.put(this.usersUrl+ `superuser/${id}`, data)
   }
-  deactivateUser(data:any){
-    return this.http.put(this.usersUrl + 'remove_user', data)
+  deactivateUser(id:any, data:any){
+    return this.http.put(this.usersUrl + `remove_user/${id}`, data)
   }
 }

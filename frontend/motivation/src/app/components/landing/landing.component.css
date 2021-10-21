@@ -18,11 +18,16 @@
   font-family: Poppins;
   font-style: normal;
   font-weight: 500;
-  font-size: 30px;
+  font-size: 28px;
   line-height: 54px;
   color: #FFFFFF;
 
 }
+
+.custom-toggler{
+  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='	rgba(255,255,255)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E");
+}
+
 
 .logo{
   height: 5rem;
@@ -123,3 +128,127 @@
   /* background-color: rgba(87, 114, 98, 0.5) !important; */
   border-radius: 25px;
 }
+
+
+.mobile-view{
+  display: none;
+}
+
+/* RESPONSIVENESS */
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+
+  .landing {
+    height: 110vh;
+    background-image: url(https://wallpaperaccess.com/full/6563775.jpg);
+
+    /* background-image: url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQamFioedNyte_Jg10-UnhiIyY7xzaZmJOdv_s6B7Q4A_bIs7u5MP5Q0M9XmFTlNZO3foo&usqp=CAU); */
+    background-size: cover;
+    background-color: #074436;
+
+  }
+
+  .navbar-brand {
+    margin-top: 2%;
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 25px;
+    color: #FFFFFF;
+
+  }
+
+  .mobile-view{
+    display: block;
+  }
+
+  .laptop-view{
+    display: none !important;
+  }
+
+  .login-register-btn {
+    margin-top: 3%;
+    margin-left: 27%;
+
+    width: 150px;
+    height: 45px;
+    background: #FFFFFF;
+    border: 2px solid #074436;
+    border-radius: 10px;
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 15px;
+    color: #134b11;
+
+
+  }
+
+  .logo{
+    height: 4rem;
+  }
+
+
+  .content h1 {
+    margin-top: 5%;
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 30px;
+    line-height: 52px;
+    text-align: center;
+
+    color: #FFFFFF;
+  }
+
+  .content p {
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 17px;
+    line-height: 36px;
+    text-align: center;
+
+    color: #FFFFFF;
+  }
+
+.get-started-btn {
+  margin-top: 10%;
+  width: 150px;
+  height: 50px;
+  left: 267px;
+  top: 750px;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 27px;
+
+  color: #074436;
+
+
+}
+
+
+
+
+
+
+
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px)and (max-width:991px){
+
+
+
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+
+}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {}

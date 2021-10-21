@@ -64,10 +64,12 @@
                     <p class="mt-4">{{review.review}}</p>
 
                     <!-- Thread buttons -->
-                    <a class="btn thread m-2" id="show-thread-form" (click)="togglePanel[i] = !togglePanel[i]">Comment</a>
-                    <a class="btn thread m-2" id="viewThread" (click)='goToUrl(review.id)'> view thread</a>
+                    <div class="thread-buttons">
+                        <a class="btn thread " id="show-thread-form" (click)="togglePanel[i] = !togglePanel[i]">Comment</a>
+                        <a class="btn thread" id="viewThread" (click)='goToUrl(review.id)'> view thread</a>
 
-                    <div class="form mt-3" class="togglePanel{{review.id}}" *ngIf="togglePanel[i]">
+                    </div>
+             <div class="form mt-3" class="togglePanel{{review.id}}" *ngIf="togglePanel[i]">
                       <form action="" id="thread-form">
 
                         <div class="mb-3">
