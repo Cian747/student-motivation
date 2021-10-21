@@ -27,6 +27,7 @@
           </div> -->
               <div class="button">
                   <button (click)="registerUser()"
+                  [disabled]="!signupForm.valid"
                     type="submit"  class="btn btn-success  signup-btn">
                       sign up
                   </button>
