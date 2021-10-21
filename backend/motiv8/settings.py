@@ -57,7 +57,9 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework_simplejwt.token_blacklist',
     'django_filters',
-    'rest_framework_swagger'
+    'rest_framework_swagger',
+]
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -108,8 +110,8 @@ DATABASES = {
     'default': {
         'ENGINE':'django.db.backends.postgresql',
         'NAME':'motivation',
-        'USER':'moringa',
-        'PASSWORD':'Access',
+        'USER':'cyan',
+        'PASSWORD':'ms254',
 
     }
 }
@@ -148,11 +150,14 @@ CORS_ORIGIN_ALLOW_ALL = True
 CORS_ORIGIN_ALLOW_ALL = False
 
 CORS_ORIGIN_WHITELIST = (
-       'http://localhost:4200',
+    'http://localhost:4200',
+    'https://mutuafranklin.github.io/ProperlearnApp/',
 )
 
 CSRF_TRUSTED_ORIGINS = [
     "http://localhost:4200",
+    'https://mutuafranklin.github.io/ProperlearnApp/',
+
 ]
 
 REST_FRAMEWORK = {
