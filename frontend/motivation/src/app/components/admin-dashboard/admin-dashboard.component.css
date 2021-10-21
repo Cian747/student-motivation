@@ -158,3 +158,22 @@ h6{
 .flagged{
   color: red;
 }
+.admin{
+  font-weight: 900;
+}
+.changeBg{
+  background-color: black !important;
+   opacity: 0.6; 
+   color: white;
+}
+.custom-tr{
+  margin-left: 1rem;
+}
+.delete-user i{
+  cursor: pointer;
+}
+.deactive{
+  margin-top:1rem;
+  font-style: italic;
+  color: rgb(226, 51, 51);
+}

@@ -3,7 +3,6 @@ import { environment } from 'src/environments/environment';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { AuthenticationService } from './authentication.service';
-
 @Injectable({
   providedIn: 'root'
 })
@@ -28,6 +27,14 @@ export class UsersService {
   getUsers(){    
    return this.http.get(this.usersUrl + 'users')
    
+  }
+  ChangeAdmin(id:any, data:any){
+    return this.http.put(this.usersUrl+ `superuser/${id}`, data)
+   
+  }
+
+  deactivateUser(id:any, data:any){
+    return this.http.put(this.usersUrl + `remove_user/${id}`, data)
   }
 
   

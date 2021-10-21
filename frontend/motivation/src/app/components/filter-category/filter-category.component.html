@@ -1,67 +1,31 @@
-<div class="container-fluid" id="main">
-  <section id="nav">
-    <app-navbar></app-navbar>
-  </section>
-  <!-- category looping -->
-  <div class="container">
-    <h5 class="text-center text-white">Choose category</h5>
-      <div class="buttons">
-        <div>
-          <a href="/home" ><button class='all-btn btn btn-lg' id="all">All</button></a>
-        </div>
-        <div class="" *ngFor="let category of categories">
+<div class="dynamic-style" *ngIf="motivations.length<5">
+  <div class="container-fluid" id="main" style="height: 150vh;" >
+    <section id="nav">
+      <app-navbar></app-navbar>
+    </section>
+    <!-- category looping -->
+    <div class="container">
+      <h5 class="text-center text-white">Choose category</h5>
+        <div class="buttons">
           <div>
-            <button (click)='goToCategory(category.id)'  (click)="refresh()"  class='custom btn btn-lg '>{{category.category_name}}</button>
+            <a href="home" ><button class='all-btn btn btn-lg' id="all">All</button></a>
           </div>
+          <div class="" *ngFor="let category of categories">
+            <div>
+              <button (click)='goToCategory(category.id)'  (click)="refresh()"  class='custom btn btn-lg '>{{category.category_name}}</button>
+            </div>
+
+
+          </div>
+
+
+
         </div>
+        <div class="subscribe">
 
-      </div>
-      <div class="subscribe">
-          <button   (click)="refresh()"  class=' btn-danger btn-sm '>Subscribe</button>
-      </div>
-
-  </div>
+          <button (click)='subscribeToCat(category.id)' class=' btn-danger btn-sm '>Subscribe to {{category.category_name}}</button>
 
 
-  <div class="container-fluid motivations" id="motivation">
-
-    <!-- post looping -->
-      <div class="row" >
-        <div class="col-md-3 m-2" *ngFor="let motivation of motivations">
-           <div class="card mb-3">
-            <div *ngIf="motivation.image == null && motivation.video == null ">
-              <img src="assets/Motivation.jpg" class="card-img-top" alt="" height="300">
-            </div>
-            <div *ngIf="motivation.image">
-              <!-- <img [src]="motivation.image" class="card-img-top" alt="image " height="300"> -->
-              <img src="https://res.cloudinary.com/kenya12254/{{motivation.image}}" class="card-img-top vid-link" alt="..." height="300">
-
-            </div>
-            <div *ngIf="motivation?.video" class="video-icon">
-              <div class="col-md-8">
-                <img src="assets/vid-icon.png" class="card-img-top" alt="Video" (click)='goToUrl(motivation.id)' height="300">
-
-              </div>
-            </div>            <div class="card-body ">
-            <h5 class="card-title">{{motivation.title}}</h5>
-            <p class="card-text">Category:{{motivation.category}}</p>
-            <p class="card-text small">{{motivation.description| words : 6}}</p>
-
-            <p class="card-text"><small class="">published by {{motivation.profile.user}}</small></p>
-            <p class="card-text"><small class="">{{motivation.created_at|date}}</small></p>
-          </div>
-          <div class="card-footer">
-            <div class="icons">
-               <a href=""><i class="fas fa-save"></i></a>
-                <a href=""><i class="fas fa-share-alt"></i></a>
-            </div>
-            <div class="details">
-                <button (click)='goToUrl(motivation.id)' class=" view-details btn btn-secondary">View Details</button>
-
-            </div>
-
-          </div>
-        </div>
         </div>
 
 
@@ -71,8 +35,217 @@
 
 
 
+    <div class="container-fluid motivations" id="motivation">
+      <!-- post looping -->
+        <div class="row" >
+          <div class="col-md-3" *ngFor="let motivation of motivations">
+
+            <div class="card mb-3">
+              <div *ngIf="motivation.image == null && motivation.video == null ">
+                <img src="assets/Motivation.jpg" class="card-img-top" alt="" height="300">
+              </div>
+              <div *ngIf="motivation.image">
+                <!-- <img [src]="motivation.image" class="card-img-top" alt="image " height="300"> -->
+                <img src="https://res.cloudinary.com/kenya12254/{{motivation.image}}" class="card-img-top vid-link" alt="..." height="300">
+
+              </div>
+              <div *ngIf="motivation?.video" class="video-icon">
+                <div class="col-md-8">
+                  <img src="assets/vid-icon.png" class="card-img-top" alt="Video" (click)='goToUrl(motivation.id)' height="300">
+
+                </div>
+              </div>
+              <div class="card-body ">
+                <h5 class="card-title">{{motivation.title}}</h5>
+                <p class="card-text">Category:{{motivation.category.category_name}}</p>
+                <p class="card-text small">{{motivation.description| words : 6}}</p>
+
+                <p class="card-text"><small class="">published by {{motivation.profile.user}}</small></p>
+                <p class="card-text"><small class="">{{motivation.created_at|date}}</small></p>
+              </div>
+              <div class="card-footer">
+                <div class="icons d-flex">
+                  <div class="wishlist">
+                    <span class="wishlisttext">Add to wishlist</span>
+                    <form action="">
+                      <i class="fas fa-save "(click)="addWishlist(motivation.id)"  ></i>
+
+                    </form>
+
+                  </div>
+                  <div class="whatsapp d-flex">
+                    <span class="whatsappshare">whatsApp share</span>
+                    <input hidden class="share-url" value="http://localhost:4200/motivation/{{motivation.id}}"   />
+                    <a href="whatsapp://send?text=For lots of tech motivations visit: https://mutuafranklin.github.io/ProperlearnApp/home"
+                      data-action="share/whatsapp/share"
+                      target="_blank">
+                      <i class="fab fa-whatsapp" ></i>
+                    </a>
+                    <!-- <a href="https://wa.me/15551234567"><i (click)= 'copyUrl()' class="fas fa-share-alt" [ngxClipboard]="formInputText"></i></a> -->
+
+                  </div>
+
+                  <div class="fb">
+                    <div class="fb-share-button"
+                      data-href="https://mutuafranklin.github.io/ProperlearnApp/home"
+                      data-layout="button_count" data-size="large">
+                      <a target="_blank"
+                        href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fmutuafranklin.github.io%2FProperlearnApp%2Fhome&amp;src=sdkpreparse"
+                        class="fb-xfbml-parse-ignore">
+                        <i class="fab fa-facebook"></i>
+                      </a>
+                    </div>
+                  </div>
+
+                </div>
+                <div class="details">
+                    <button (click)='goToUrl(motivation.id)' class=" view-details btn btn-info">View Details</button>
+
+                </div>
+
+              </div>
+
+          </div>
+          </div>
+
+
+      </div>
+
+
+
+
+
+
+    </div>
+
+
+
   </div>
-
-
-
 </div>
+<div class="dynamic-style" *ngIf="motivations.length>4"  >
+  <div class="container-fluid" id="main" >
+    <section id="nav">
+      <app-navbar></app-navbar>
+    </section>
+    <!-- category looping -->
+    <div class="container">
+      <h5 class="text-center text-white">Choose category</h5>
+        <div class="buttons">
+          <div>
+            <a href="/home" ><button class='all-btn btn btn-lg' id="all">All</button></a>
+          </div>
+          <div class="" *ngFor="let category of categories">
+            <div>
+              <button (click)='goToCategory(category.id)'  (click)="refresh()"  class='custom btn btn-lg '>{{category.category_name}}</button>
+            </div>
+
+
+          </div>
+
+
+
+        </div>
+        <div class="subscribe">
+          <form action="">
+           <button (click)='subscribeToCat(category.id)' class=' btn-danger btn-sm '>Subscribe to {{category.category_name}}</button>
+          </form>
+
+        </div>
+
+
+    </div>
+
+
+
+
+
+    <div class="container-fluid motivations" id="motivation">
+      <!-- post looping -->
+        <div class="row" >
+          <div class="col-md-3" *ngFor="let motivation of motivations">
+
+            <div class="card mb-3">
+              <div *ngIf="motivation.image == null && motivation.video == null ">
+                <img src="assets/Motivation.jpg" class="card-img-top" alt="" height="300">
+              </div>
+              <div *ngIf="motivation.image">
+                <!-- <img [src]="motivation.image" class="card-img-top" alt="image " height="300"> -->
+                <img src="https://res.cloudinary.com/kenya12254/{{motivation.image}}" class="card-img-top vid-link" alt="..." height="300">
+
+              </div>
+              <div *ngIf="motivation?.video" class="video-icon">
+                <div class="col-md-8">
+                  <img src="assets/vid-icon.png" class="card-img-top" alt="Video" (click)='goToUrl(motivation.id)' height="300">
+
+                </div>
+              </div>
+              <div class="card-body ">
+                <h5 class="card-title">{{motivation.title}}</h5>
+                <p class="card-text">Category:{{motivation.category.category_name}}</p>
+                <p class="card-text small">{{motivation.description| words : 6}}</p>
+
+                <p class="card-text"><small class="">published by {{motivation.profile.user}}</small></p>
+                <p class="card-text"><small class="">{{motivation.created_at|date}}</small></p>
+              </div>
+              <div class="card-footer">
+                <div class="icons d-flex">
+                  <div class="wishlist">
+                    <span class="wishlisttext">Add to wishlist</span>
+                    <form action="">
+                      <i class="fas fa-save "(click)="addWishlist(motivation.id)"  ></i>
+
+                    </form>
+
+                  </div>
+                  <div class="whatsapp d-flex">
+                    <span class="whatsappshare">whatsApp share</span>
+                    <input hidden class="share-url" value="http://localhost:4200/motivation/{{motivation.id}}"   />
+                    <a href="whatsapp://send?text=For lots of tech motivations visit: https://mutuafranklin.github.io/ProperlearnApp/home"
+                      data-action="share/whatsapp/share"
+                      target="_blank">
+                      <i class="fab fa-whatsapp" ></i>
+                    </a>
+                    <!-- <a href="https://wa.me/15551234567"><i (click)= 'copyUrl()' class="fas fa-share-alt" [ngxClipboard]="formInputText"></i></a> -->
+
+                  </div>
+
+                  <div class="fb">
+                    <div class="fb-share-button"
+                      data-href="https://mutuafranklin.github.io/ProperlearnApp/home"
+                      data-layout="button_count" data-size="large">
+                      <a target="_blank"
+                        href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fmutuafranklin.github.io%2FProperlearnApp%2Fhome&amp;src=sdkpreparse"
+                        class="fb-xfbml-parse-ignore">
+                        <i class="fab fa-facebook"></i>
+                      </a>
+                    </div>
+                  </div>
+
+                </div>
+                <div class="details">
+                    <button (click)='goToUrl(motivation.id)' class=" view-details btn btn-info">View Details</button>
+
+                </div>
+
+              </div>
+
+          </div>
+          </div>
+
+
+        </div>
+
+
+
+
+
+
+    </div>
+
+
+
+  </div>
+</div>
+
+
+

@@ -25,7 +25,7 @@
       </form> -->
 
 
-      <form action="" class="form"  [formGroup]="signinForm" (ngSubmit)="loginUser()">
+      <form action="" class="form"  #loginForm="ngForm" [formGroup]="signinForm" (ngSubmit)="loginUser()">
         <div class="form-item">
           <label for="username">username</label>
           <input formControlName="username"  type="text"  class="input" placeholder="Username" required="required">
@@ -40,7 +40,11 @@
 
 
         <div class="button">
+<<<<<<< HEAD
+          <button  [disabled]="!loginForm.valid" type="submit" class="btn btn-success  signin-btn">
+=======
           <button  type="submit" class="btn btn-success  signin-btn">
+>>>>>>> origin/hotfix
             Sign in
           </button>
         </div>
@@ -62,7 +66,11 @@
       <img src="assets/signin.png" alt="">
       <p>Dont have an account?</p>
       <div class="button">
+<<<<<<< HEAD
+        <a href="signup"><button type="submit" class="btn btn-success  signup-btn">
+=======
         <a href="/signup"><button type="submit" class="btn btn-success  signup-btn">
+>>>>>>> origin/hotfix
             Sign up
           </button>
         </a>

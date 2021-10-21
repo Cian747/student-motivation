@@ -1,0 +1,179 @@
+#main{
+  background-color: #074436 !important;
+  padding-left: 3%;
+}
+
+.motivations{
+  margin-top: 5px;
+  background-color: rgba(211, 202, 185, 0.5) !important;
+
+
+}
+
+
+
+
+.categories{
+  /* position: fixed;  */
+  margin: 0 auto
+}
+.buttons{
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.btn{
+  background: #fff !important;
+  color: #074436 !important;
+  margin: 5px;
+  height: 40px;
+  font-size: 17px;
+}
+.btn:hover{
+  background-color: #074436 !important;
+  color: #fff !important;
+  border: 1px solid #fff !important;
+}
+
+.view-comment{
+  text-decoration: none;
+  font-weight: 800;
+  color: #fff;
+}
+
+.card{
+  margin-top: 5%;
+  /* background-color: rgba(140, 154, 194, 0.5) !important; */
+  background-color: rgba(22, 54, 80, 0.5) !important;
+  color: aliceblue;
+  box-shadow:  0 4px 8px 0 rgba(0, 0, 0, 0.2);
+
+
+}
+
+.card:hover{
+  filter:drop-shadow(8px 8px 10px rgb(19, 19, 19));
+}
+
+.card-body{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+
+}
+
+.card-footer{
+  display: flex;
+  justify-content: space-between;
+}
+
+.vid-link:hover{
+  cursor: pointer;
+}
+
+i{
+  padding: 0.5rem;
+  color: rgb(15, 221, 25);
+}
+
+.motivation-loop{
+  display: flex;
+}
+
+.video-icon{
+  display: flex;
+  justify-content: center;
+}
+
+.custom{
+  background-color:rgb(164, 180, 185) !important;
+  color: rgb(16, 20, 9) !important;
+  border-radius: 25px;
+  border:  1px solid rgb(11, 36, 28);
+}
+
+.custom:hover{
+  background-color:rgb(26, 66, 5) !important;
+  color: aliceblue !important;
+  border:  1px solid green;
+
+}
+
+.view-details{
+  background-color:rgb(164, 180, 185) !important;
+  color: rgb(16, 20, 9) !important;
+  border-radius: 25px;
+  border:  1px solid rgb(11, 36, 28);
+}
+
+
+
+.all-btn{
+  background-color:rgba(189, 214, 192, 0.9) !important;
+  color: rgb(21, 8, 56) !important;
+}
+
+.subscribe{
+  display: flex;
+  justify-content: center;
+  margin: 5px;
+}
+
+.goToUrl{
+  background-color:rgb(164, 180, 185) !important;
+  color: rgb(16, 20, 9) !important;
+  border-radius: 25px;
+  border:  1px solid rgb(11, 36, 28);
+}
+
+.goToUrl:hover{
+  background-color:rgb(26, 66, 5) !important;
+  color: aliceblue !important;
+  border:  1px solid green;
+
+}
+
+.fas, .fab{
+  font-size: 20px;
+}
+.fas:hover{
+  cursor: pointer;
+}
+
+
+.wishlist, .whatsapp  .fb{
+  position: relative;
+  display: inline-block;
+}
+
+.wishlisttext, .whatsappshare, .fbshare{
+  visibility: hidden;
+  width: 120px;
+  background-color:rgb(164, 180, 185) !important;
+  color: rgb(16, 20, 9) !important;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+
+  /* Position */
+  position: absolute;
+  z-index: 1;
+  top: -45px;
+  /* right: 10%; */
+}
+
+.wishlist:hover .wishlisttext {
+  visibility: visible;
+}
+
+.whatsapp:hover .whatsappshare {
+  visibility: visible;
+}
+
+
+.fb:hover .fbshare {
+  visibility: visible;
+}
+
+

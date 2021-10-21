@@ -19,6 +19,9 @@ import { TruncateModule } from 'ng2-truncate';
 import { AuthInterceptor } from './services/authconfig.interceptors';
 import { ClipboardModule } from 'ngx-clipboard';
 import { InterceptorInterceptor } from './Auth/interceptor.interceptor';
+import { NgHttpLoaderModule } from 'ng-http-loader';
+import { ReviewThreadComponent } from './components/review-thread/review-thread.component';
+import { WishlistComponent } from './components/wishlist/wishlist.component';
 
 
 @NgModule({
@@ -34,7 +37,9 @@ import { InterceptorInterceptor } from './Auth/interceptor.interceptor';
     MotivationComponent,
     SingleMotivationComponent,
     FilterCategoryComponent,
-  
+    ReviewThreadComponent,
+    WishlistComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -44,15 +49,18 @@ import { InterceptorInterceptor } from './Auth/interceptor.interceptor';
     TruncateModule,
     ClipboardModule,
     ReactiveFormsModule,
+    NgHttpLoaderModule.forRoot(),
+    // CloudinaryModule,
   ],
   providers: [
     {
       provide: HTTP_INTERCEPTORS,
       useClass: InterceptorInterceptor,
       // useClass: AuthInterceptor,
-
       multi: true
-    }
+    },
+    // provideCloudinary(require('cloudinary-core'), { cloud_name: 'kenya12254' } as CloudinaryConfiguration)
+
 
   ],
 

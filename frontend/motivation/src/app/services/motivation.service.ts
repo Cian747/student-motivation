@@ -21,20 +21,37 @@ export class MotivationService {
 
 
   getSingleMotivation(id:any):Observable<any[]>{
-    return this.http.get<any[]>(this.APIUrl + `motivation/mot-id/${id}/`)
+    return this.http.get<any[]>(this.APIUrl + `motivation/mot-id/${id}`)
   }
 
   filterByCategory(id:any):Observable<any[]>{
-    return this.http.get<any[]>(this.APIUrl + `mot?category=${id}`)
+    return this.http.get<any[]>(this.APIUrl + `motivation/mot-cat/${id}`)
+  }
+
+
+  subscribeCat(subscription:any, id:any):Observable<any[]>{
+    return this.http.post<any[]>(this.APIUrl + `subscribe/${id}`, subscription)
+  }
+
+
+  addToWishlist(favMotivationData:any, id:any){
+
+    return this.http.post<any[]>(this.APIUrl + `wishlist/${id}`, favMotivationData )
+  }
+
+  getWishlistPost():Observable<any[]>{
+    return this.http.get<any[]>(this.APIUrl + 'user_wishlist')
   }
 
 
 
+  // /api/wishlist/{id}
 
-  postMotivation(motivationData:any, file:any){
-    const body = new FormData();
-    body.append('id', motivationData);
-    body.append('files', file, file.name);
+
+  postMotivation(motivationData:any){
+    // const body = new FormData();
+    // body.append('id', motivationData);
+    // body.append('files', file, file.name);
     return this.http.post<any[]>(this.APIUrl + 'motivation/', motivationData )
   }
 
